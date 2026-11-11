@@ -30,24 +30,10 @@ urls.push('/aviso-legal/','/en/legal-notice/','/politica-privacidad/','/en/priva
   }
   for(const path of ['/contacto/','/en/contact/','/','/en/']){
    await page.goto(base+path);
-   const outbound=[];
-   const onRequest=r=>{if(r.method()!=='GET')outbound.push(r.url());};
-   page.on('request',onRequest);
-   await page.locator('[name=nombre]').fill('Prueba / Test');
-   await page.locator('[name=email]').fill('test@example.org');
-   await page.locator('[name=mensaje]').fill('<script>Test</script> — consulta técnica');
-   await page.locator('#contact-form button[type=submit]').click();
-   assert(await page.locator('#draft-output').isVisible());
-   assert((await page.locator('#enquiry-draft').inputValue()).includes('<script>Test</script>'));
-   assert((await page.locator('#contact-status').innerText()).includes(path.startsWith('/en/')?'No message':'No se ha enviado'));
-   const compose = await page.locator('#open-email').getAttribute('href');
-   assert(compose.startsWith('mailto:garciarodriguezadolfo@gmail.com?'));
-   assert.equal(new URL(compose).searchParams.get('body'), await page.locator('#enquiry-draft').inputValue());
-   await page.locator('#copy-draft').click();
-   assert((await page.locator('#contact-status').innerText()).length>0);
-   assert.deepEqual(outbound,[],'Draft must not transmit form data');
+   assert(await page.locator('#contact-form button[type=submit]').isDisabled());
+   await page.waitForFunction(()=>document.getElementById('contact-status').dataset.state==='error');
+   assert((await page.locator('#contact-status').innerText()).includes(path.startsWith('/en/')?'unavailable':'no está disponible'));
    assert.equal(await page.evaluate(()=>localStorage.length+sessionStorage.length),0);
-   page.off('request',onRequest);
   }
   const nojs = await browser.newContext({javaScriptEnabled:false});
   await nojs.route('https://fonts.googleapis.com/**',r=>r.abort());
@@ -64,6 +50,6 @@ urls.push('/aviso-legal/','/en/legal-notice/','/politica-privacidad/','/en/priva
   await page.setViewportSize({width:390,height:844});await page.goto(base+'/certificados-energeticos-alicante/');
   await page.screenshot({path:'/tmp/adolfo-preview/energy-mobile.png',fullPage:true});
   assert.deepEqual(errors,[]);
-  console.log('OK: 18 routes at desktop/390px/320px; language pairs with/without JS; canonical; local draft/copy without transmission or storage; no JS errors.');
+  console.log('OK: 18 routes at desktop/390px/320px; language pairs with/without JS; canonical; honest unconfigured form state; no JS errors.');
  } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});

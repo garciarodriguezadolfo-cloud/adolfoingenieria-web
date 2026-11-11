@@ -1,3 +1,5 @@
+> Actualización: el contacto directo sustituye el borrador local descrito en esta auditoría de la ampliación inicial. Consulte `contact-setup.md` para el estado actual, la configuración obligatoria, privacidad y pruebas pendientes de envío real.
+
 # Ampliación comercial bilingüe
 
 ## Alcance

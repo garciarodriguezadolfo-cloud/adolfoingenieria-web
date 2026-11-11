@@ -1,2 +1,8 @@
 __pycache__/
 *.py[cod]
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+.wrangler/
+node_modules/

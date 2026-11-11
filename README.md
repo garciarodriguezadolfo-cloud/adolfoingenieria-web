@@ -4,7 +4,7 @@ Sitio estático bilingüe de adolfoingenieria.es. Conserva la identidad visual o
 
 ## Publicación
 
-Los HTML generados y los recursos están versionados y listos para servir desde la raíz del repositorio. No requiere Node, Python ni compilación en Cloudflare Pages. Esta ampliación no cambia la configuración de Pages, `_headers`, las reglas de seguridad ni `robots.txt`.
+Los HTML generados y los recursos están versionados y listos para servir desde la raíz del repositorio. Los HTML no requieren compilación; Pages compila automáticamente la función del servidor al desplegar desde GitHub. El contacto directo usa una Pages Function en `/api/contact`; consulte `docs/contact-setup.md` para configurar Resend y Turnstile. `_routes.json` conserva el servicio estático para el resto de rutas. No cambia `_headers`, las reglas de seguridad ni `robots.txt`.
 
 ## Edición
 
@@ -31,8 +31,10 @@ En otra terminal, con Playwright disponible y Chromium instalado:
 node tests/browser.cjs
 ```
 
-Se puede cambiar el servidor mediante `TEST_BASE_URL` y el ejecutable mediante `CHROMIUM_PATH`. Las pruebas de navegador recorren todas las páginas a 1440, 390 y 320 píxeles, comprueban los pares de idioma con y sin JavaScript, el canonical y que el borrador no envía ni almacena datos. Capturas en `/tmp/adolfo-preview/`.
+Se puede cambiar el servidor mediante `TEST_BASE_URL` y el ejecutable mediante `CHROMIUM_PATH`. Las pruebas de navegador recorren las páginas a 1440, 390 y 320 píxeles y los pares de idioma con y sin JavaScript. Capturas en `/tmp/adolfo-preview/`.
+
+El backend se verifica con `npm test`; la interfaz de envío con `node tests/contact-browser.cjs` (requiere el servidor anterior o `TEST_BASE_URL`). Las pruebas usan fixtures aislados y no acreditan envío real. La compilación de Functions se puede comprobar con `npx wrangler pages functions build functions --outdir /tmp/adolfo-functions-build --build-output-directory .`.
 
 ## Pendientes del titular
 
-Consultar `docs/service-expansion.md`. El correo confirmado es garciarodriguezadolfo@gmail.com. El formulario prepara un borrador local y permite copiarlo o abrirlo en la aplicación de correo del usuario; la web no realiza el envío. Los textos legales son borradores identificados y noindex, fuera del sitemap. Teléfono confirmado: 638 651 175. No se publica dirección ni precios por indicación del titular. No se han inventado NIF, horarios, reseñas ni acreditaciones.
+Consultar `docs/service-expansion.md` y `docs/contact-setup.md`. El correo confirmado es garciarodriguezadolfo@gmail.com y el teléfono 638 651 175. El formulario envía mediante Resend y Turnstile cuando se configuran los servicios y `CONTACT_ENABLED=true`; sin configuración muestra indisponibilidad. No solicita claves al visitante ni usa su aplicación de correo para el envío directo. No se publica dirección ni precios. Los textos legales siguen identificados como borradores pendientes de revisión; no activar el envío antes de completarla.

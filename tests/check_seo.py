@@ -73,9 +73,12 @@ for key, paths in PATHS.items():
         if key in ('home','contact'):
             assert page.find('a',href='tel:+34638651175')
             assert page.find('form',id='contact-form')
-            assert not page.find('form')[0].get('action')
+            assert page.find('form')[0]['action'] == '/api/contact'
+            assert page.find('form')[0]['method'] == 'post'
+            assert 'required' in page.find('input',name='email')[0]
+            assert 'required' in page.find('input',name='privacy')[0]
             assert page.find('p',id='contact-notice')
-            assert page.find('form')[0]['data-recipient'] == 'garciarodriguezadolfo@gmail.com'
+            assert 'disabled' in page.find('button',type='submit')[0]
             assert page.find('a',href='mailto:garciarodriguezadolfo@gmail.com')
 
 for path,page in pages.items():
