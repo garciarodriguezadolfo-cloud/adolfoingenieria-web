@@ -10,10 +10,12 @@ Las páginas contienen metadatos únicos, H1 único, H2 ordenados, canonical pro
 
 El generador Python es una herramienta de mantenimiento; Pages sigue sirviendo archivos estáticos ya versionados. No se han cambiado las reglas o configuración de Cloudflare. Se mantienen robots, encabezados y 404 de la corrección anterior.
 
+Teléfono confirmado: 638 651 175, con enlace de llamada `tel:+34638651175` en inicio y contacto de ambos idiomas y en los datos estructurados. Por indicación del titular, no se publica dirección ni precios. Los borradores legales permanecen pendientes de revisión.
+
 ## Pendiente de confirmar
 
 - Confirmar si se desea en el futuro un backend de formularios: actualmente se usa el correo confirmado mediante la aplicación del visitante. Sin JavaScript se mantiene el enlace directo al correo. Generar el borrador no transmite datos a un endpoint ni los persiste; abrirlo y enviarlo usa la aplicación de correo del visitante.
-- NIF, domicilio profesional a efectos legales, procedimiento de derechos y detalles legales/profesionales necesarios. El correo confirmado figura como contacto, pero faltan las condiciones de tratamiento de consultas recibidas. Los datos de colegiación COITIA 4.702 aparecían en la web anterior, pero no están verificados en este encargo; se omiten del contenido público generado hasta confirmación. Se mantienen las especialidades y experiencia indicadas por el titular en la petición.
+- NIF, procedimiento de derechos y detalles legales/profesionales necesarios. El correo confirmado figura como contacto, pero faltan las condiciones de tratamiento de consultas recibidas. Los datos de colegiación COITIA 4.702 aparecían en la web anterior, pero no están verificados en este encargo; se omiten del contenido público generado hasta confirmación. Se mantienen las especialidades y experiencia indicadas por el titular en la petición.
 - Revisión final de aviso legal y privacidad: base jurídica, conservación, encargados, transferencias, contratación y recursos externos (Cloudflare y Google Fonts). No se atribuyen garantías jurídicas al borrador.
 - Condiciones concretas de cada encargo: disponibilidad, desplazamientos, honorarios, trámites incluidos, tasas y alcance profesional aplicable. No se prometen resultados administrativos ni judiciales.
 - Tras aprobar y publicar: verificar HTTP/MIME y redirecciones reales, reenviar el sitemap de 14 URL a Search Console y confirmar lectura por Google. La ampliación no acredita resuelto el 403 anterior; consultar `docs/seo-audit.md` para su investigación.

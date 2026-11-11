@@ -65,11 +65,13 @@ for key, paths in PATHS.items():
         graph = schema['@graph']
         assert graph[0]['name'] == 'Manuel Adolfo García Rodríguez | Ingeniero Mecánico'
         assert graph[1]['url'] == url and graph[1]['inLanguage'] == lang
-        assert not any(field in graph[0] for field in ('telephone','address','aggregateRating'))
+        assert graph[0]['telephone'] == '+34638651175'
+        assert not any(field in graph[0] for field in ('address','aggregateRating','priceRange'))
         if key not in ('home','contact','legal','privacy'):
             assert graph[2]['@type'] == 'Service'
             assert graph[2]['areaServed'] == (['España','Comunidad Valenciana'] if key in ('expert','accidents') else ['Provincia de Alicante'])
         if key in ('home','contact'):
+            assert page.find('a',href='tel:+34638651175')
             assert page.find('form',id='contact-form')
             assert not page.find('form')[0].get('action')
             assert page.find('p',id='contact-notice')
@@ -80,7 +82,7 @@ for path,page in pages.items():
     for tag,attr in [('a','href'),('link','href'),('script','src')]:
         for a in page.find(tag):
             value = a.get(attr,'')
-            if not value or value.startswith(('https:', 'mailto:')):
+            if not value or value.startswith(('https:', 'mailto:', 'tel:')):
                 continue
             parsed = urlsplit(value)
             assert value.startswith(('/', '#')), (path,value)

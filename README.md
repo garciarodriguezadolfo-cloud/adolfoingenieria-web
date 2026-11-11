@@ -8,7 +8,7 @@ Los HTML generados y los recursos están versionados y listos para servir desde 
 
 ## Edición
 
-- Correo de contacto confirmado: `site/config.json`.
+- Datos de contacto confirmados: `site/config.json`.
 - Contenido de los cinco servicios en ambos idiomas: `site/services.json`.
 - Bloques originales de inicio: `site/templates/home-es.html` y `home-en.html`.
 - Plantilla compartida, contacto, borradores legales, rutas y metadatos de inicio: `tools/build_site.py`.
@@ -35,4 +35,4 @@ Se puede cambiar el servidor mediante `TEST_BASE_URL` y el ejecutable mediante `
 
 ## Pendientes del titular
 
-Consultar `docs/service-expansion.md`. El correo confirmado es garciarodriguezadolfo@gmail.com. El formulario prepara un borrador local y permite copiarlo o abrirlo en la aplicación de correo del usuario; la web no realiza el envío. Los textos legales son borradores identificados y noindex, fuera del sitemap. No se han inventado teléfono, dirección, NIF, precios, horarios, reseñas ni acreditaciones.
+Consultar `docs/service-expansion.md`. El correo confirmado es garciarodriguezadolfo@gmail.com. El formulario prepara un borrador local y permite copiarlo o abrirlo en la aplicación de correo del usuario; la web no realiza el envío. Los textos legales son borradores identificados y noindex, fuera del sitemap. Teléfono confirmado: 638 651 175. No se publica dirección ni precios por indicación del titular. No se han inventado NIF, horarios, reseñas ni acreditaciones.

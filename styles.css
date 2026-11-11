@@ -12,3 +12,5 @@ select{font:inherit;background:white;color:var(--ink);padding:15px;width:100%;bo
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 .icon-arrow{display:inline-block;width:1em;height:1em;vertical-align:-.12em;margin-left:.15em}
 .contact-email{overflow-wrap:anywhere}.contact-email a{text-decoration:underline}.draft-output .primary{margin-top:20px}
+
+.contact-phone a{text-decoration:underline;display:inline-block;padding:8px 0}
