@@ -55,7 +55,7 @@ def language_switch(key, lang):
         f'<a href="{PATHS[key][target]}" lang="{HTML_LANG[target]}" hreflang="{HTML_LANG[target]}" '
         f'aria-label="{LANG_NAMES[target]}" title="{LANG_NAMES[target]}"'
         + (' aria-current="page"' if target == lang else '')
-        + f'><img src="/assets/flags/{FLAGS[target]}.svg" width="24" height="16" alt="" aria-hidden="true"></a>'
+        + f'><img src="/assets/flags/{FLAGS[target]}.svg" width="24" height="16" alt="" aria-hidden="true"><span class="language-code" aria-hidden="true">{target.upper()}</span></a>'
         for target in LANGS)
     return f'<div class="language-switch" role="group" aria-label="{LANGUAGE_LABELS[lang]}">{links}</div>'
 
