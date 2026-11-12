@@ -1,27 +1,642 @@
 [
   {
     "key": "expert",
-    "es": {"slug":"peritajes-tecnicos", "title":"Perito ingeniero mecánico | Peritajes técnicos en España", "description":"Peritajes mecánicos, informes técnicos y dictámenes periciales en toda España, con especial atención a la Comunidad Valenciana. Valoración del caso y presupuesto.", "name":"Peritajes técnicos", "lead":"Análisis independiente de hechos, daños y causas para tomar decisiones con una base técnica. Peritajes mecánicos en toda España, con especial atención a la Comunidad Valenciana.", "sections":[["Peritaje mecánico e informe pericial","Manuel Adolfo García Rodríguez, ingeniero mecánico y perito técnico, estudia la documentación disponible, los elementos afectados y las cuestiones que necesita resolver el cliente. El informe técnico expone el método de análisis, los resultados y sus límites, diferenciando hechos comprobados de hipótesis."],["Dictámenes y ratificación judicial","Un dictamen pericial puede apoyar una reclamación o un procedimiento judicial o extrajudicial. Cuando el encargo lo requiere, se valora la ratificación judicial y la explicación de las conclusiones. Si busca un perito judicial, la aceptación depende de la materia, la documentación y el alcance profesional aplicable; no se presupone una designación judicial."],["Cómo se plantea el trabajo","La primera valoración identifica el objeto del peritaje, los plazos y la información disponible. A continuación se define si son necesarias inspecciones, mediciones o documentación adicional, y se propone un alcance y presupuesto. Los honorarios y desplazamientos se concretan antes de iniciar el trabajo."],["Qué aportar para valorar su caso","Una cronología de los hechos, fotografías originales, contratos, facturas, informes previos y las preguntas técnicas que necesita aclarar. Conserve los elementos afectados y evite intervenir sobre ellos sin documentar su estado. La investigación y reconstrucción de accidentes dispone de una página específica."]]},
-    "en": {"slug":"technical-expert-reports", "title":"Mechanical engineer expert | Technical reports in Spain", "description":"Mechanical expert assessments, technical reports and expert opinions throughout Spain, especially the Valencian Community. Scope review and quotation.", "name":"Technical expert reports", "lead":"Independent analysis of facts, damage and causes to support informed decisions. Mechanical expert assessments throughout Spain, with particular attention to the Valencian Community.", "sections":[["Mechanical assessments and technical reports","Manuel Adolfo García Rodríguez, mechanical engineer and technical expert, reviews available documents, affected components and the questions the client needs to resolve. The technical report explains the analytical method, findings and limitations, separating established facts from hypotheses."],["Expert opinions and court testimony","An expert opinion can support a claim or legal or non-legal proceedings. Where required by the assignment, court testimony and explanation of the findings can be considered. Acceptance depends on the subject, evidence and applicable professional scope; no court appointment is implied."],["Defining the assignment","An initial review identifies the purpose, deadlines and available information. The need for inspections, measurements or additional documents is then assessed and a scope and quotation proposed. Fees and travel arrangements are agreed before work begins."],["Information for an initial assessment","Provide a chronology, original photographs, contracts, invoices, previous reports and the technical questions to be answered. Preserve affected items and document their condition before any intervention. Accident investigation and reconstruction is explained on its own service page."]]}
+    "es": {
+      "slug": "peritajes-tecnicos",
+      "title": "Perito ingeniero mecánico | Peritajes técnicos en España",
+      "description": "Peritajes mecánicos, informes técnicos y dictámenes periciales en toda España, con especial atención a la Comunidad Valenciana y Alicante. Valoración del caso y presupuesto.",
+      "name": "Peritajes técnicos",
+      "lead": "Análisis independiente de hechos, daños y causas para tomar decisiones con una base técnica. Peritajes mecánicos en toda España, con especial atención a la Comunidad Valenciana y Alicante.",
+      "sections": [
+        [
+          "Peritaje mecánico e informe pericial",
+          "Manuel Adolfo García Rodríguez, ingeniero mecánico y perito técnico, estudia la documentación disponible, los elementos afectados y las cuestiones que necesita resolver el cliente. El informe técnico expone el método de análisis, los resultados y sus límites, diferenciando hechos comprobados de hipótesis."
+        ],
+        [
+          "Dictámenes y ratificación judicial",
+          "Un dictamen pericial puede apoyar una reclamación o un procedimiento judicial o extrajudicial. Cuando el encargo lo requiere, se valora la ratificación judicial y la explicación de las conclusiones. Si busca un perito judicial, la aceptación depende de la materia, la documentación y el alcance profesional aplicable; no se presupone una designación judicial."
+        ],
+        [
+          "Cómo se plantea el trabajo",
+          "La primera valoración identifica el objeto del peritaje, los plazos y la información disponible. A continuación se define si son necesarias inspecciones, mediciones o documentación adicional, y se propone un alcance y presupuesto. Los honorarios y desplazamientos se concretan antes de iniciar el trabajo."
+        ],
+        [
+          "Qué aportar para valorar su caso",
+          "Una cronología de los hechos, fotografías originales, contratos, facturas, informes previos y las preguntas técnicas que necesita aclarar. Conserve los elementos afectados y evite intervenir sobre ellos sin documentar su estado. La investigación y reconstrucción de accidentes dispone de una página específica."
+        ]
+      ]
+    },
+    "en": {
+      "slug": "technical-expert-reports",
+      "title": "Mechanical engineer expert | Technical reports in Spain",
+      "description": "Mechanical expert assessments, technical reports and expert opinions throughout Spain, especially the Valencian Community and Alicante. Scope review and quotation.",
+      "name": "Technical expert reports",
+      "lead": "Independent analysis of facts, damage and causes to support informed decisions. Mechanical expert assessments throughout Spain, with particular attention to the Valencian Community and Alicante.",
+      "sections": [
+        [
+          "Mechanical assessments and technical reports",
+          "Manuel Adolfo García Rodríguez, mechanical engineer and technical expert, reviews available documents, affected components and the questions the client needs to resolve. The technical report explains the analytical method, findings and limitations, separating established facts from hypotheses."
+        ],
+        [
+          "Expert opinions and court testimony",
+          "An expert opinion can support a claim or legal or non-legal proceedings. Where required by the assignment, court testimony and explanation of the findings can be considered. Acceptance depends on the subject, evidence and applicable professional scope; no court appointment is implied."
+        ],
+        [
+          "Defining the assignment",
+          "An initial review identifies the purpose, deadlines and available information. The need for inspections, measurements or additional documents is then assessed and a scope and quotation proposed. Fees and travel arrangements are agreed before work begins."
+        ],
+        [
+          "Information for an initial assessment",
+          "Provide a chronology, original photographs, contracts, invoices, previous reports and the technical questions to be answered. Preserve affected items and document their condition before any intervention. Accident investigation and reconstruction is explained on its own service page."
+        ]
+      ]
+    },
+    "de": {
+      "slug": "technische-gutachten",
+      "title": "Technische Gutachten in Spanien | Maschinenbauingenieur",
+      "description": "Technische und maschinenbauliche Gutachten in ganz Spanien, insbesondere Valencia und Alicante. Unabhängige Analyse, Gutachten und Erläuterung vor Gericht.",
+      "name": "Technische Gutachten",
+      "lead": "Unabhängige Analyse von Sachverhalten, Schäden und Ursachen als Grundlage fundierter Entscheidungen. Maschinenbauliche Begutachtung in ganz Spanien, insbesondere in der Autonomen Gemeinschaft Valencia und in Alicante.",
+      "sections": [
+        [
+          "Maschinenbauliche Begutachtung und Sachverständigengutachten",
+          "Manuel Adolfo García Rodríguez, Maschinenbauingenieur und technischer Sachverständiger, prüft die verfügbaren Unterlagen, betroffenen Bauteile und Fragen des Auftraggebers. Der Bericht erläutert Untersuchungsmethode, Ergebnisse und Grenzen und unterscheidet nachgewiesene Tatsachen von Hypothesen."
+        ],
+        [
+          "Gutachten und Erläuterung vor Gericht",
+          "Ein Sachverständigengutachten kann Ansprüche sowie gerichtliche oder außergerichtliche Verfahren unterstützen. Bei Bedarf wird die Erläuterung der Ergebnisse vor Gericht in den Auftrag einbezogen. Die Annahme hängt von Fachgebiet, Unterlagen und zulässigem beruflichem Tätigkeitsumfang ab; eine gerichtliche Bestellung wird nicht vorausgesetzt."
+        ],
+        [
+          "Festlegung des Auftrags",
+          "Zunächst werden Untersuchungsziel, Fristen und verfügbare Informationen geklärt. Anschließend wird geprüft, ob Besichtigungen, Messungen oder weitere Unterlagen erforderlich sind. Leistungsumfang, Honorar und Reisekosten werden vor Arbeitsbeginn vereinbart."
+        ],
+        [
+          "Unterlagen für die erste Einschätzung",
+          "Hilfreich sind eine Chronologie, Originalfotos, Verträge, Rechnungen, frühere Berichte und die zu klärenden technischen Fragen. Bewahren Sie betroffene Gegenstände auf und dokumentieren Sie deren Zustand vor Eingriffen. Zur Unfalluntersuchung und Rekonstruktion gibt es eine eigene Leistungsseite."
+        ]
+      ]
+    },
+    "no": {
+      "slug": "sakkyndige-rapporter",
+      "title": "Teknisk sakkyndig i Spania | Maskiningeniør",
+      "description": "Maskintekniske vurderinger og sakkyndige rapporter i hele Spania, særlig Valencia og Alicante. Uavhengig analyse og forklaring i retten ved behov.",
+      "name": "Sakkyndige tekniske rapporter",
+      "lead": "Uavhengig analyse av hendelser, skader og årsaker som grunnlag for gode beslutninger. Maskintekniske vurderinger i hele Spania, særlig i Valencia-regionen og Alicante.",
+      "sections": [
+        [
+          "Maskinteknisk vurdering og sakkyndig rapport",
+          "Manuel Adolfo García Rodríguez, maskiningeniør og teknisk sakkyndig, gjennomgår tilgjengelige dokumenter, berørte komponenter og spørsmålene kunden ønsker svar på. Rapporten beskriver metode, funn og begrensninger, og skiller dokumenterte fakta fra hypoteser."
+        ],
+        [
+          "Sakkyndige uttalelser og forklaring i retten",
+          "En sakkyndig uttalelse kan støtte et krav eller brukes i rettslige og utenrettslige prosesser. Ved behov kan oppdraget omfatte forklaring av konklusjonene i retten. Oppdrag vurderes ut fra fagområde, dokumentasjon og gjeldende faglige rammer; dette innebærer ingen rettsoppnevning."
+        ],
+        [
+          "Avklaring av oppdraget",
+          "Først avklares formål, frister og tilgjengelig informasjon. Deretter vurderes behovet for befaring, målinger eller flere dokumenter. Omfang, honorar og reiseutgifter avtales før arbeidet starter."
+        ],
+        [
+          "Grunnlag for en første vurdering",
+          "Forbered en tidslinje, originale fotografier, kontrakter, fakturaer, tidligere rapporter og de tekniske spørsmålene som skal avklares. Ta vare på berørte gjenstander og dokumenter tilstanden før inngrep. Ulykkesundersøkelse og rekonstruksjon er beskrevet på en egen tjenesteside."
+        ]
+      ]
+    },
+    "ru": {
+      "slug": "tekhnicheskaya-ekspertiza",
+      "title": "Техническая экспертиза в Испании | Инженер-механик",
+      "description": "Технические экспертизы, отчёты и заключения по всей Испании, особенно в Валенсии и Аликанте. Независимый анализ и пояснение выводов в суде.",
+      "name": "Техническая экспертиза",
+      "lead": "Независимый анализ обстоятельств, повреждений и причин для обоснованных решений. Экспертизы в области механики по всей Испании, особенно в Валенсийском сообществе и Аликанте.",
+      "sections": [
+        [
+          "Техническое обследование и экспертное заключение",
+          "Manuel Adolfo García Rodríguez, инженер-механик и технический эксперт, изучает имеющиеся документы, повреждённые элементы и вопросы заказчика. В отчёте изложены метод анализа, результаты и ограничения; установленные факты отделены от гипотез."
+        ],
+        [
+          "Экспертные заключения и пояснения в суде",
+          "Заключение может служить обоснованием претензии в судебном или внесудебном порядке. При необходимости в рамках задания рассматривается выступление в суде с пояснением выводов. Принятие задания зависит от предмета, доказательств и профессиональной компетенции; назначение экспертом судом не подразумевается."
+        ],
+        [
+          "Определение объёма работ",
+          "Сначала уточняются цель экспертизы, сроки и доступная информация. Затем оценивается необходимость осмотров, измерений и дополнительных документов. Объём работ, вознаграждение и расходы на выезды согласовываются до начала выполнения."
+        ],
+        [
+          "Что подготовить для первичной оценки",
+          "Нужны хронология событий, оригиналы фотографий, договоры, счета, прежние отчёты и технические вопросы, требующие ответа. Сохраняйте повреждённые элементы и фиксируйте их состояние до вмешательства. Расследованию и реконструкции аварий посвящена отдельная страница."
+        ]
+      ]
+    }
   },
   {
-    "key":"accidents",
-    "es":{"slug":"investigacion-reconstruccion-accidentes", "title":"Investigación y reconstrucción de accidentes | Perito técnico", "description":"Investigación de accidentes, análisis de causas y reconstrucción técnica en España y Comunidad Valenciana. Informes basados en evidencias y límites documentados.", "name":"Investigación y reconstrucción de accidentes", "lead":"Comprender cómo ocurrió un accidente exige relacionar las evidencias con un análisis técnico coherente. Servicio en toda España, especialmente en la Comunidad Valenciana.", "sections":[["Experiencia en investigación y análisis de causas","La experiencia en investigación de accidentes y elaboración de informes orienta un trabajo centrado en los hechos. Se examina la secuencia del suceso, los daños observados y los factores mecánicos relevantes para valorar posibles causas y su compatibilidad con la evidencia."],["Reconstrucción de accidentes con evidencias disponibles","La reconstrucción técnica parte de fotografías, planos, mediciones, documentación y, cuando procede, inspecciones. Las hipótesis se contrastan con los datos disponibles. Si faltan evidencias o existen incertidumbres, se indican expresamente: no se garantiza una conclusión determinada."],["Un informe que permita seguir el razonamiento","El informe recoge el objeto del estudio, las fuentes, el método, el análisis y las conclusiones. Puede integrarse en un dictamen pericial y contemplar ratificación judicial si se acuerda en el encargo. La viabilidad se revisa para cada caso dentro del ámbito de la ingeniería mecánica."],["Conservar la información desde el inicio","Para consultar a un perito de accidentes, reúna fecha y lugar, una descripción cronológica, fotografías originales, informes existentes y datos de los elementos implicados. No se exponga a riesgos para obtener pruebas ni altere los elementos sin documentarlos. Indique los plazos judiciales o de reclamación si los conoce."]]},
-    "en":{"slug":"accident-investigation-reconstruction", "title":"Accident investigation and reconstruction in Spain", "description":"Accident investigation, cause analysis and technical reconstruction in Spain and the Valencian Community. Evidence-based reports with documented limitations.", "name":"Accident investigation and reconstruction", "lead":"Understanding an accident requires evidence and a coherent technical analysis. Available throughout Spain, particularly in the Valencian Community.", "sections":[["Experience in investigation and cause analysis","Experience in accident investigation and report writing supports a fact-focused approach. The sequence of events, observed damage and relevant mechanical factors are examined to assess possible causes and their compatibility with the evidence."],["Reconstruction based on available evidence","Technical reconstruction draws on photographs, plans, measurements, documents and inspections where appropriate. Hypotheses are checked against available data. Missing evidence and uncertainties are made explicit; a particular conclusion cannot be guaranteed."],["A report with a traceable line of reasoning","The report sets out the purpose, sources, method, analysis and conclusions. It may form part of an expert opinion and include court testimony if agreed within the assignment. Feasibility is reviewed case by case within the scope of mechanical engineering."],["Preserve information from the outset","Provide the date and location, a chronology, original photographs, existing reports and details of the items involved. Do not take risks to obtain evidence or alter items without documenting their condition. Mention any known legal or claims deadlines."]]}
+    "key": "accidents",
+    "es": {
+      "slug": "investigacion-reconstruccion-accidentes",
+      "title": "Investigación y reconstrucción de accidentes | Perito técnico",
+      "description": "Investigación de accidentes, análisis de causas y reconstrucción técnica en España y Comunidad Valenciana y Alicante. Informes basados en evidencias y límites documentados.",
+      "name": "Investigación y reconstrucción de accidentes",
+      "lead": "Comprender cómo ocurrió un accidente exige relacionar las evidencias con un análisis técnico coherente. Servicio en toda España, especialmente en la Comunidad Valenciana y Alicante.",
+      "sections": [
+        [
+          "Experiencia en investigación y análisis de causas",
+          "La experiencia en investigación de accidentes y elaboración de informes orienta un trabajo centrado en los hechos. Se examina la secuencia del suceso, los daños observados y los factores mecánicos relevantes para valorar posibles causas y su compatibilidad con la evidencia."
+        ],
+        [
+          "Reconstrucción de accidentes con evidencias disponibles",
+          "La reconstrucción técnica parte de fotografías, planos, mediciones, documentación y, cuando procede, inspecciones. Las hipótesis se contrastan con los datos disponibles. Si faltan evidencias o existen incertidumbres, se indican expresamente: no se garantiza una conclusión determinada."
+        ],
+        [
+          "Un informe que permita seguir el razonamiento",
+          "El informe recoge el objeto del estudio, las fuentes, el método, el análisis y las conclusiones. Puede integrarse en un dictamen pericial y contemplar ratificación judicial si se acuerda en el encargo. La viabilidad se revisa para cada caso dentro del ámbito de la ingeniería mecánica."
+        ],
+        [
+          "Conservar la información desde el inicio",
+          "Para consultar a un perito de accidentes, reúna fecha y lugar, una descripción cronológica, fotografías originales, informes existentes y datos de los elementos implicados. No se exponga a riesgos para obtener pruebas ni altere los elementos sin documentarlos. Indique los plazos judiciales o de reclamación si los conoce."
+        ]
+      ]
+    },
+    "en": {
+      "slug": "accident-investigation-reconstruction",
+      "title": "Accident investigation and reconstruction in Spain",
+      "description": "Accident investigation, cause analysis and technical reconstruction in Spain and the Valencian Community and Alicante. Evidence-based reports with documented limitations.",
+      "name": "Accident investigation and reconstruction",
+      "lead": "Understanding an accident requires evidence and a coherent technical analysis. Available throughout Spain, particularly in the Valencian Community and Alicante.",
+      "sections": [
+        [
+          "Experience in investigation and cause analysis",
+          "Experience in accident investigation and report writing supports a fact-focused approach. The sequence of events, observed damage and relevant mechanical factors are examined to assess possible causes and their compatibility with the evidence."
+        ],
+        [
+          "Reconstruction based on available evidence",
+          "Technical reconstruction draws on photographs, plans, measurements, documents and inspections where appropriate. Hypotheses are checked against available data. Missing evidence and uncertainties are made explicit; a particular conclusion cannot be guaranteed."
+        ],
+        [
+          "A report with a traceable line of reasoning",
+          "The report sets out the purpose, sources, method, analysis and conclusions. It may form part of an expert opinion and include court testimony if agreed within the assignment. Feasibility is reviewed case by case within the scope of mechanical engineering."
+        ],
+        [
+          "Preserve information from the outset",
+          "Provide the date and location, a chronology, original photographs, existing reports and details of the items involved. Do not take risks to obtain evidence or alter items without documenting their condition. Mention any known legal or claims deadlines."
+        ]
+      ]
+    },
+    "de": {
+      "slug": "unfalluntersuchung-rekonstruktion",
+      "title": "Unfalluntersuchung und Rekonstruktion in Spanien",
+      "description": "Technische Unfalluntersuchung, Ursachenanalyse und Rekonstruktion in Spanien, insbesondere Valencia und Alicante. Beweisgestützte Berichte mit klaren Grenzen.",
+      "name": "Unfalluntersuchung und Rekonstruktion",
+      "lead": "Um einen Unfall nachzuvollziehen, müssen Beweismittel technisch schlüssig ausgewertet werden. Einsatz in ganz Spanien, insbesondere in der Autonomen Gemeinschaft Valencia und in Alicante.",
+      "sections": [
+        [
+          "Erfahrung in Untersuchung und Ursachenanalyse",
+          "Erfahrung in Unfalluntersuchungen und der Erstellung technischer Berichte bildet die Grundlage einer sachorientierten Arbeitsweise. Untersucht werden Unfallablauf, festgestellte Schäden und relevante mechanische Faktoren, um mögliche Ursachen und deren Vereinbarkeit mit den Beweismitteln zu bewerten."
+        ],
+        [
+          "Rekonstruktion anhand verfügbarer Beweismittel",
+          "Die technische Rekonstruktion stützt sich auf Fotos, Pläne, Messungen, Unterlagen und gegebenenfalls Besichtigungen. Hypothesen werden mit den verfügbaren Daten abgeglichen. Fehlende Beweismittel und Unsicherheiten werden ausdrücklich benannt; ein bestimmtes Ergebnis wird nicht zugesichert."
+        ],
+        [
+          "Nachvollziehbare technische Berichte",
+          "Der Bericht enthält Auftrag, Quellen, Methode, Analyse und Schlussfolgerungen. Er kann Teil eines Sachverständigengutachtens sein und bei entsprechender Vereinbarung vor Gericht erläutert werden. Die Durchführbarkeit wird für jeden Fall im Fachgebiet Maschinenbau geprüft."
+        ],
+        [
+          "Informationen frühzeitig sichern",
+          "Stellen Sie Datum und Ort, eine Chronologie, Originalfotos, vorhandene Berichte und Angaben zu den beteiligten Gegenständen zusammen. Gehen Sie zur Beweissicherung keine Risiken ein und dokumentieren Sie den Zustand vor Veränderungen. Nennen Sie bekannte Gerichts- oder Anspruchsfristen."
+        ]
+      ]
+    },
+    "no": {
+      "slug": "ulykkesundersoekelse-rekonstruksjon",
+      "title": "Ulykkesundersøkelse og rekonstruksjon i Spania",
+      "description": "Undersøkelse av ulykker, årsaksanalyse og teknisk rekonstruksjon i Spania, særlig Valencia og Alicante. Rapporter med dokumenterte funn og begrensninger.",
+      "name": "Ulykkesundersøkelse og rekonstruksjon",
+      "lead": "For å forstå en ulykke må bevisene ses i sammenheng med en faglig begrunnet teknisk analyse. Tjenesten tilbys i hele Spania, særlig i Valencia-regionen og Alicante.",
+      "sections": [
+        [
+          "Erfaring med undersøkelser og årsaksanalyse",
+          "Erfaring fra ulykkesundersøkelser og rapportskriving gir grunnlag for en faktabasert tilnærming. Hendelsesforløp, observerte skader og relevante mekaniske forhold undersøkes for å vurdere mulige årsaker og om de samsvarer med bevisene."
+        ],
+        [
+          "Rekonstruksjon ut fra tilgjengelige bevis",
+          "Teknisk rekonstruksjon bygger på fotografier, tegninger, målinger, dokumenter og eventuelle befaringer. Hypoteser prøves mot tilgjengelige data. Manglende bevis og usikkerhet oppgis uttrykkelig; en bestemt konklusjon kan ikke garanteres."
+        ],
+        [
+          "En etterprøvbar rapport",
+          "Rapporten beskriver formål, kilder, metode, analyse og konklusjoner. Den kan inngå i en sakkyndig uttalelse og omfatte forklaring i retten dersom dette avtales. Gjennomførbarheten vurderes for hver sak innen maskinteknikkens faglige rammer."
+        ],
+        [
+          "Sikre informasjon tidlig",
+          "Samle dato og sted, en tidslinje, originale fotografier, eksisterende rapporter og opplysninger om involverte gjenstander. Ikke utsett deg for fare ved innhenting av bevis, og dokumenter tilstanden før endringer. Oppgi kjente frister for rettslige prosesser eller krav."
+        ]
+      ]
+    },
+    "ru": {
+      "slug": "rassledovanie-rekonstruktsiya-avariy",
+      "title": "Расследование и реконструкция аварий в Испании",
+      "description": "Исследование аварий, анализ причин и техническая реконструкция в Испании, Валенсии и Аликанте. Отчёты на основе доказательств с указанием ограничений.",
+      "name": "Расследование и реконструкция аварий",
+      "lead": "Чтобы понять, как произошла авария, необходимо сопоставить доказательства с последовательным техническим анализом. Услуги по всей Испании, особенно в Валенсийском сообществе и Аликанте.",
+      "sections": [
+        [
+          "Опыт расследования и анализа причин",
+          "Опыт исследования аварий и подготовки отчётов определяет подход, основанный на фактах. Изучаются последовательность событий, наблюдаемые повреждения и существенные механические факторы для оценки возможных причин и их соответствия доказательствам."
+        ],
+        [
+          "Реконструкция по имеющимся доказательствам",
+          "Техническая реконструкция опирается на фотографии, планы, измерения, документы и, при необходимости, осмотры. Гипотезы сопоставляются с данными. Недостаток доказательств и неопределённость указываются прямо; конкретный вывод не гарантируется."
+        ],
+        [
+          "Отчёт с прослеживаемой логикой",
+          "В отчёте описаны цель, источники, метод, анализ и выводы. Он может входить в экспертное заключение и предусматривать пояснения в суде, если это согласовано. Выполнимость оценивается отдельно для каждого случая в пределах компетенции инженера-механика."
+        ],
+        [
+          "Сохраняйте информацию с самого начала",
+          "Подготовьте дату и место, хронологию, оригиналы фотографий, имеющиеся отчёты и сведения об участвовавших объектах. Не подвергайте себя риску ради получения доказательств и фиксируйте состояние элементов до изменений. Укажите известные сроки судебного разбирательства или предъявления претензий."
+        ]
+      ]
+    }
   },
   {
-    "key":"energy",
-    "es":{"slug":"certificados-energeticos-alicante", "title":"Certificado energético en Alicante | Técnico certificador CEE", "description":"Certificados de eficiencia energética en la provincia de Alicante: Benidorm, Altea, Calpe, Dénia y Marina Baixa. Visita, evaluación y alcance del trámite.", "name":"Certificados de eficiencia energética", "lead":"Certificado energético (CEE) para conocer la eficiencia energética del inmueble y atender las obligaciones que correspondan en una venta o alquiler. Servicio en la provincia de Alicante.", "sections":[["Qué incluye la evaluación energética","El trabajo parte de la información del inmueble y de una visita para recoger sus características: envolvente, huecos e instalaciones relevantes. El técnico certificador evalúa el comportamiento energético mediante el procedimiento aplicable y prepara el certificado con su calificación y recomendaciones de mejora."],["Documentación y tramitación","Para valorar el encargo se solicita ubicación, uso, superficie aproximada y documentación disponible, como planos o certificados anteriores. El presupuesto debe precisar la visita, la elaboración del CEE y, en su caso, la gestión de registro y tasas. No se promete una calificación ni un plazo sin revisar el inmueble."],["Atención en Alicante y Marina Baixa","Se atienden encargos en Benidorm, Altea, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià y l’Alfàs del Pi, así como en el resto de la provincia de Alicante. La disponibilidad de visita y los desplazamientos se acuerdan para cada inmueble."],["Cuándo consultar","Si va a vender o alquilar, conviene revisar con antelación si necesita certificado, su vigencia y las posibles excepciones según el caso. La certificación energética no sustituye la documentación de ocupación del inmueble. Puede consultar también el servicio de segunda ocupación."]]},
-    "en":{"slug":"energy-certificates-alicante", "title":"Energy performance certificate in Alicante | EPC assessment", "description":"Energy performance certificates in Alicante province: Benidorm, Altea, Calpe, Dénia and Marina Baixa. Property assessment, visits and registration scope.", "name":"Energy performance certificates", "lead":"An energy performance certificate (EPC, known as CEE in Spain) assesses a property's energy efficiency and addresses applicable sale or rental requirements. Service across Alicante province.", "sections":[["What the energy assessment covers","The work starts with property information and a visit to record relevant characteristics, including the building envelope, openings and systems. The certifying technician assesses energy performance using the applicable procedure and prepares the certificate with its rating and improvement recommendations."],["Documents and registration","An initial quotation requires the location, use, approximate floor area and available documents, such as plans or previous certificates. The quotation should specify the visit, certificate preparation and any agreed registration work and fees. A rating or deadline cannot be promised without reviewing the property."],["Alicante and Marina Baixa coverage","Assignments are considered in Benidorm, Altea, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià and l’Alfàs del Pi, as well as the rest of Alicante province. Visit availability and travel are agreed for each property."],["When to enquire","Before a sale or rental, check whether a certificate is required, its validity and any case-specific exemptions. Energy certification does not replace occupancy documentation. The second occupancy service may also be relevant."]]}
+    "key": "energy",
+    "es": {
+      "slug": "certificados-energeticos-alicante",
+      "title": "Certificado energético en Alicante | Técnico certificador CEE",
+      "description": "Certificados de eficiencia energética en la provincia de Alicante: Benidorm, Altea, Calpe, Dénia y Marina Baixa. Visita, evaluación y alcance del trámite.",
+      "name": "Certificados de eficiencia energética",
+      "lead": "Certificado energético (CEE) para conocer la eficiencia energética del inmueble y atender las obligaciones que correspondan en una venta o alquiler. Servicio en la provincia de Alicante.",
+      "sections": [
+        [
+          "Qué incluye la evaluación energética",
+          "El trabajo parte de la información del inmueble y de una visita para recoger sus características: envolvente, huecos e instalaciones relevantes. El técnico certificador evalúa el comportamiento energético mediante el procedimiento aplicable y prepara el certificado con su calificación y recomendaciones de mejora."
+        ],
+        [
+          "Documentación y tramitación",
+          "Para valorar el encargo se solicita ubicación, uso, superficie aproximada y documentación disponible, como planos o certificados anteriores. El presupuesto debe precisar la visita, la elaboración del CEE y, en su caso, la gestión de registro y tasas. No se promete una calificación ni un plazo sin revisar el inmueble."
+        ],
+        [
+          "Atención en Alicante y Marina Baixa",
+          "Se atienden encargos en Benidorm, Altea, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià y l’Alfàs del Pi, así como en el resto de la provincia de Alicante. La disponibilidad de visita y los desplazamientos se acuerdan para cada inmueble."
+        ],
+        [
+          "Cuándo consultar",
+          "Si va a vender o alquilar, conviene revisar con antelación si necesita certificado, su vigencia y las posibles excepciones según el caso. La certificación energética no sustituye la documentación de ocupación del inmueble. Puede consultar también el servicio de segunda ocupación."
+        ]
+      ]
+    },
+    "en": {
+      "slug": "energy-certificates-alicante",
+      "title": "Energy performance certificate in Alicante | EPC assessment",
+      "description": "Energy performance certificates in Alicante province: Benidorm, Altea, Calpe, Dénia and Marina Baixa. Property assessment, visits and registration scope.",
+      "name": "Energy performance certificates",
+      "lead": "An energy performance certificate (EPC, known as CEE in Spain) assesses a property's energy efficiency and addresses applicable sale or rental requirements. Service across Alicante province.",
+      "sections": [
+        [
+          "What the energy assessment covers",
+          "The work starts with property information and a visit to record relevant characteristics, including the building envelope, openings and systems. The certifying technician assesses energy performance using the applicable procedure and prepares the certificate with its rating and improvement recommendations."
+        ],
+        [
+          "Documents and registration",
+          "An initial quotation requires the location, use, approximate floor area and available documents, such as plans or previous certificates. The quotation should specify the visit, certificate preparation and any agreed registration work and fees. A rating or deadline cannot be promised without reviewing the property."
+        ],
+        [
+          "Alicante and Marina Baixa coverage",
+          "Assignments are considered in Benidorm, Altea, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià and l’Alfàs del Pi, as well as the rest of Alicante province. Visit availability and travel are agreed for each property."
+        ],
+        [
+          "When to enquire",
+          "Before a sale or rental, check whether a certificate is required, its validity and any case-specific exemptions. Energy certification does not replace occupancy documentation. The second occupancy service may also be relevant."
+        ]
+      ]
+    },
+    "de": {
+      "slug": "energieausweise-alicante",
+      "title": "Energieausweis in Alicante | Energieeffizienz-Zertifikat CEE",
+      "description": "Energieausweise in der Provinz Alicante: Altea, Benidorm, Villajoyosa, Calpe und Dénia. Besichtigung, Bewertung und vereinbarte Registrierung.",
+      "name": "Energieausweise",
+      "lead": "Ein spanischer Energieausweis (CEE) bewertet die Energieeffizienz einer Immobilie und erfüllt gegebenenfalls Pflichten bei Verkauf oder Vermietung. Service in der gesamten Provinz Alicante.",
+      "sections": [
+        [
+          "Inhalt der energetischen Bewertung",
+          "Ausgangspunkt sind die Gebäudedaten und eine Besichtigung zur Erfassung von Gebäudehülle, Öffnungen und relevanter Anlagentechnik. Die Bewertung erfolgt nach dem anwendbaren Verfahren. Der Ausweis enthält die Energieklasse und Empfehlungen zur Verbesserung."
+        ],
+        [
+          "Unterlagen und Registrierung",
+          "Für ein Angebot werden Lage, Nutzung, ungefähre Fläche und vorhandene Unterlagen wie Pläne oder frühere Ausweise benötigt. Das Angebot legt Besichtigung, Erstellung des CEE sowie gegebenenfalls Registrierung und Gebühren fest. Energieklasse und Frist werden erst nach Prüfung der Immobilie eingeschätzt."
+        ],
+        [
+          "Provinz Alicante und Marina Baixa",
+          "Aufträge in Altea, Benidorm, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià und l’Alfàs del Pi sowie in der übrigen Provinz Alicante. Verfügbarkeit und Anfahrt werden für jede Immobilie vereinbart."
+        ],
+        [
+          "Wann eine Anfrage sinnvoll ist",
+          "Prüfen Sie vor Verkauf oder Vermietung rechtzeitig, ob ein Ausweis erforderlich und noch gültig ist oder eine Ausnahme greift. Der Energieausweis ersetzt keine Nutzungs- oder Bewohnbarkeitsunterlagen. Beachten Sie auch die Leistung zur zweiten Wohnungsnutzung."
+        ]
+      ]
+    },
+    "no": {
+      "slug": "energiattester-alicante",
+      "title": "Energiattest i Alicante | Energimerking av bolig i Spania",
+      "description": "Energiattester i Alicante-provinsen: Altea, Benidorm, Villajoyosa, Calpe og Dénia. Befaring, energivurdering og avtalt registrering.",
+      "name": "Energiattester",
+      "lead": "En spansk energiattest (CEE) vurderer eiendommens energieffektivitet og dekker aktuelle krav ved salg eller utleie. Tjenesten tilbys i hele Alicante-provinsen.",
+      "sections": [
+        [
+          "Dette omfatter energivurderingen",
+          "Arbeidet bygger på eiendomsopplysninger og en befaring for å registrere blant annet klimaskjerm, vinduer, dører og relevante tekniske anlegg. Energieffektiviteten vurderes etter gjeldende metode. Attesten angir energiklasse og anbefalte forbedringer."
+        ],
+        [
+          "Dokumentasjon og registrering",
+          "For et tilbud trengs beliggenhet, bruk, omtrentlig areal og tilgjengelige dokumenter, som tegninger eller tidligere attester. Tilbudet skal angi befaring, utarbeidelse av CEE og eventuell registrering og gebyrer. Energiklasse eller frist kan ikke loves før eiendommen er vurdert."
+        ],
+        [
+          "Alicante og Marina Baixa",
+          "Oppdrag i Altea, Benidorm, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià og l’Alfàs del Pi, samt resten av Alicante-provinsen. Tidspunkt for befaring og reise avtales for hver eiendom."
+        ],
+        [
+          "Når bør du ta kontakt?",
+          "Før salg eller utleie bør du avklare om energiattest er påkrevd, om den er gyldig og om eventuelle unntak gjelder. Energiattesten erstatter ikke dokumentasjon om lovlig bruk av boligen. Se også tjenesten for fornyet bruk av bolig."
+        ]
+      ]
+    },
+    "ru": {
+      "slug": "energeticheskie-sertifikaty-alicante",
+      "title": "Энергетический сертификат в Аликанте | CEE",
+      "description": "Энергетические сертификаты в провинции Аликанте: Altea, Benidorm, Villajoyosa, Calpe и Dénia. Осмотр, оценка и согласованная регистрация.",
+      "name": "Сертификаты энергоэффективности",
+      "lead": "Испанский сертификат энергоэффективности (CEE) оценивает энергетические характеристики недвижимости и позволяет выполнить применимые требования при продаже или аренде. Обслуживание по всей провинции Аликанте.",
+      "sections": [
+        [
+          "Что входит в энергетическую оценку",
+          "Работа начинается со сведений об объекте и осмотра для фиксации характеристик ограждающих конструкций, окон, дверей и инженерных систем. Оценка проводится по применимой методике. Сертификат содержит класс энергоэффективности и рекомендации по улучшению."
+        ],
+        [
+          "Документы и регистрация",
+          "Для предложения нужны местоположение, назначение, примерная площадь и имеющиеся документы, например планы или прежние сертификаты. В предложении уточняются осмотр, подготовка CEE и, при необходимости, регистрация и сборы. Класс и срок не обещаются до изучения объекта."
+        ],
+        [
+          "Аликанте и Marina Baixa",
+          "Принимаются запросы из Altea, Benidorm, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià и l’Alfàs del Pi, а также остальных муниципалитетов провинции Аликанте. Возможность осмотра и выезд согласовываются для каждого объекта."
+        ],
+        [
+          "Когда обращаться",
+          "Перед продажей или сдачей в аренду заранее уточните необходимость сертификата, срок его действия и возможные исключения. Энергосертификат не заменяет документы, разрешающие использование жилья. Также может понадобиться услуга по повторному заселению."
+        ]
+      ]
+    }
   },
   {
-    "key":"occupancy",
-    "es":{"slug":"certificados-segunda-ocupacion-alicante", "title":"Certificado de segunda ocupación en Alicante", "description":"Documentación técnica para segunda ocupación en Alicante, Benidorm, Altea y Marina Baixa. Revisión del inmueble y de los requisitos del ayuntamiento.", "name":"Certificados de segunda ocupación", "lead":"Revisión técnica y documentación para el trámite de segunda ocupación de viviendas en la provincia de Alicante, de acuerdo con las condiciones del inmueble y los requisitos municipales.", "sections":[["Revisar la situación de la vivienda","Antes de preparar un certificado de segunda ocupación se estudian los antecedentes disponibles, el uso de la vivienda y la documentación que solicita el ayuntamiento. La visita permite comprobar los aspectos técnicos que procedan; las incidencias detectadas se comunican para valorar los siguientes pasos."],["Requisitos que dependen del municipio","El nombre del trámite, la documentación exigida y la forma de presentación pueden variar. Puede ser necesaria una declaración responsable de ocupación u otra documentación técnica. El servicio no garantiza una resolución favorable ni regulariza por sí mismo obras o usos que no sean conformes."],["Qué documentación preparar","Facilite dirección, referencia catastral si dispone de ella, planos y antecedentes de ocupación, así como información sobre reformas. El presupuesto concreta la revisión, la visita y la documentación técnica; la presentación, las tasas y posibles trabajos adicionales deben quedar expresamente acordados."],["Cobertura en la provincia de Alicante","Atención en Benidorm, Altea, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià y l’Alfàs del Pi, y otros municipios de Alicante. Si también necesita un certificado energético, ambos encargos se valoran con su alcance propio."]]},
-    "en":{"slug":"second-occupancy-certificates-alicante", "title":"Second occupancy certificates in Alicante province", "description":"Technical documentation for second occupancy in Alicante, Benidorm, Altea and Marina Baixa. Property review and municipal requirements assessed case by case.", "name":"Second occupancy certificates", "lead":"Technical review and documentation for the second occupancy procedure for homes in Alicante province, according to the property and municipal requirements.", "sections":[["Reviewing the property's circumstances","Before preparing a second occupancy certificate, available records, residential use and the council's requirements are reviewed. A visit enables the relevant technical checks; any issues identified are explained so that the next steps can be assessed."],["Requirements vary between municipalities","The procedure name, required documents and submission process may differ. An occupancy responsible declaration or other technical documentation may be required. The service does not guarantee approval or by itself regularise non-compliant works or uses."],["Documents to prepare","Provide the address, cadastral reference if available, plans and previous occupancy documents, together with details of alterations. The quotation defines the review, visit and technical documentation; submission, fees and any additional work must be expressly agreed."],["Coverage across Alicante province","Service in Benidorm, Altea, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià and l’Alfàs del Pi, and other Alicante municipalities. If an energy certificate is also needed, each assignment is assessed with its own scope."]]}
+    "key": "occupancy",
+    "es": {
+      "slug": "certificados-segunda-ocupacion-alicante",
+      "title": "Certificado de segunda ocupación en Alicante",
+      "description": "Documentación técnica para segunda ocupación en Alicante, Benidorm, Altea y Marina Baixa. Revisión del inmueble y de los requisitos del ayuntamiento.",
+      "name": "Certificados de segunda ocupación",
+      "lead": "Revisión técnica y documentación para el trámite de segunda ocupación de viviendas en la provincia de Alicante, de acuerdo con las condiciones del inmueble y los requisitos municipales.",
+      "sections": [
+        [
+          "Revisar la situación de la vivienda",
+          "Antes de preparar un certificado de segunda ocupación se estudian los antecedentes disponibles, el uso de la vivienda y la documentación que solicita el ayuntamiento. La visita permite comprobar los aspectos técnicos que procedan; las incidencias detectadas se comunican para valorar los siguientes pasos."
+        ],
+        [
+          "Requisitos que dependen del municipio",
+          "El nombre del trámite, la documentación exigida y la forma de presentación pueden variar. Puede ser necesaria una declaración responsable de ocupación u otra documentación técnica. El servicio no garantiza una resolución favorable ni regulariza por sí mismo obras o usos que no sean conformes."
+        ],
+        [
+          "Qué documentación preparar",
+          "Facilite dirección, referencia catastral si dispone de ella, planos y antecedentes de ocupación, así como información sobre reformas. El presupuesto concreta la revisión, la visita y la documentación técnica; la presentación, las tasas y posibles trabajos adicionales deben quedar expresamente acordados."
+        ],
+        [
+          "Cobertura en la provincia de Alicante",
+          "Atención en Benidorm, Altea, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià y l’Alfàs del Pi, y otros municipios de Alicante. Si también necesita un certificado energético, ambos encargos se valoran con su alcance propio."
+        ]
+      ]
+    },
+    "en": {
+      "slug": "second-occupancy-certificates-alicante",
+      "title": "Second occupancy certificates in Alicante province",
+      "description": "Technical documentation for second occupancy in Alicante, Benidorm, Altea and Marina Baixa. Property review and municipal requirements assessed case by case.",
+      "name": "Second occupancy certificates",
+      "lead": "Technical review and documentation for the second occupancy procedure for homes in Alicante province, according to the property and municipal requirements.",
+      "sections": [
+        [
+          "Reviewing the property's circumstances",
+          "Before preparing a second occupancy certificate, available records, residential use and the council's requirements are reviewed. A visit enables the relevant technical checks; any issues identified are explained so that the next steps can be assessed."
+        ],
+        [
+          "Requirements vary between municipalities",
+          "The procedure name, required documents and submission process may differ. An occupancy responsible declaration or other technical documentation may be required. The service does not guarantee approval or by itself regularise non-compliant works or uses."
+        ],
+        [
+          "Documents to prepare",
+          "Provide the address, cadastral reference if available, plans and previous occupancy documents, together with details of alterations. The quotation defines the review, visit and technical documentation; submission, fees and any additional work must be expressly agreed."
+        ],
+        [
+          "Coverage across Alicante province",
+          "Service in Benidorm, Altea, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià and l’Alfàs del Pi, and other Alicante municipalities. If an energy certificate is also needed, each assignment is assessed with its own scope."
+        ]
+      ]
+    },
+    "de": {
+      "slug": "zweite-wohnungsnutzung-alicante",
+      "title": "Bescheinigung zur zweiten Wohnungsnutzung in Alicante",
+      "description": "Technische Unterlagen zur segunda ocupación in Alicante, Altea, Benidorm und Marina Baixa. Prüfung der Immobilie und der kommunalen Anforderungen.",
+      "name": "Bescheinigungen zur zweiten Wohnungsnutzung",
+      "lead": "Technische Prüfung und Unterlagen für das spanische Verfahren der segunda ocupación bei Wohnungen in der Provinz Alicante, entsprechend dem Zustand der Immobilie und den Anforderungen der Gemeinde.",
+      "sections": [
+        [
+          "Prüfung der Wohnungssituation",
+          "Vor der Erstellung werden vorhandene Nachweise, Wohnnutzung und die von der Gemeinde verlangten Unterlagen geprüft. Bei einer Besichtigung erfolgen die erforderlichen technischen Kontrollen. Festgestellte Probleme werden erläutert, damit das weitere Vorgehen bewertet werden kann."
+        ],
+        [
+          "Kommunale Anforderungen",
+          "Verfahrensbezeichnung, Unterlagen und Einreichung können je nach Gemeinde variieren. Erforderlich sein können eine eigenverantwortliche Erklärung zur Nutzung (declaración responsable de ocupación) oder andere technische Nachweise. Die Leistung garantiert keine Genehmigung und legalisiert für sich genommen keine unzulässigen Baumaßnahmen oder Nutzungen."
+        ],
+        [
+          "Benötigte Unterlagen",
+          "Bitte nennen Sie Objektadresse und gegebenenfalls Katasterreferenz und stellen Sie Pläne, frühere Nutzungsnachweise und Angaben zu Umbauten bereit. Das Angebot umfasst die vereinbarte Prüfung, Besichtigung und technischen Unterlagen. Einreichung, Gebühren und Zusatzarbeiten müssen ausdrücklich vereinbart werden."
+        ],
+        [
+          "Service in der Provinz Alicante",
+          "Betreuung in Altea, Benidorm, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià, l’Alfàs del Pi und weiteren Gemeinden der Provinz Alicante. Wird auch ein Energieausweis benötigt, wird dessen Umfang gesondert festgelegt."
+        ]
+      ]
+    },
+    "no": {
+      "slug": "attest-fornyet-bruk-bolig-alicante",
+      "title": "Attest for fornyet bruk av bolig i Alicante",
+      "description": "Teknisk dokumentasjon for segunda ocupación i Alicante, Altea, Benidorm og Marina Baixa. Vurdering av boligen og kommunens krav.",
+      "name": "Attester for fornyet bruk av bolig",
+      "lead": "Teknisk gjennomgang og dokumentasjon for den spanske ordningen segunda ocupación i Alicante-provinsen, basert på boligens tilstand og kommunale krav.",
+      "sections": [
+        [
+          "Gjennomgang av boligens situasjon",
+          "Før en attest utarbeides, gjennomgås tilgjengelige opplysninger, boligens bruk og dokumentasjonen kommunen krever. En befaring gir grunnlag for aktuelle tekniske kontroller. Eventuelle avvik forklares slik at neste steg kan vurderes."
+        ],
+        [
+          "Kravene varierer mellom kommuner",
+          "Navnet på prosedyren, dokumentkrav og innsending kan variere. En egenerklæring om bruk av bolig (declaración responsable de ocupación) eller annen teknisk dokumentasjon kan være nødvendig. Tjenesten garanterer ikke godkjenning og lovliggjør ikke i seg selv ulovlige arbeider eller bruk."
+        ],
+        [
+          "Dokumenter du bør forberede",
+          "Oppgi eiendommens adresse, eventuell matrikkelreferanse, tegninger, tidligere bruksdokumenter og opplysninger om ombygging. Tilbudet definerer gjennomgang, befaring og teknisk dokumentasjon. Innsending, gebyrer og eventuelt tilleggsarbeid må avtales uttrykkelig."
+        ],
+        [
+          "Dekning i Alicante-provinsen",
+          "Tjenester i Altea, Benidorm, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià, l’Alfàs del Pi og andre kommuner i Alicante. Trenger du også energiattest, vurderes hvert oppdrag med sitt eget omfang."
+        ]
+      ]
+    },
+    "ru": {
+      "slug": "povtornoe-zaselenie-alicante",
+      "title": "Документы для повторного заселения жилья в Аликанте",
+      "description": "Технические документы для segunda ocupación в Аликанте, Altea, Benidorm и Marina Baixa. Проверка недвижимости и требований муниципалитета.",
+      "name": "Документы для повторного заселения жилья",
+      "lead": "Техническая проверка и документация для испанской процедуры segunda ocupación в провинции Аликанте с учётом состояния жилья и муниципальных требований.",
+      "sections": [
+        [
+          "Проверка состояния и документов жилья",
+          "До подготовки технического документа изучаются имеющиеся сведения, использование жилья и перечень документов, требуемых муниципалитетом. Осмотр позволяет выполнить необходимые технические проверки. Выявленные проблемы разъясняются для определения дальнейших действий."
+        ],
+        [
+          "Требования зависят от муниципалитета",
+          "Название процедуры, перечень документов и способ подачи могут различаться. Может потребоваться декларация об использовании жилья (declaración responsable de ocupación) или другие технические документы. Услуга не гарантирует положительного решения и сама по себе не узаконивает несоответствующие работы или использование."
+        ],
+        [
+          "Какие документы подготовить",
+          "Укажите адрес объекта, кадастровый номер при наличии, предоставьте планы, прежние документы о заселении и сведения о перепланировках. Предложение определяет проверку, осмотр и техническую документацию. Подача, сборы и дополнительные работы согласовываются отдельно."
+        ],
+        [
+          "Обслуживание по провинции Аликанте",
+          "Услуги в Altea, Benidorm, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià, l’Alfàs del Pi и других муниципалитетах Аликанте. Если требуется энергосертификат, объём каждого задания определяется отдельно."
+        ]
+      ]
+    }
   },
   {
-    "key":"opening",
-    "es":{"slug":"aperturas-cambios-titularidad-alicante", "title":"Aperturas y cambios de titularidad de actividades en Alicante", "description":"Asistencia técnica para licencias de apertura, declaraciones responsables y cambios de titularidad en Alicante. Revisión de actividad, local y documentación.", "name":"Aperturas y cambios de titularidad", "lead":"Asistencia técnica para iniciar una actividad o revisar un cambio de titularidad en la provincia de Alicante. El procedimiento se determina según la actividad, el local y los requisitos municipales.", "sections":[["Antes de abrir o asumir un local","Conviene revisar la situación administrativa y las condiciones técnicas del local antes de comprometer una inversión. Se estudian el uso previsto, los antecedentes y las exigencias aplicables para identificar la documentación necesaria y las cuestiones que requieren comprobación."],["Licencia de apertura y declaración responsable","No todas las actividades siguen el mismo procedimiento. Según el caso puede corresponder una licencia de apertura, una declaración responsable u otro trámite. La documentación puede incluir proyectos e informes técnicos dentro del ámbito profesional aplicable. La viabilidad y el alcance se confirman tras revisar el encargo."],["Cambio de titularidad de actividades","Un cambio de titular no debe confundirse con una autorización para modificar la actividad o el local. Se revisan los antecedentes y si existen cambios que afecten a las condiciones autorizadas. Las gestiones, tasas y documentación a aportar se concretan conforme a los requisitos del ayuntamiento."],["Información para solicitar presupuesto","Indique municipio, dirección, actividad prevista, superficie aproximada, situación del local y si dispone de licencia o documentación anterior. Se atiende la provincia de Alicante; los plazos dependen del alcance técnico y de las actuaciones administrativas, sin garantía de concesión."]]},
-    "en":{"slug":"business-opening-ownership-changes-alicante", "title":"Business opening and ownership changes in Alicante", "description":"Technical support for opening licences, responsible declarations and activity ownership changes in Alicante province. Premises and documentation review.", "name":"Business opening and ownership changes", "lead":"Technical support for starting a business activity or reviewing a change of operator in Alicante province. The procedure depends on the activity, premises and municipal requirements.", "sections":[["Before opening or taking over premises","Reviewing administrative records and technical conditions before committing to an investment helps identify potential issues. The proposed use, existing documentation and applicable requirements are examined to establish what needs to be prepared or checked."],["Opening licences and responsible declarations","Activities do not all follow the same procedure. An opening licence, responsible declaration or another process may apply. Documentation may include technical projects and reports within the applicable professional scope. Feasibility and the extent of the work are confirmed after reviewing the assignment."],["Changes of activity ownership","A change of operator should not be treated as permission to alter the activity or premises. Existing records and any changes affecting authorised conditions are reviewed. Submission work, fees and documents are defined according to council requirements."],["Information for a quotation","Provide the municipality, address, intended activity, approximate floor area, condition of the premises and any existing licence or technical documents. Service covers Alicante province; timing depends on technical work and administrative procedures, and approval cannot be guaranteed."]]}
+    "key": "opening",
+    "es": {
+      "slug": "aperturas-cambios-titularidad-alicante",
+      "title": "Aperturas y cambios de titularidad de actividades en Alicante",
+      "description": "Asistencia técnica para licencias de apertura, declaraciones responsables y cambios de titularidad en Alicante. Revisión de actividad, local y documentación.",
+      "name": "Aperturas y cambios de titularidad",
+      "lead": "Asistencia técnica para iniciar una actividad o revisar un cambio de titularidad en la provincia de Alicante. El procedimiento se determina según la actividad, el local y los requisitos municipales.",
+      "sections": [
+        [
+          "Antes de abrir o asumir un local",
+          "Conviene revisar la situación administrativa y las condiciones técnicas del local antes de comprometer una inversión. Se estudian el uso previsto, los antecedentes y las exigencias aplicables para identificar la documentación necesaria y las cuestiones que requieren comprobación."
+        ],
+        [
+          "Licencia de apertura y declaración responsable",
+          "No todas las actividades siguen el mismo procedimiento. Según el caso puede corresponder una licencia de apertura, una declaración responsable u otro trámite. La documentación puede incluir proyectos e informes técnicos dentro del ámbito profesional aplicable. La viabilidad y el alcance se confirman tras revisar el encargo."
+        ],
+        [
+          "Cambio de titularidad de actividades",
+          "Un cambio de titular no debe confundirse con una autorización para modificar la actividad o el local. Se revisan los antecedentes y si existen cambios que afecten a las condiciones autorizadas. Las gestiones, tasas y documentación a aportar se concretan conforme a los requisitos del ayuntamiento."
+        ],
+        [
+          "Información para solicitar presupuesto",
+          "Indique municipio, dirección, actividad prevista, superficie aproximada, situación del local y si dispone de licencia o documentación anterior. Se atiende la provincia de Alicante; los plazos dependen del alcance técnico y de las actuaciones administrativas, sin garantía de concesión."
+        ]
+      ]
+    },
+    "en": {
+      "slug": "business-opening-ownership-changes-alicante",
+      "title": "Business opening and ownership changes in Alicante",
+      "description": "Technical support for opening licences, responsible declarations and activity ownership changes in Alicante province. Premises and documentation review.",
+      "name": "Business opening and ownership changes",
+      "lead": "Technical support for starting a business activity or reviewing a change of operator in Alicante province. The procedure depends on the activity, premises and municipal requirements.",
+      "sections": [
+        [
+          "Before opening or taking over premises",
+          "Reviewing administrative records and technical conditions before committing to an investment helps identify potential issues. The proposed use, existing documentation and applicable requirements are examined to establish what needs to be prepared or checked."
+        ],
+        [
+          "Opening licences and responsible declarations",
+          "Activities do not all follow the same procedure. An opening licence, responsible declaration or another process may apply. Documentation may include technical projects and reports within the applicable professional scope. Feasibility and the extent of the work are confirmed after reviewing the assignment."
+        ],
+        [
+          "Changes of activity ownership",
+          "A change of operator should not be treated as permission to alter the activity or premises. Existing records and any changes affecting authorised conditions are reviewed. Submission work, fees and documents are defined according to council requirements."
+        ],
+        [
+          "Information for a quotation",
+          "Provide the municipality, address, intended activity, approximate floor area, condition of the premises and any existing licence or technical documents. Service covers Alicante province; timing depends on technical work and administrative procedures, and approval cannot be guaranteed."
+        ]
+      ]
+    },
+    "de": {
+      "slug": "betriebseroeffnung-inhaberwechsel-alicante",
+      "title": "Betriebseröffnung und Inhaberwechsel in Alicante",
+      "description": "Technische Unterstützung bei Betriebseröffnungen, Erklärungen und Inhaberwechseln in der Provinz Alicante. Prüfung von Tätigkeit, Räumen und Unterlagen.",
+      "name": "Betriebseröffnung und Inhaberwechsel",
+      "lead": "Technische Unterstützung bei Aufnahme einer gewerblichen Tätigkeit oder einem Inhaberwechsel in der Provinz Alicante. Das Verfahren richtet sich nach Tätigkeit, Räumlichkeiten und kommunalen Vorgaben.",
+      "sections": [
+        [
+          "Vor Eröffnung oder Übernahme",
+          "Vor einer Investition sollten der Verwaltungsstand und der technische Zustand der Räume geprüft werden. Vorgesehene Nutzung, bisherige Unterlagen und geltende Anforderungen werden untersucht, um notwendige Nachweise und offene Prüfpunkte festzustellen."
+        ],
+        [
+          "Eröffnungsgenehmigung und eigenverantwortliche Erklärung",
+          "Je nach Tätigkeit kommen eine Eröffnungsgenehmigung, eine eigenverantwortliche Erklärung (declaración responsable) oder andere Verfahren infrage. Unterlagen können technische Planungen und Berichte im zulässigen beruflichen Tätigkeitsbereich umfassen. Machbarkeit und Leistungsumfang werden nach Auftragsprüfung bestätigt."
+        ],
+        [
+          "Wechsel des Betriebsinhabers",
+          "Ein Inhaberwechsel ist keine Erlaubnis zur Änderung der Tätigkeit oder der Räume. Vorhandene Unterlagen und Änderungen mit Auswirkungen auf genehmigte Bedingungen werden geprüft. Einreichung, Gebühren und Nachweise werden nach kommunalen Anforderungen festgelegt."
+        ],
+        [
+          "Angaben für ein Angebot",
+          "Nennen Sie Gemeinde, Objektadresse, geplante Tätigkeit, ungefähre Fläche, Zustand der Räume und vorhandene Genehmigungen oder technische Unterlagen. Service in der Provinz Alicante. Fristen hängen von technischem Umfang und Verwaltungsverfahren ab; eine Genehmigung wird nicht garantiert."
+        ]
+      ]
+    },
+    "no": {
+      "slug": "virksomhetsetablering-eierskifte-alicante",
+      "title": "Virksomhetsetablering og eierskifte i Alicante",
+      "description": "Teknisk bistand ved åpningstillatelser, egenerklæringer og skifte av virksomhetsinnehaver i Alicante-provinsen. Vurdering av lokaler og dokumentasjon.",
+      "name": "Virksomhetsetablering og eierskifte",
+      "lead": "Teknisk bistand ved oppstart av virksomhet eller skifte av innehaver i Alicante-provinsen. Prosedyren avhenger av virksomheten, lokalene og kommunale krav.",
+      "sections": [
+        [
+          "Før du åpner eller overtar lokaler",
+          "Gjennomgå administrative forhold og lokalenes tekniske tilstand før du binder deg til en investering. Planlagt bruk, tidligere dokumenter og gjeldende krav undersøkes for å avklare nødvendig dokumentasjon og forhold som må kontrolleres."
+        ],
+        [
+          "Åpningstillatelse og egenerklæring",
+          "Ulike virksomheter følger ulike prosedyrer. Åpningstillatelse, egenerklæring (declaración responsable) eller en annen prosess kan være aktuelt. Dokumentasjonen kan omfatte tekniske prosjekter og rapporter innen relevante faglige rammer. Gjennomførbarhet og omfang bekreftes etter vurdering av oppdraget."
+        ],
+        [
+          "Skifte av virksomhetsinnehaver",
+          "Et eierskifte er ikke en tillatelse til å endre virksomheten eller lokalene. Eksisterende dokumenter og eventuelle endringer som påvirker godkjente vilkår, gjennomgås. Innsending, gebyrer og dokumentasjon avklares ut fra kommunens krav."
+        ],
+        [
+          "Opplysninger for et pristilbud",
+          "Oppgi kommune, eiendommens adresse, planlagt virksomhet, omtrentlig areal, lokalenes tilstand og eventuelle tidligere tillatelser eller tekniske dokumenter. Tjenesten dekker Alicante-provinsen. Frister avhenger av teknisk omfang og saksbehandling; godkjenning kan ikke garanteres."
+        ]
+      ]
+    },
+    "ru": {
+      "slug": "otkrytie-biznesa-smena-vladeltsa-alicante",
+      "title": "Открытие бизнеса и смена владельца в Аликанте",
+      "description": "Техническое сопровождение открытия бизнеса, ответственных деклараций и смены владельца в провинции Аликанте. Проверка деятельности, помещений и документов.",
+      "name": "Открытие бизнеса и смена владельца",
+      "lead": "Техническое сопровождение начала деятельности или смены её владельца в провинции Аликанте. Порядок определяется видом деятельности, помещением и муниципальными требованиями.",
+      "sections": [
+        [
+          "До открытия или принятия помещения",
+          "До вложения средств рекомендуется проверить административный статус и техническое состояние помещения. Изучаются планируемое использование, прежние документы и применимые требования, чтобы определить необходимые материалы и вопросы для проверки."
+        ],
+        [
+          "Разрешение на открытие и ответственная декларация",
+          "Для разных видов деятельности действуют разные процедуры: разрешение на открытие, ответственная декларация (declaración responsable) или иной порядок. Документация может включать технические проекты и отчёты в пределах профессиональной компетенции. Выполнимость и объём подтверждаются после изучения задания."
+        ],
+        [
+          "Смена владельца деятельности",
+          "Смена владельца не означает разрешения изменять деятельность или помещение. Изучаются прежние документы и изменения, влияющие на согласованные условия. Подача, сборы и необходимые материалы определяются по требованиям муниципалитета."
+        ],
+        [
+          "Сведения для подготовки предложения",
+          "Укажите муниципалитет, адрес объекта, планируемую деятельность, примерную площадь, состояние помещения и наличие прежнего разрешения или технических документов. Обслуживается провинция Аликанте. Сроки зависят от технических работ и административных процедур; выдача разрешения не гарантируется."
+        ]
+      ]
+    }
   }
 ]

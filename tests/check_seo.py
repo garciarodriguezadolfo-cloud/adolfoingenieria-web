@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
-from build_site import PATHS, BASE
+from build_site import PATHS, BASE, LANGS, HTML_LANG, WHATSAPP
 
 
 class Page(HTMLParser):
@@ -38,12 +38,12 @@ for key, paths in PATHS.items():
         page = Page(text)
         pages[path] = page
         url = BASE + path
-        assert page.find('html') == [{'lang':lang}], path
+        assert page.find('html') == [{'lang':HTML_LANG[lang]}], path
         assert [a['href'] for a in page.find('link',rel='canonical')] == [url], path
         alternates = page.find('link',rel='alternate')
-        assert len(alternates) == 3, path
+        assert len(alternates) == 6, path
         assert {a['hreflang']:a['href'] for a in alternates} == {
-            'es':BASE+paths['es'], 'en':BASE+paths['en'], 'x-default':BASE+paths['es']}, path
+            **{HTML_LANG[l]:BASE+paths[l] for l in LANGS}, 'x-default':BASE+paths['es']}, path
         assert [a['content'] for a in page.find('meta',property='og:url')] == [url]
         assert len(page.find('h1')) == 1 and page.find('h2'), path
         title = text.split('<title>')[1].split('</title>')[0]
@@ -59,17 +59,27 @@ for key, paths in PATHS.items():
             assert 'noindex' in page.find('meta',name='robots')[0]['content']
         ids = [a['id'] for _,a in page.tags if 'id' in a]
         assert len(ids) == len(set(ids)), path
-        other = 'en' if lang == 'es' else 'es'
-        assert [a['href'] for a in page.find('a',id='lang')] == [paths[other]]
+        selectors = page.find('a', **{'aria-current':'page'})
+        assert len(selectors) == 1 and selectors[0]['href'] == path
+        for target in LANGS:
+            assert page.find('a', href=paths[target], hreflang=HTML_LANG[target]), (path, target)
+        whatsapp = page.find('a', **{'class':'whatsapp-float'})
+        assert len(whatsapp) == 1
+        from urllib.parse import parse_qs
+        wa = urlsplit(whatsapp[0]['href'])
+        assert wa.netloc == 'wa.me' and wa.path == '/34638651175'
+        assert parse_qs(wa.query)['text'] == [WHATSAPP[lang][0]]
+        assert whatsapp[0]['rel'] == 'noopener noreferrer'
+        assert '+34 638 651 175' in whatsapp[0]['aria-label']
         schema = json.loads(text.split('<script type="application/ld+json">')[1].split('</script>')[0])
         graph = schema['@graph']
         assert graph[0]['name'] == 'Manuel Adolfo García Rodríguez | Ingeniero Mecánico'
-        assert graph[1]['url'] == url and graph[1]['inLanguage'] == lang
+        assert graph[1]['url'] == url and graph[1]['inLanguage'] == HTML_LANG[lang]
         assert graph[0]['telephone'] == '+34638651175'
         assert not any(field in graph[0] for field in ('address','aggregateRating','priceRange'))
         if key not in ('home','contact','legal','privacy'):
             assert graph[2]['@type'] == 'Service'
-            assert graph[2]['areaServed'] == (['España','Comunidad Valenciana'] if key in ('expert','accidents') else ['Provincia de Alicante'])
+            assert graph[2]['areaServed'] == (['España','Comunidad Valenciana','Alicante'] if key in ('expert','accidents') else ['Provincia de Alicante'])
         if key in ('home','contact'):
             assert page.find('a',href='tel:+34638651175')
             assert page.find('form',id='contact-form')
@@ -101,10 +111,20 @@ ns = '{http://www.sitemaps.org/schemas/sitemap/0.9}'
 root = ET.parse(ROOT/'sitemap.xml').getroot()
 assert root.tag == ns+'urlset'
 urls = [loc.text for loc in root.findall(ns+'url/'+ns+'loc')]
-assert len(urls) == len(set(urls)) == 14 and set(urls) == indexable
+assert len(urls) == len(set(urls)) == 35 and set(urls) == indexable
+# Detect orphan indexable HTML outside the generator's route table as well.
+actual_indexable = set()
+for file in ROOT.rglob('*.html'):
+    relative = file.relative_to(ROOT)
+    if relative.parts[0] in ('site','node_modules','.git'):
+        continue
+    page = Page(file.read_text())
+    if not any('noindex' in a.get('content','') for a in page.find('meta',name='robots')):
+        actual_indexable.add(BASE+'/' + (str(relative.parent)+'/' if str(relative.parent) != '.' else ''))
+assert actual_indexable == indexable, actual_indexable ^ indexable
 assert (ROOT/'robots.txt').read_text().splitlines() == ['User-agent: *','Allow: /','Sitemap: '+BASE+'/sitemap.xml']
 headers = (ROOT/'_headers').read_text()
 assert '/sitemap.xml\n  Content-Type: application/xml; charset=utf-8' in headers
 assert '/robots.txt\n  Content-Type: text/plain; charset=utf-8' in headers
 assert 'noindex' in Page((ROOT/'404.html').read_text()).find('meta',name='robots')[0]['content']
-print(f'OK: {len(pages)} pages, unique metadata, reciprocal languages, schema, internal links/anchors, 14 sitemap URLs, robots and headers.')
+print(f'OK: {len(pages)} pages, unique metadata, reciprocal languages, schema, internal links/anchors, 35 sitemap URLs, robots and headers.')

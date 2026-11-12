@@ -22,7 +22,7 @@ const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:8877';
     window.contactTurnstileReady();
   `}));
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  for(const path of ['/contacto/','/en/contact/','/','/en/']){
+  for(const path of ['/contacto/','/en/contact/','/de/kontakt/','/no/kontakt/','/ru/kontakty/','/','/en/','/de/','/no/','/ru/']){
    for(scenario of ['accepted','delivery','verification','unavailable','network']){
     await page.goto(base+path);
     await page.waitForFunction(()=>!document.querySelector('button[type=submit]').disabled);
@@ -34,18 +34,19 @@ const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:8877';
     await page.locator('button[type=submit]').click();
     await page.waitForFunction(()=>!document.getElementById('contact-form').hasAttribute('aria-busy'));
     const status=await page.locator('#contact-status').innerText();
-    const en=path.startsWith('/en/');
+    const lang=await page.locator('html').getAttribute('lang');
+    const accepted={es:'aceptada por el servicio de correo',en:'accepted by the email service',de:'vom E-Mail-Dienst angenommen',nb:'godtatt av e-posttjenesten',ru:'Почтовый сервис принял'}[lang];
     if(scenario==='accepted'){
-      assert(status.includes(en?'accepted by the email service':'aceptada por el servicio de correo'));
+      assert(status.includes(accepted));
       assert.equal(await page.locator('[name=mensaje]').inputValue(),'');
     } else {
       assert.equal(await page.locator('#contact-status').getAttribute('data-state'),'error');
       assert((await page.locator('[name=mensaje]').inputValue()).includes('Consulta'));
-      assert(!status.includes(en?'accepted by':'aceptada por'));
+      assert(!status.includes(accepted));
     }
     await page.evaluate(()=>window.testOptions.callback('next-ui-fixture-token'));
     assert.equal(await page.locator('#contact-status').innerText(),status,'Refreshing captcha must preserve the submission result');
-    assert.equal(submissions.at(-1).language,en?'en':'es');
+    assert.equal(submissions.at(-1).language,lang);
     assert.equal(submissions.at(-1).token,'ui-fixture-token');
     assert.equal(submissions.at(-1).privacy,true);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
@@ -61,6 +62,6 @@ const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:8877';
   await page.evaluate(()=>window.testOptions['expired-callback']());
   assert(await page.locator('button[type=submit]').isDisabled());
   assert.deepEqual(errors,[]);
-  console.log('OK: bilingual UI fixtures: provider acceptance, errors, unavailable service, network failure, required fields, captcha expiry, mobile layout and no persistent storage. No real emails sent.');
+  console.log('OK: five-language UI fixtures: provider acceptance, errors, unavailable service, network failure, required fields, captcha expiry, mobile layout and no persistent storage. No real emails sent.');
  } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});
