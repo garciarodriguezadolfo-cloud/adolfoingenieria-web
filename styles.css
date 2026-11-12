@@ -15,3 +15,10 @@ select{font:inherit;background:white;color:var(--ink);padding:15px;width:100%;bo
 
 .contact-phone a{text-decoration:underline;display:inline-block;padding:8px 0}
 .form-trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}.privacy-check{flex-direction:row;align-items:flex-start;line-height:1.7}.privacy-check input{width:20px;height:20px;flex-shrink:0;margin:0}.contact button:disabled{opacity:.6;cursor:not-allowed}#contact-status[data-state=error]{color:#ffd1c9}#contact-captcha{min-height:65px}
+/* Language links remain usable without JavaScript. */
+.language-switch{display:flex;flex-wrap:wrap;gap:4px;font-size:12px;max-width:100%}.language-switch a{padding:9px 8px;border:1px solid var(--line);line-height:1.4}.language-switch a[aria-current=page]{background:var(--navy);color:white}.language-switch a:hover{text-decoration:underline}
+.site-header{flex-wrap:wrap}.site-header nav{flex-wrap:wrap}.brand{min-width:0}main,footer{overflow-wrap:anywhere}form>*{min-width:0}
+/* Reserve a strip for the fixed contact link, including mobile safe areas. */
+body{padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))}.whatsapp-float{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:5;display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:28px;background:#17613b;color:#fff;box-shadow:0 3px 12px #0003;font-size:13px;font-weight:700;line-height:1.35}.whatsapp-float:hover{background:#124d2f}.whatsapp-float svg{width:30px;height:30px;flex-shrink:0}.whatsapp-number{display:block;font-size:11px;font-weight:500}
+@media(max-width:520px){.whatsapp-float{right:12px;bottom:max(8px,env(safe-area-inset-bottom,0px));padding:8px 12px}.language-switch{gap:5px}.language-switch a{padding:9px 7px}}
+html{scroll-padding-bottom:100px}input,textarea,select,button,.footer-links a{scroll-margin-bottom:100px}

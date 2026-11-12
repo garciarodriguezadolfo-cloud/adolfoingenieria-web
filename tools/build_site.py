@@ -3,6 +3,7 @@ from pathlib import Path
 from html import escape as esc
 import json
 import re
+from urllib.parse import quote
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,16 +14,32 @@ CONTACT_EMAIL = CONFIG['contact_email']
 CONTACT_PHONE = CONFIG['contact_phone']
 CONTACT_PHONE_DISPLAY = CONFIG['contact_phone_display']
 SERVICES = json.loads((ROOT / 'site/services.json').read_text())
-LANGS = ('es', 'en')
+LANGS = ('es', 'en', 'de', 'no', 'ru')
+HTML_LANG = {lang: ('nb' if lang == 'no' else lang) for lang in LANGS}
+LOCALES = {lang: json.loads((ROOT / f'site/locales/{lang}.json').read_text()) for lang in ('de', 'no', 'ru')}
+LANG_NAMES = {'es':'Español', 'en':'English', 'de':'Deutsch', 'no':'Norsk bokmål', 'ru':'Русский'}
+WHATSAPP = {
+'es': ('Hola, me gustaría consultar sobre sus servicios de ingeniería.', 'Consultar por WhatsApp'),
+'en': ('Hello, I would like to enquire about your engineering services.', 'Contact via WhatsApp'),
+'de': ('Guten Tag, ich möchte mich über Ihre Ingenieurleistungen informieren.', 'Kontakt über WhatsApp'),
+'no': ('Hei, jeg ønsker informasjon om ingeniørtjenestene dine.', 'Ta kontakt på WhatsApp'),
+'ru': ('Здравствуйте! Хочу узнать подробнее о ваших инженерных услугах.', 'Связаться через WhatsApp'),
+}
 PATHS = {'home': {'es': '/', 'en': '/en/'}, 'contact': {'es': '/contacto/', 'en': '/en/contact/'},
          'legal': {'es': '/aviso-legal/', 'en': '/en/legal-notice/'},
          'privacy': {'es': '/politica-privacidad/', 'en': '/en/privacy-policy/'}}
+for lang, contact, legal, privacy in (
+    ('de', 'kontakt', 'impressum', 'datenschutz'),
+    ('no', 'kontakt', 'juridisk-informasjon', 'personvern'),
+    ('ru', 'kontakty', 'pravovaya-informatsiya', 'konfidentsialnost')):
+    for key, slug in [('home',''), ('contact',contact), ('legal',legal), ('privacy',privacy)]:
+        PATHS[key][lang] = f'/{lang}/' + (slug+'/' if slug else '')
 for s in SERVICES:
-    PATHS[s['key']] = {lang: ('/' if lang == 'es' else '/en/') + s[lang]['slug'] + '/' for lang in LANGS}
+    PATHS[s['key']] = {lang: ('/' if lang == 'es' else f'/{lang}/') + s[lang]['slug'] + '/' for lang in LANGS}
 
 
 def tr(lang, es, en):
-    return es if lang == 'es' else en
+    return es if lang == 'es' else en if lang == 'en' else LOCALES[lang][en]
 
 
 def link(key, lang, label, cls=''):
@@ -30,18 +47,24 @@ def link(key, lang, label, cls=''):
 
 
 def header(key, lang):
-    other = 'en' if lang == 'es' else 'es'
     nav = link('home', lang, tr(lang, 'Inicio', 'Home')) + link('expert', lang, tr(lang, 'Peritajes', 'Expert reports'))
     nav += f'<a href="{PATHS["home"][lang]}#servicios">{tr(lang, "Servicios", "Services")}</a>'
     nav += f'<a href="{PATHS["home"][lang]}#perfil">{tr(lang, "Sobre mí", "About")}</a>'
     nav += link('contact', lang, tr(lang, 'Contacto', 'Contact'))
-    nav += f'<a id="lang" href="{PATHS[key][other]}" lang="{other}" hreflang="{other}" aria-label="{tr(lang, "Read this page in English", "Leer esta página en español")}">{other.upper()}</a>'
+    selector = '<div class="language-switch" role="group" aria-label="'+{'es':'Idiomas','en':'Languages','de':'Sprachen','no':'Språk','ru':'Языки'}[lang]+'">'
+    selector += ''.join(f'<a href="{PATHS[key][target]}" lang="{HTML_LANG[target]}" hreflang="{HTML_LANG[target]}" aria-current="{"page" if target == lang else "false"}">{LANG_NAMES[target]}</a>' for target in LANGS)
+    selector += '</div>'
     return f'''<a class="skip-link" href="#contenido">{tr(lang, 'Saltar al contenido', 'Skip to content')}</a>
-<header class="site-header"><a class="brand" href="{PATHS['home'][lang]}"><span class="brand-name">Manuel Adolfo<br>García Rodríguez</span><span class="brand-sub">{tr(lang, 'Ingeniero Mecánico | Perito Técnico', 'Mechanical Engineer | Technical Expert')}</span></a><nav aria-label="{tr(lang, 'Navegación principal', 'Main navigation')}">{nav}</nav></header>'''
+<header class="site-header"><a class="brand" href="{PATHS['home'][lang]}"><span class="brand-name">Manuel Adolfo<br>García Rodríguez</span><span class="brand-sub">{tr(lang, 'Ingeniero Mecánico | Perito Técnico', 'Mechanical Engineer | Technical Expert')}</span></a><nav aria-label="{tr(lang, 'Navegación principal', 'Main navigation')}">{nav}</nav>{selector}</header>'''
 
 
 def footer(lang):
     return f'''<footer><span>© <span id="year"></span> {NAME}</span><span>{tr(lang, 'Ingeniero Mecánico', 'Mechanical Engineer')}</span><div class="footer-links">{link('legal',lang,tr(lang,'Aviso legal (borrador)','Legal notice (draft)'))}{link('privacy',lang,tr(lang,'Privacidad (borrador)','Privacy (draft)'))}</div></footer>'''
+
+
+def whatsapp(lang):
+    message, label = WHATSAPP[lang]
+    return f'''<a class="whatsapp-float" href="https://wa.me/34638651175?text={quote(message, safe='')}" target="_blank" rel="noopener noreferrer" aria-label="{label}: +34 638 651 175"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M27 15.5A11.5 11.5 0 0 1 10 25.6L4 27l1.5-5.8A11.5 11.5 0 1 1 27 15.5Z" stroke="currentColor" stroke-width="2"/><path d="M11 9c-1 0-2 2-1 5 1 4 5 8 9 8 2 0 4-2 3-3l-3-2-2 2c-2-1-4-3-5-5l2-2-2-3h-1Z" fill="currentColor"/></svg><span>WhatsApp<span class="whatsapp-number">+34 638 651 175</span></span></a>'''
 
 
 def form(lang):
@@ -72,15 +95,16 @@ def service_list(lang, exclude=None):
 
 def shell(key, lang, title, description, body, service=None, draft=False):
     url = BASE + PATHS[key][lang]
+    og_locale = {'es':'es_ES','en':'en_GB','de':'de_DE','no':'nb_NO','ru':'ru_RU'}[lang]
     body = body.replace('↗', '<svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.8"/></svg>')
     provider = {'@type':'Organization', '@id':BASE+'/#professional', 'name':NAME+' | Ingeniero Mecánico', 'url':BASE+'/', 'email':CONTACT_EMAIL, 'telephone':CONTACT_PHONE}
-    graph = [provider, {'@type':'WebPage','@id':url+'#page','url':url,'name':title,'description':description,'inLanguage':lang,'about':{'@id':BASE+'/#professional'}}]
+    graph = [provider, {'@type':'WebPage','@id':url+'#page','url':url,'name':title,'description':description,'inLanguage':HTML_LANG[lang],'about':{'@id':BASE+'/#professional'}}]
     if service:
-        graph.append({'@type':'Service','@id':url+'#service','name':service[lang]['name'],'description':description,'url':url,'provider':{'@id':BASE+'/#professional'},'areaServed': ['España','Comunidad Valenciana'] if service['key'] in ('expert','accidents') else ['Provincia de Alicante']})
-    alternates = ''.join(f'<link rel="alternate" hreflang="{l}" href="{BASE+PATHS[key][l]}">\n' for l in LANGS)
+        graph.append({'@type':'Service','@id':url+'#service','name':service[lang]['name'],'description':description,'url':url,'provider':{'@id':BASE+'/#professional'},'areaServed': ['España','Comunidad Valenciana','Alicante'] if service['key'] in ('expert','accidents') else ['Provincia de Alicante']})
+    alternates = ''.join(f'<link rel="alternate" hreflang="{HTML_LANG[l]}" href="{BASE+PATHS[key][l]}">\n' for l in LANGS)
     alternates += f'<link rel="alternate" hreflang="x-default" href="{BASE+PATHS[key]["es"]}">'
     return f'''<!doctype html>
-<html lang="{lang}">
+<html lang="{HTML_LANG[lang]}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -94,12 +118,13 @@ def shell(key, lang, title, description, body, service=None, draft=False):
 <meta property="og:url" content="{url}">
 <meta property="og:title" content="{esc(title, quote=True)}">
 <meta property="og:description" content="{esc(description, quote=True)}">
-<meta property="og:locale" content="{tr(lang,'es_ES','en_GB')}">
+<meta property="og:locale" content="{og_locale}">
 <link rel="stylesheet" href="/styles.css">
 <script type="application/ld+json">{json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False)}</script>
+<script id="contact-translations" type="application/json">{json.dumps(LOCALES.get(lang, {}), ensure_ascii=False)}</script>
 <script src="/script.js" defer></script>
 </head>
-<body>{header(key,lang)}<main id="contenido">{body}</main>{footer(lang)}</body>
+<body>{header(key,lang)}<main id="contenido">{body}</main>{footer(lang)}{whatsapp(lang)}</body>
 </html>
 '''
 
@@ -140,14 +165,17 @@ def render_contact(lang):
 LEGAL = {
 'es': {
 'legal': [('Titular del sitio','Manuel Adolfo García Rodríguez | Ingeniero Mecánico. Correo: garciarodriguezadolfo@gmail.com. Pendiente de completar y verificar: NIF y demás información legal aplicable.'),('Información profesional','Pendiente de confirmar: datos de colegiación que proceda publicar, titulación oficial y referencias a las normas profesionales aplicables. No se publican acreditaciones adicionales sin verificación.'),('Objeto y condiciones de uso','Este sitio describe servicios de ingeniería y permite enviar consultas. La información general no sustituye el estudio de un caso ni constituye un presupuesto o una aceptación del encargo. Pendiente de revisión: condiciones de contratación, responsabilidades y normativa aplicable.'),('Propiedad intelectual y enlaces','Pendiente de verificar la titularidad y licencias de los contenidos, recursos y marcas, y de completar las condiciones de uso y referencias a terceros.')],
-'privacy': [('Responsable y finalidad','Manuel Adolfo García Rodríguez. Contacto: garciarodriguezadolfo@gmail.com. Los datos de nombre, correo, servicio y consulta se utilizan exclusivamente para gestionar y responder su solicitud. No se destinan a publicidad. No incluya información sensible o datos de terceros.'),('Base jurídica y conservación','Las consultas para contratar un servicio se atienden como medidas precontractuales solicitadas por el interesado; otras solicitudes se valoran conforme al interés legítimo en atender comunicaciones dirigidas al profesional. La casilla acredita la lectura de esta información, no una suscripción comercial. Antes de activar el formulario, el titular debe concretar y revisar los plazos de conservación de consultas, correos y registros, y las obligaciones de conservación aplicables.'),('Procesamiento y proveedores','El formulario transmite los datos por HTTPS a una función de Cloudflare Pages y, mediante Resend, al correo garciarodriguezadolfo@gmail.com. Resend recibe el contenido y el correo de respuesta; el proveedor de la cuenta destinataria también procesa el mensaje. Cloudflare Turnstile comprueba la interacción para prevenir spam y puede procesar datos del dispositivo y de conexión. El código no almacena consultas en una base de datos, no registra su contenido y no usa almacenamiento local del navegador. Los proveedores pueden mantener registros propios; deben revisarse sus contratos y condiciones de privacidad.'),('Derechos y transferencias','Puede dirigirse a garciarodriguezadolfo@gmail.com para ejercer acceso, rectificación, supresión, oposición, limitación y portabilidad cuando procedan, y reclamar ante la AEPD. Pendiente de revisión por el titular: identificación fiscal, procedimiento de derechos, encargados y subencargados, garantías para posibles transferencias internacionales y conservación. El envío debe activarse solo tras revisar estas condiciones.'),('Recursos externos','El sitio carga tipografías de Google Fonts, que pueden recibir datos de conexión. La configuración real de cookies y registros de Cloudflare y del resto de proveedores debe revisarse antes de activar el servicio.')]
+'privacy': [('Responsable y finalidad','Manuel Adolfo García Rodríguez. Contacto: garciarodriguezadolfo@gmail.com. Los datos de nombre, correo, servicio y consulta se utilizan exclusivamente para gestionar y responder su solicitud. No se destinan a publicidad. No incluya información sensible o datos de terceros.'),('Base jurídica y conservación','Las consultas para contratar un servicio se atienden como medidas precontractuales solicitadas por el interesado; otras solicitudes se valoran conforme al interés legítimo en atender comunicaciones dirigidas al profesional. La casilla acredita la lectura de esta información, no una suscripción comercial. Antes de activar el formulario, el titular debe concretar y revisar los plazos de conservación de consultas, correos y registros, y las obligaciones de conservación aplicables.'),('Procesamiento y proveedores','El formulario transmite los datos por HTTPS a una función de Cloudflare Pages y, mediante Resend, al correo garciarodriguezadolfo@gmail.com. Resend recibe el contenido y el correo de respuesta; el proveedor de la cuenta destinataria también procesa el mensaje. Cloudflare Turnstile comprueba la interacción para prevenir spam y puede procesar datos del dispositivo y de conexión. El código no almacena consultas en una base de datos, no registra su contenido y no usa almacenamiento local del navegador. Los proveedores pueden mantener registros propios; deben revisarse sus contratos y condiciones de privacidad.'),('Derechos y transferencias','Puede dirigirse a garciarodriguezadolfo@gmail.com para ejercer acceso, rectificación, supresión, oposición, limitación y portabilidad cuando procedan, y reclamar ante la AEPD. Pendiente de revisión por el titular: identificación fiscal, procedimiento de derechos, encargados y subencargados, garantías para posibles transferencias internacionales y conservación. El envío debe activarse solo tras revisar estas condiciones.'),('Recursos externos','El sitio carga tipografías de Google Fonts, que pueden recibir datos de conexión. La configuración real de cookies y registros de Cloudflare y del resto de proveedores debe revisarse antes de activar el servicio. El enlace de WhatsApp abre un servicio externo de WhatsApp/Meta sujeto a sus condiciones de privacidad al acceder. La web no carga widgets de WhatsApp ni envía mensajes automáticamente.')]
 
 },
 'en': {
 'legal': [('Website owner','Manuel Adolfo García Rodríguez | Mechanical Engineer. To be completed and verified: tax identification and other applicable legal information. Contact email: garciarodriguezadolfo@gmail.com.'),('Professional information','To be confirmed: any professional registration details to publish, official qualification and references to applicable professional rules. Additional credentials are not published without verification.'),('Purpose and terms of use','This website describes engineering services and enables enquiries to be submitted. General information does not replace a case assessment or constitute a quotation or acceptance of an assignment. Contract terms, responsibilities and applicable law require review.'),('Intellectual property and links','Ownership and licences for content, resources and marks must be verified, and terms of use and third-party references completed.')],
-'privacy': [('Controller and purpose','Manuel Adolfo García Rodríguez. Contact: garciarodriguezadolfo@gmail.com. Your name, email, service and enquiry are used solely to handle and reply to your request, not for marketing. Do not include sensitive or third-party data.'),('Legal basis and retention','Requests to engage a service are handled as pre-contractual steps requested by the individual; other enquiries are assessed under the legitimate interest in responding to communications addressed to the professional. The checkbox acknowledges this notice, not a marketing subscription. Before enabling submissions, the owner must define and review retention periods for enquiries, emails and logs and any applicable legal retention duties.'),('Processing and providers','The form sends data over HTTPS to a Cloudflare Pages Function and through Resend to garciarodriguezadolfo@gmail.com. Resend receives the enquiry and reply email; the receiving mailbox provider also processes the message. Cloudflare Turnstile checks interactions to prevent spam and may process device and connection data. This code does not store enquiries in a database, log their content or use browser local storage. Providers may keep their own logs; their contracts and privacy terms must be reviewed.'),('Rights and transfers','Contact garciarodriguezadolfo@gmail.com to exercise rights of access, rectification, erasure, objection, restriction and portability where applicable, or complain to the Spanish authority AEPD. The owner must review tax identification, rights procedures, processors and subprocessors, safeguards for possible international transfers and retention. Enable submissions only after reviewing these conditions.'),('External resources','The site loads Google Fonts, which may receive connection data. Actual cookies and logs used by Cloudflare and other providers must be reviewed before enabling the service.')]
+'privacy': [('Controller and purpose','Manuel Adolfo García Rodríguez. Contact: garciarodriguezadolfo@gmail.com. Your name, email, service and enquiry are used solely to handle and reply to your request, not for marketing. Do not include sensitive or third-party data.'),('Legal basis and retention','Requests to engage a service are handled as pre-contractual steps requested by the individual; other enquiries are assessed under the legitimate interest in responding to communications addressed to the professional. The checkbox acknowledges this notice, not a marketing subscription. Before enabling submissions, the owner must define and review retention periods for enquiries, emails and logs and any applicable legal retention duties.'),('Processing and providers','The form sends data over HTTPS to a Cloudflare Pages Function and through Resend to garciarodriguezadolfo@gmail.com. Resend receives the enquiry and reply email; the receiving mailbox provider also processes the message. Cloudflare Turnstile checks interactions to prevent spam and may process device and connection data. This code does not store enquiries in a database, log their content or use browser local storage. Providers may keep their own logs; their contracts and privacy terms must be reviewed.'),('Rights and transfers','Contact garciarodriguezadolfo@gmail.com to exercise rights of access, rectification, erasure, objection, restriction and portability where applicable, or complain to the Spanish authority AEPD. The owner must review tax identification, rights procedures, processors and subprocessors, safeguards for possible international transfers and retention. Enable submissions only after reviewing these conditions.'),('External resources','The site loads Google Fonts, which may receive connection data. Actual cookies and logs used by Cloudflare and other providers must be reviewed before enabling the service. The WhatsApp link opens an external WhatsApp/Meta service subject to its privacy terms when accessed. This website loads no WhatsApp widgets and sends no messages automatically.')]
 
 }}
+
+
+LEGAL.update(json.loads((ROOT / 'site/legal-locales.json').read_text()))
 
 
 def render_legal(key, lang):
@@ -165,6 +193,11 @@ def build():
             file = ROOT / PATHS[key][lang].lstrip('/') / 'index.html'
             file.parent.mkdir(parents=True,exist_ok=True)
             file.write_text(html)
+    # Cloudflare serves one shared 404 document; offer every language without indexing it.
+    not_found = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>404 | '+NAME+'</title><link rel="stylesheet" href="/styles.css"></head><body><main class="legal-content"><h1>404</h1><p>Página no encontrada · Page not found · Seite nicht gefunden · Siden finnes ikke · Страница не найдена</p><div class="language-switch">'
+    not_found += ''.join(f'<a href="{PATHS["home"][lang]}" lang="{HTML_LANG[lang]}">{LANG_NAMES[lang]}</a>' for lang in LANGS)
+    not_found += '</div></main>'+whatsapp('es')+'</body></html>'
+    (ROOT / '404.html').write_text(not_found)
     ET.register_namespace('', 'http://www.sitemaps.org/schemas/sitemap/0.9')
     ns = '{http://www.sitemaps.org/schemas/sitemap/0.9}'
     root = ET.Element(ns+'urlset')
@@ -175,7 +208,7 @@ def build():
             ET.SubElement(ET.SubElement(root,ns+'url'),ns+'loc').text = BASE + path
     ET.indent(root)
     ET.ElementTree(root).write(ROOT / 'sitemap.xml', encoding='UTF-8', xml_declaration=True)
-    print('Generated 18 static pages and sitemap (14 indexable URLs).')
+    print(f'Generated {len(PATHS)*len(LANGS)} static pages and sitemap ({(len(PATHS)-2)*len(LANGS)} indexable URLs).')
 
 
 if __name__ == '__main__':

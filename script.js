@@ -1,6 +1,7 @@
 'use strict';
 const language = document.documentElement.lang;
-const text = (es, en) => language === 'es' ? es : en;
+const translations = JSON.parse(document.getElementById('contact-translations')?.textContent || '{}');
+const text = (es, en) => language === 'es' ? es : language === 'en' ? en : translations[en];
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
 const form = document.getElementById('contact-form');
@@ -66,7 +67,7 @@ if (form) {
         else throw Error('delivery');
         return;
       }
-      message(text('Consulta aceptada por el servicio de correo. Gracias. Si necesita confirmar su recepción, puede llamar al 638 651 175.',
+      message(text('Consulta aceptada por el servicio de correo. Gracias. Si necesita confirmar su recepción, puede llamar al +34 638 651 175.',
         'Your enquiry has been accepted by the email service. Thank you. To confirm receipt, you can call +34 638 651 175.'));
       form.reset(); requestId = crypto.randomUUID();
     } catch {
