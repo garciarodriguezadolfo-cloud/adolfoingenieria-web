@@ -1,6 +1,6 @@
 """Generate deployable static HTML with Python only; no build needed on Pages."""
 from pathlib import Path
-from html import escape as esc
+from html import escape as esc, unescape
 import json
 import re
 from urllib.parse import quote
@@ -9,6 +9,8 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://adolfoingenieria.es'
+TYPOGRAPHY_SCRIPT = '/typography.js?v=' + sha256((ROOT / 'typography.js').read_bytes()).hexdigest()[:12]
+TYPOGRAPHY_CSS = '/typography.css?v=' + sha256((ROOT / 'typography.css').read_bytes()).hexdigest()[:12]
 SELECTOR_CSS = '/language-selector.css?v=' + sha256((ROOT / 'language-selector.css').read_bytes()).hexdigest()[:12]
 NAME = 'Manuel Adolfo García Rodríguez'
 CONFIG = json.loads((ROOT / 'site/config.json').read_text())
@@ -107,10 +109,18 @@ def service_list(lang, exclude=None):
     return '<div class="service-list">' + ''.join(f'''<article><span>{i:02d}</span><div><h3>{link(s['key'],lang,s[lang]['name'])}</h3><p>{tr(lang,'Toda España · Comunidad Valenciana','Spain · Valencian Community') if s['key'] in ('expert','accidents') else tr(lang,'Provincia de Alicante','Alicante province')}</p></div><span class="arrow" aria-hidden="true">↗</span></article>''' for i,s in enumerate(SERVICES,1) if s['key'] != exclude) + '</div>'
 
 
+def mark_reading_prose(match):
+    # Do not justify short text or alter any of the translated copy.
+    if len(unescape(match[1])) < 280:
+        return match[0]
+    return '<p class="reading-prose">' + match[1] + '</p>'
+
+
 def shell(key, lang, title, description, body, service=None, draft=False):
     url = BASE + PATHS[key][lang]
     og_locale = {'es':'es_ES','en':'en_GB','de':'de_DE','no':'nb_NO','ru':'ru_RU','nl':'nl_NL'}[lang]
     body = body.replace('↗', '<svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.8"/></svg>')
+    body = re.sub(r'<p>([^<]+)</p>', mark_reading_prose, body)
     provider = {'@type':'Organization', '@id':BASE+'/#professional', 'name':NAME+' | Ingeniero Mecánico', 'url':BASE+'/', 'email':CONTACT_EMAIL, 'telephone':CONTACT_PHONE}
     graph = [provider, {'@type':'WebPage','@id':url+'#page','url':url,'name':title,'description':description,'inLanguage':HTML_LANG[lang],'about':{'@id':BASE+'/#professional'}}]
     if service:
@@ -135,9 +145,11 @@ def shell(key, lang, title, description, body, service=None, draft=False):
 <meta property="og:locale" content="{og_locale}">
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="{SELECTOR_CSS}">
+<link rel="stylesheet" href="{TYPOGRAPHY_CSS}">
 <script type="application/ld+json">{json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False)}</script>
 <script id="contact-translations" type="application/json">{json.dumps(LOCALES.get(lang, {}), ensure_ascii=False)}</script>
 <script src="/script.js" defer></script>
+<script src="{TYPOGRAPHY_SCRIPT}" defer></script>
 </head>
 <body>{header(key,lang)}<main id="contenido">{body}</main>{footer(lang)}{whatsapp(lang)}</body>
 </html>
