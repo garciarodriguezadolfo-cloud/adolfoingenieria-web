@@ -1,0 +1,59 @@
+/* Reading typography only: retain the site's fonts, colours and section layout. */
+.section.expertise > div,
+.section.about > div {
+  min-inline-size: 0;
+}
+.section.expertise > div:last-child,
+.section.about > div:last-child,
+.legal-content section {
+  container-name: reading;
+  container-type: inline-size;
+}
+.section.expertise > div:last-child > p:not(.eyebrow),
+.section.about > div:last-child > p:not(.eyebrow):not(.about-lead),
+.legal-content section > p {
+  max-inline-size: 60ch;
+  margin-block: 0 1.2em;
+  line-height: 1.8;
+  text-align: left;
+  text-align-last: left;
+  word-break: normal;
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  text-wrap: pretty;
+}
+.section.expertise > div:last-child > p:last-child,
+.section.about > div:last-child > p:last-child,
+.legal-content section > p:last-child {
+  margin-block-end: 0;
+}
+.legal-content {
+  max-inline-size: 68ch;
+}
+main h1,
+main h2,
+main h3 {
+  text-align: left;
+  word-break: normal;
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  hyphenate-limit-chars: 8 4 4;
+  text-wrap: balance;
+}
+/* Only long explanatory paragraphs are marked by the generator.
+   The presentation guard keeps justification only if word spacing stays natural.
+   Narrow columns and browsers without container queries keep left alignment. */
+@media (min-width: 768px) {
+  @container reading (min-width: 30rem) {
+    .section.expertise > div:last-child > p.reading-prose:is(.try-justification, .has-uniform-spacing),
+    .section.about > div:last-child > p.reading-prose:is(.try-justification, .has-uniform-spacing),
+    .legal-content section > p.reading-prose:is(.try-justification, .has-uniform-spacing) {
+      text-align: justify;
+      text-align-last: left;
+      text-justify: inter-word;
+    }
+  }
+}
