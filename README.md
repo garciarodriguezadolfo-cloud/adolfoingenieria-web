@@ -39,7 +39,7 @@ El backend se verifica con `npm test`; la interfaz de envío con `TEST_BASE_URL=
 
 ## Pendientes del titular
 
-Consultar `docs/service-expansion.md` y `docs/contact-setup.md`. El correo confirmado es garciarodriguezadolfo@gmail.com y el teléfono +34 638 651 175. El formulario envía mediante Resend y Turnstile cuando se configuran los servicios y `CONTACT_ENABLED=true`; sin configuración muestra indisponibilidad. No solicita claves al visitante ni usa su aplicación de correo para el envío directo. No se publica dirección ni precios. Los textos legales siguen identificados como borradores pendientes de revisión; se conserva su estado previo sin modificar la activación existente.
+Consultar `docs/service-expansion.md` y `docs/contact-setup.md`. El correo confirmado es info@adolfoingenieria.es y el teléfono +34 638 651 175. El formulario envía mediante Resend y Turnstile cuando se configuran los servicios y `CONTACT_ENABLED=true`; sin configuración muestra indisponibilidad. No solicita claves al visitante ni usa su aplicación de correo para el envío directo. No se publica dirección ni precios. Los textos legales siguen identificados como borradores pendientes de revisión; se conserva su estado previo sin modificar la activación existente.
 
 ## Idiomas y WhatsApp
 
@@ -48,3 +48,5 @@ Las rutas son `/`, `/en/`, `/de/`, `/no/`, `/ru/` y `/nl/`. Bokmål utiliza `nb`
 El selector usa seis banderas SVG locales en `assets/flags/`, con nombres accesibles nativos, enlaces de teclado y marcador del idioma actual. Se comprueba con `node tests/flags-browser.cjs`. Los SVG son dibujos vectoriales minimalistas creados para este repositorio, sin dependencias externas.
 
 La optimización de contenidos y SEO internacional se documenta en `docs/seo-optimization.md`. El sitemap conserva 42 URLs y añade equivalencias de idioma xhtml; los informes preliminares se integran en la página de peritajes existente.
+
+El destinatario profesional se fija en `TO` dentro de `functions/api/contact.js`; este cambio de dirección no requiere actualizar variables de Cloudflare. Conservar `CONTACT_FROM` como remitente verificado de Resend. El nuevo destino solo se aplicará al desplegar la versión aprobada; la recepción en Zoho desde el formulario aún requiere una prueba real expresamente anunciada. Ver `docs/contact-setup.md`.

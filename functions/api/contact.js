@@ -1,4 +1,4 @@
-const TO = 'garciarodriguezadolfo@gmail.com';
+const TO = 'info@adolfoingenieria.es';
 const SERVICES = {
   expert: 'Peritajes técnicos', accidents: 'Investigación y reconstrucción de accidentes',
   energy: 'Certificados energéticos', occupancy: 'Segunda ocupación',
