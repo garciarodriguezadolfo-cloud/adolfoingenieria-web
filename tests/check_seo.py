@@ -79,14 +79,36 @@ for key, paths in PATHS.items():
         assert '+34 638 651 175' in whatsapp[0]['aria-label']
         schema = json.loads(text.split('<script type="application/ld+json">')[1].split('</script>')[0])
         graph = schema['@graph']
-        assert graph[0]['name'] == 'Manuel Adolfo García Rodríguez | Ingeniero Mecánico'
+        assert graph[0]['@type'] == 'Person'
+        assert graph[0]['name'] == 'Manuel Adolfo García Rodríguez'
+        assert graph[0]['jobTitle']
         assert graph[1]['url'] == url and graph[1]['inLanguage'] == HTML_LANG[lang]
         assert graph[0]['telephone'] == '+34638651175'
         assert not any(field in graph[0] for field in ('address','aggregateRating','priceRange'))
         if key not in ('home','contact','legal','privacy'):
             assert graph[2]['@type'] == 'Service'
-            assert graph[2]['areaServed'] == (['España','Comunidad Valenciana','Alicante'] if key in ('expert','accidents') else ['Provincia de Alicante'])
+            assert graph[2]['areaServed'] == (['España','Comunidad Valenciana','Alicante'] if key in ('expert','accidents') else ['Provincia de Alicante','Marina Baixa','Costa Blanca'])
+        if key not in ('legal','privacy'):
+            website = next(item for item in graph if item['@type'] == 'WebSite')
+            assert website['url'] == BASE+PATHS['home'][lang]
+            assert website['inLanguage'] == HTML_LANG[lang]
+            assert graph[1]['isPartOf']['@id'] == website['@id']
+            assert website['publisher']['@id'] == graph[0]['@id']
+            assert len({item['@id'] for item in graph}) == len(graph)
+            if key != 'home':
+                crumb = next(item for item in graph if item['@type'] == 'BreadcrumbList')
+                assert [i['position'] for i in crumb['itemListElement']] == [1,2]
+                assert [i['item'] for i in crumb['itemListElement']] == [BASE+PATHS['home'][lang],url]
+                assert graph[1]['breadcrumb']['@id'] == crumb['@id']
+            if key not in ('home','contact'):
+                assert graph[1]['mainEntity']['@id'] == graph[2]['@id']
+            else:
+                assert graph[1]['@type'] == ('ContactPage' if key == 'contact' else 'WebPage')
+        assert len(page.find('meta',property='og:locale:alternate')) == 5
+        if key == 'expert':
+            assert page.find('section',id='preliminary-assessment')
         if key in ('home','contact'):
+
             assert page.find('a',href='tel:+34638651175')
             assert page.find('form',id='contact-form')
             assert page.find('form')[0]['action'] == '/api/contact'
@@ -118,6 +140,15 @@ root = ET.parse(ROOT/'sitemap.xml').getroot()
 assert root.tag == ns+'urlset'
 urls = [loc.text for loc in root.findall(ns+'url/'+ns+'loc')]
 assert len(urls) == len(set(urls)) == 42 and set(urls) == indexable
+for entry in root.findall(ns+'url'):
+    location = entry.find(ns+'loc').text
+    key = next(key for key,paths in PATHS.items() if location in {BASE+p for p in paths.values()})
+    expected = {HTML_LANG[lang]:BASE+path for lang,path in PATHS[key].items()}
+    expected['x-default'] = BASE+PATHS[key]['es']
+    alternates = entry.findall('{http://www.w3.org/1999/xhtml}link')
+    assert len(alternates) == 7
+    assert all(item.get('rel') == 'alternate' for item in alternates)
+    assert {item.get('hreflang'):item.get('href') for item in alternates} == expected
 # Detect orphan indexable HTML outside the generator's route table as well.
 actual_indexable = set()
 for file in ROOT.rglob('*.html'):

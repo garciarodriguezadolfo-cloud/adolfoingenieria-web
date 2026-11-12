@@ -18,6 +18,7 @@ CONTACT_EMAIL = CONFIG['contact_email']
 CONTACT_PHONE = CONFIG['contact_phone']
 CONTACT_PHONE_DISPLAY = CONFIG['contact_phone_display']
 SERVICES = json.loads((ROOT / 'site/services.json').read_text())
+SEO = json.loads((ROOT / 'site/seo.json').read_text())
 LANGS = ('es', 'en', 'de', 'no', 'ru', 'nl')
 HTML_LANG = {lang: ('nb' if lang == 'no' else lang) for lang in LANGS}
 LOCALES = {lang: json.loads((ROOT / f'site/locales/{lang}.json').read_text()) for lang in ('de', 'no', 'ru', 'nl')}
@@ -121,12 +122,27 @@ def shell(key, lang, title, description, body, service=None, draft=False):
     og_locale = {'es':'es_ES','en':'en_GB','de':'de_DE','no':'nb_NO','ru':'ru_RU','nl':'nl_NL'}[lang]
     body = body.replace('↗', '<svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.8"/></svg>')
     body = re.sub(r'<p>([^<]+)</p>', mark_reading_prose, body)
-    provider = {'@type':'Organization', '@id':BASE+'/#professional', 'name':NAME+' | Ingeniero Mecánico', 'url':BASE+'/', 'email':CONTACT_EMAIL, 'telephone':CONTACT_PHONE}
+    provider = {'@type':'Person', '@id':BASE+'/#professional', 'name':NAME, 'jobTitle':tr(lang,'Ingeniero Mecánico','Mechanical Engineer'), 'url':BASE+'/', 'email':CONTACT_EMAIL, 'telephone':CONTACT_PHONE}
     graph = [provider, {'@type':'WebPage','@id':url+'#page','url':url,'name':title,'description':description,'inLanguage':HTML_LANG[lang],'about':{'@id':BASE+'/#professional'}}]
     if service:
-        graph.append({'@type':'Service','@id':url+'#service','name':service[lang]['name'],'description':description,'url':url,'provider':{'@id':BASE+'/#professional'},'areaServed': ['España','Comunidad Valenciana','Alicante'] if service['key'] in ('expert','accidents') else ['Provincia de Alicante']})
+        graph.append({'@type':'Service','@id':url+'#service','name':service[lang]['h1'],'serviceType':service[lang]['name'],'description':description,'url':url,'provider':{'@id':BASE+'/#professional'},'areaServed': ['España','Comunidad Valenciana','Alicante'] if service['key'] in ('expert','accidents') else ['Provincia de Alicante','Marina Baixa','Costa Blanca']})
+    if not draft:
+        website_id = BASE + PATHS['home'][lang] + '#website'
+        graph[1]['isPartOf'] = {'@id':website_id}
+        if key == 'contact':
+            graph[1]['@type'] = 'ContactPage'
+        if service:
+            graph[1]['mainEntity'] = {'@id':url+'#service'}
+        graph.append({'@type':'WebSite','@id':website_id,'url':BASE+PATHS['home'][lang],
+                      'name':NAME,'inLanguage':HTML_LANG[lang], 'publisher':{'@id':BASE+'/#professional'}})
+        if key != 'home':
+            graph[1]['breadcrumb'] = {'@id':url+'#breadcrumb'}
+            graph.append({'@type':'BreadcrumbList','@id':url+'#breadcrumb','itemListElement':[
+                {'@type':'ListItem','position':1,'name':tr(lang,'Inicio','Home'),'item':BASE+PATHS['home'][lang]},
+                {'@type':'ListItem','position':2,'name':service[lang]['h1'] if service else tr(lang,'Contacto','Contact'),'item':url}]})
     alternates = ''.join(f'<link rel="alternate" hreflang="{HTML_LANG[l]}" href="{BASE+PATHS[key][l]}">\n' for l in LANGS)
     alternates += f'<link rel="alternate" hreflang="x-default" href="{BASE+PATHS[key]["es"]}">'
+    og_alternates = ''.join(f'<meta property="og:locale:alternate" content="{locale}">\n' for code,locale in {'es':'es_ES','en':'en_GB','de':'de_DE','no':'nb_NO','ru':'ru_RU','nl':'nl_NL'}.items() if code != lang)
     return f'''<!doctype html>
 <html lang="{HTML_LANG[lang]}">
 <head>
@@ -143,6 +159,7 @@ def shell(key, lang, title, description, body, service=None, draft=False):
 <meta property="og:title" content="{esc(title, quote=True)}">
 <meta property="og:description" content="{esc(description, quote=True)}">
 <meta property="og:locale" content="{og_locale}">
+{og_alternates}
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="{SELECTOR_CSS}">
 <link rel="stylesheet" href="{TYPOGRAPHY_CSS}">
@@ -166,18 +183,25 @@ def render_home(lang):
     body = body.replace(tr(lang,'Otros servicios','Other services'),tr(lang,'Servicios de ingeniería','Engineering services'))
     body = body.replace(tr(lang,'SERVICIOS COMPLEMENTARIOS','ADDITIONAL SERVICES'),tr(lang,'SERVICIOS','SERVICES'))
     body = body.replace(tr(lang,'Peritajes en toda España','Expert assessments throughout Spain'),tr(lang,'Peritajes en toda España · Especial atención a la Comunidad Valenciana','Expert assessments throughout Spain · Particular focus on the Valencian Community'))
-    body += f'''<section class="section expertise"><div><p class="eyebrow dark">{tr(lang,'ÁMBITO DE TRABAJO','SERVICE AREA')}</p><h2>{tr(lang,'Peritajes en España.<br>Certificaciones en Alicante.','Expert reports across Spain.<br>Certificates in Alicante.')}</h2></div><div><p>{tr(lang,'Perito ingeniero mecánico para informes y dictámenes periciales en toda España, con especial atención a la Comunidad Valenciana. Certificados energéticos, segunda ocupación y asistencia para aperturas en la provincia de Alicante.','Mechanical engineering expert for technical reports and opinions throughout Spain, with particular attention to the Valencian Community. Energy and second occupancy certificates and business opening support in Alicante province.')}</p><p>{tr(lang,'Atención en Benidorm, Altea, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià y l’Alfàs del Pi. Las visitas y el alcance se acuerdan según cada encargo.','Assignments in Benidorm, Altea, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià and l’Alfàs del Pi. Visits and scope are agreed for each assignment.')}</p></div></section>'''
+    body += f'''<section class="section expertise"><div><p class="eyebrow dark">{tr(lang,'ÁMBITO DE TRABAJO','SERVICE AREA')}</p><h2>{tr(lang,'Peritajes en España.<br>Certificaciones en Alicante.','Expert reports across Spain.<br>Certificates in Alicante.')}</h2></div><div><p>{esc(SEO[lang]["home"]["scope"])}</p><p>{tr(lang,'Atención en Benidorm, Altea, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià y l’Alfàs del Pi. Las visitas y el alcance se acuerdan según cada encargo.','Assignments in Benidorm, Altea, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià and l’Alfàs del Pi. Visits and scope are agreed for each assignment.')}</p></div></section>'''
     body += contact_block(lang)
-    title = tr(lang,'Perito ingeniero mecánico | Manuel Adolfo García Rodríguez','Mechanical engineer & technical expert | Manuel Adolfo García Rodríguez')
-    description = tr(lang,'Manuel Adolfo García Rodríguez: peritajes en España y Comunidad Valenciana. Certificados energéticos, segunda ocupación y aperturas en Alicante.','Manuel Adolfo García Rodríguez: expert reports in Spain and the Valencian Community. Energy and occupancy certificates and opening support in Alicante.')
+    title = SEO[lang]['home']['title']
+    description = SEO[lang]['home']['description']
     return shell('home',lang,title,description,body)
 
 
 def render_service(s, lang):
     data = s[lang]
-    body = f'''<section class="service-hero"><p class="eyebrow">{tr(lang,'INGENIERÍA · ANÁLISIS TÉCNICO','ENGINEERING · TECHNICAL ANALYSIS')}</p><h1>{esc(data['name'])}<span class="dot">.</span></h1><p class="lead">{esc(data['lead'])}</p>{link('contact',lang,tr(lang,'Solicitar presupuesto ↗','Request a quotation ↗'),'primary')}</section>'''
+    body = f'''<section class="service-hero"><p class="eyebrow">{tr(lang,'INGENIERÍA · ANÁLISIS TÉCNICO','ENGINEERING · TECHNICAL ANALYSIS')}</p><h1>{esc(data['h1'])}<span class="dot">.</span></h1><p class="lead">{esc(data['lead'])}</p>{link('contact',lang,tr(lang,'Solicitar presupuesto ↗','Request a quotation ↗'),'primary')}</section>'''
+    contextual_links = {'expert':(3,'accidents'), 'accidents':(2,'expert'), 'energy':(3,'occupancy'), 'occupancy':(3,'energy')}
     for i,(heading,text) in enumerate(data['sections']):
-        body += f'<section class="section expertise{" services" if i%2 else ""}"><div><p class="eyebrow dark">{i+1:02d}</p><h2>{esc(heading)}</h2></div><div><p>{esc(text)}</p></div></section>'
+        anchor = ' id="preliminary-assessment"' if s['key'] == 'expert' and i == 0 else ''
+        related = ''
+        if s['key'] in contextual_links and contextual_links[s['key']][0] == i:
+            target = contextual_links[s['key']][1]
+            target_service = next(item for item in SERVICES if item['key'] == target)
+            related = link(target, lang, target_service[lang]['name'], 'text-link')
+        body += f'<section{anchor} class="section expertise{" services" if i%2 else ""}"><div><p class="eyebrow dark">{i+1:02d}</p><h2>{esc(heading)}</h2></div><div><p>{esc(text)}</p>{related}</div></section>'
     body += f'<section class="section services"><h2>{tr(lang,"Servicios relacionados","Related services")}</h2>{service_list(lang,s["key"])}</section>'
     body += f'<section class="contact"><h2>{tr(lang,"Definamos el alcance de su encargo.","Let’s define the scope of your assignment.")}</h2><p>{tr(lang,"Indique el lugar, los hechos o el inmueble y los plazos que necesita valorar. El presupuesto se concreta tras revisar la información.","Describe the location, events or property and the deadlines to be assessed. A quotation is defined after reviewing the information.")}</p>{link("contact",lang,tr(lang,"Preparar consulta ↗","Prepare an enquiry ↗"),"primary")}</section>'
     return shell(s['key'],lang,data['title'],data['description'],body,s)
@@ -186,7 +210,7 @@ def render_service(s, lang):
 def render_contact(lang):
     body = f'''<section class="service-hero"><p class="eyebrow">{tr(lang,'CONTACTO PROFESIONAL','PROFESSIONAL ENQUIRIES')}</p><h1>{tr(lang,'Solicitar presupuesto','Request a quotation')}<span class="dot">.</span></h1><p class="lead">{NAME} | {tr(lang,'Ingeniero Mecánico. Peritajes en toda España; certificaciones y aperturas en la provincia de Alicante.','Mechanical Engineer. Expert reports throughout Spain; certificates and business opening support in Alicante province.')}</p></section><section class="section expertise"><div><h2>{tr(lang,'Qué información preparar','Information to prepare')}</h2></div><div><p>{tr(lang,'Indique el servicio, municipio, una descripción del caso o inmueble y los plazos relevantes. Para peritajes, añada una cronología y qué cuestiones necesita resolver; para certificaciones o aperturas, describa el uso y la documentación disponible. No adjunte documentación sensible en esta fase.','Include the service, municipality, a description of the case or property and relevant deadlines. For expert reports, outline the chronology and the questions to resolve; for certificates or opening procedures, describe the use and available documents. Do not include sensitive documents at this stage.')}</p></div></section>'''
     body += contact_block(lang)
-    return shell('contact',lang,tr(lang,'Contacto y presupuestos | Manuel Adolfo García Rodríguez','Contact and quotations | Manuel Adolfo García Rodríguez'),tr(lang,'Prepare su consulta sobre peritajes, certificados o aperturas. Alcance y presupuesto según el encargo. Formulario de contacto, correo y teléfono profesional.','Prepare an enquiry about expert reports, certificates or business opening. Scope and quotations depend on the assignment. Contact form, professional email and phone.'),body)
+    return shell('contact',lang,SEO[lang]['contact']['title'],SEO[lang]['contact']['description'],body)
 
 
 LEGAL = {
@@ -227,13 +251,18 @@ def build():
     not_found += '</main>'+whatsapp('es')+'</body></html>'
     (ROOT / '404.html').write_text(not_found)
     ET.register_namespace('', 'http://www.sitemaps.org/schemas/sitemap/0.9')
+    ET.register_namespace('xhtml', 'http://www.w3.org/1999/xhtml')
     ns = '{http://www.sitemaps.org/schemas/sitemap/0.9}'
     root = ET.Element(ns+'urlset')
     for key, paths in PATHS.items():
         if key in ('legal','privacy'):
             continue  # Legal drafts remain noindex and outside the sitemap.
         for path in paths.values():
-            ET.SubElement(ET.SubElement(root,ns+'url'),ns+'loc').text = BASE + path
+            entry = ET.SubElement(root,ns+'url')
+            ET.SubElement(entry,ns+'loc').text = BASE + path
+            for lang in LANGS:
+                ET.SubElement(entry,'{http://www.w3.org/1999/xhtml}link',rel='alternate',hreflang=HTML_LANG[lang],href=BASE+paths[lang])
+            ET.SubElement(entry,'{http://www.w3.org/1999/xhtml}link',rel='alternate',hreflang='x-default',href=BASE+paths['es'])
     ET.indent(root)
     ET.ElementTree(root).write(ROOT / 'sitemap.xml', encoding='UTF-8', xml_declaration=True)
     print(f'Generated {len(PATHS)*len(LANGS)} static pages and sitemap ({(len(PATHS)-2)*len(LANGS)} indexable URLs).')

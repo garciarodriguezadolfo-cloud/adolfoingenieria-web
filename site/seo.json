@@ -1,0 +1,68 @@
+{
+  "es": {
+    "home": {
+      "title": "Perito judicial Alicante | Manuel Adolfo García Rodríguez",
+      "description": "Ingeniero mecánico: peritajes judiciales e informes preliminares en España. Certificados energéticos, segunda ocupación y aperturas en Alicante y Costa Blanca.",
+      "scope": "Peritajes judiciales e informes preliminares en toda España, especialmente Comunidad Valenciana y Alicante. Certificados de eficiencia energética, documentación de segunda ocupación y asistencia de ingeniería para aperturas en la provincia de Alicante, Marina Baixa y Costa Blanca."
+    },
+    "contact": {
+      "title": "Contacto y presupuestos | Manuel Adolfo García Rodríguez",
+      "description": "Consulte sobre informes preliminares, peritajes judiciales, certificados energéticos, segunda ocupación o aperturas. Servicio en España y provincia de Alicante."
+    }
+  },
+  "en": {
+    "home": {
+      "title": "Engineering expert in Alicante | Manuel Adolfo García Rodríguez",
+      "description": "Mechanical engineering expert reports and preliminary assessments across Spain. Energy and occupancy certificates and opening support in Alicante and Costa Blanca.",
+      "scope": "Expert reports and preliminary technical assessments throughout Spain, particularly the Valencian Community and Alicante. Spanish energy certificates, second occupancy documentation and engineering support for business opening in Alicante province, Marina Baixa and the Costa Blanca."
+    },
+    "contact": {
+      "title": "Contact and quotations | Manuel Adolfo García Rodríguez",
+      "description": "Enquire about preliminary technical assessments, expert reports, Spanish energy and occupancy certificates or business opening in Spain and Alicante province."
+    }
+  },
+  "de": {
+    "home": {
+      "title": "Gutachter in Alicante | Manuel Adolfo García Rodríguez",
+      "description": "Maschinenbauingenieur: technische Vorprüfungen und Gutachten in Spanien. Energieausweise, Wohnungsnutzung und Betriebseröffnungen in Alicante und Costa Blanca.",
+      "scope": "Technische Vorprüfungen und Gutachten in ganz Spanien, insbesondere in der Region Valencia und Alicante. Spanische Energieausweise, Unterlagen zur segunda ocupación und technische Unterstützung bei Betriebseröffnungen in der Provinz Alicante, Marina Baixa und an der Costa Blanca."
+    },
+    "contact": {
+      "title": "Kontakt und Angebote | Manuel Adolfo García Rodríguez",
+      "description": "Anfragen zu technischen Vorprüfungen, Gutachten, spanischen Energieausweisen, segunda ocupación und Betriebseröffnungen in Spanien und der Provinz Alicante."
+    }
+  },
+  "no": {
+    "home": {
+      "title": "Sakkyndig ingeniør Alicante | Manuel Adolfo García Rodríguez",
+      "description": "Maskiningeniør med tekniske forundersøkelser og sakkyndige rapporter i Spania. Energiattester, boligattester og virksomhetsetablering i Alicante og Costa Blanca.",
+      "scope": "Tekniske forundersøkelser og sakkyndige rapporter i hele Spania, særlig Valencia-regionen og Alicante. Spanske energiattester, dokumentasjon for segunda ocupación og ingeniørbistand ved virksomhetsetablering i Alicante-provinsen, Marina Baixa og Costa Blanca."
+    },
+    "contact": {
+      "title": "Kontakt og pristilbud | Manuel Adolfo García Rodríguez",
+      "description": "Spør om tekniske forundersøkelser, sakkyndige rapporter, spanske energiattester, segunda ocupación og virksomhetsetablering i Spania og Alicante-provinsen."
+    }
+  },
+  "ru": {
+    "home": {
+      "title": "Инженер-эксперт в Аликанте | Manuel Adolfo García Rodríguez",
+      "description": "Инженер-механик: предварительные исследования и заключения для суда в Испании. Энергосертификаты, segunda ocupación и открытие бизнеса в Аликанте и Коста-Бланке.",
+      "scope": "Предварительные исследования и экспертные заключения по всей Испании, особенно в Валенсийском сообществе и Аликанте. Испанские энергосертификаты, документы для segunda ocupación и инженерная помощь при открытии бизнеса в провинции Аликанте, Marina Baixa и на Коста-Бланке (Costa Blanca)."
+    },
+    "contact": {
+      "title": "Контакты и предложения | Manuel Adolfo García Rodríguez",
+      "description": "Запросы по предварительным исследованиям, экспертным заключениям, CEE, segunda ocupación и открытию бизнеса в Испании и провинции Аликанте."
+    }
+  },
+  "nl": {
+    "home": {
+      "title": "Technisch deskundige Alicante | Manuel Adolfo García Rodríguez",
+      "description": "Technisch vooronderzoek en deskundigenrapporten in Spanje. Spaanse energiecertificaten, bewoningsdocumenten en bedrijfsopening in Alicante en de Costa Blanca.",
+      "scope": "Technisch vooronderzoek en deskundigenrapporten in heel Spanje, vooral de regio Valencia en Alicante. Spaanse energiecertificaten, documenten voor segunda ocupación en ingenieursbijstand bij bedrijfsopening in de provincie Alicante, Marina Baixa en de Costa Blanca."
+    },
+    "contact": {
+      "title": "Contact en offertes | Manuel Adolfo García Rodríguez",
+      "description": "Vraag naar technisch vooronderzoek, deskundigenrapporten, Spaanse energiecertificaten, segunda ocupación en bedrijfsopening in Spanje en Alicante."
+    }
+  }
+}

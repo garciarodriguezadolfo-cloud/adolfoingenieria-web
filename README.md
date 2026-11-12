@@ -9,9 +9,10 @@ Los HTML generados y los recursos están versionados y listos para servir desde 
 ## Edición
 
 - Datos de contacto confirmados: `site/config.json`.
-- Contenido de los cinco servicios en los seis idiomas: `site/services.json`.
+- Contenido de los cinco servicios en los seis idiomas: `site/services.json`. `name` conserva las etiquetas de navegación/formulario; `h1` define el encabezado SEO.
 - Bloques originales de inicio: `site/templates/home-{es,en,de,no,ru,nl}.html`.
-- Plantilla compartida, contacto, borradores legales, rutas y metadatos de inicio: `tools/build_site.py`.
+- Metadatos de inicio/contacto y ámbito comercial: `site/seo.json`.
+- Plantilla compartida, contacto, borradores legales, rutas, schema y sitemap: `tools/build_site.py`.
 - Traducciones compartidas y mensajes del formulario: `site/locales/{de,no,ru,nl}.json`; borradores legales traducidos: `site/legal-locales.json`.
 - Apariencia y comportamiento: `styles.css` y `script.js`.
 - Regenerar después de editar fuentes: `python3 tools/build_site.py`. Los HTML resultantes y `sitemap.xml` deben incluirse en el mismo commit. No editar únicamente los HTML generados.
@@ -45,3 +46,5 @@ Consultar `docs/service-expansion.md` y `docs/contact-setup.md`. El correo confi
 Las rutas son `/`, `/en/`, `/de/`, `/no/`, `/ru/` y `/nl/`. Bokmål utiliza `nb` en HTML, hreflang, Turnstile y el formulario, conservando `/no/` como URL. El selector enlaza las seis páginas equivalentes sin JavaScript. El sitemap incluye 42 URLs indexables; los 12 borradores legales y el 404 permanecen fuera. WhatsApp utiliza únicamente `wa.me` con mensaje inicial traducido y el número internacional visible. Consulte `docs/dutch-flags.md` para la ampliación a seis idiomas y `docs/languages-whatsapp.md` para la ampliación anterior.
 
 El selector usa seis banderas SVG locales en `assets/flags/`, con nombres accesibles nativos, enlaces de teclado y marcador del idioma actual. Se comprueba con `node tests/flags-browser.cjs`. Los SVG son dibujos vectoriales minimalistas creados para este repositorio, sin dependencias externas.
+
+La optimización de contenidos y SEO internacional se documenta en `docs/seo-optimization.md`. El sitemap conserva 42 URLs y añade equivalencias de idioma xhtml; los informes preliminares se integran en la página de peritajes existente.
