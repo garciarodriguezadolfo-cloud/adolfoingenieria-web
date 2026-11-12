@@ -124,5 +124,47 @@
         "Сайт загружает Google Fonts, которые могут получать данные соединения. Фактические файлы cookie и журналы Cloudflare и других поставщиков требуют проверки до активации. Ссылка WhatsApp открывает внешний сервис WhatsApp/Meta. При переходе применяются обработка данных и условия конфиденциальности этого сервиса. Сайт не загружает виджет WhatsApp и не отправляет сообщения автоматически."
       ]
     ]
+  },
+  "nl": {
+    "legal": [
+      [
+        "Eigenaar van de website",
+        "Manuel Adolfo García Rodríguez | Werktuigbouwkundig ingenieur. E-mail: garciarodriguezadolfo@gmail.com. Nog aan te vullen en te controleren: fiscaal identificatienummer en overige wettelijk vereiste informatie."
+      ],
+      [
+        "Professionele informatie",
+        "Nog te bevestigen: eventueel te publiceren gegevens over beroepsregistratie, officiële kwalificaties en verwijzingen naar toepasselijke beroepsregels. Aanvullende kwalificaties worden niet zonder controle gepubliceerd."
+      ],
+      [
+        "Doel en gebruiksvoorwaarden",
+        "Deze website beschrijft ingenieursdiensten en biedt de mogelijkheid aanvragen te versturen. Algemene informatie vervangt geen beoordeling van een concrete zaak en vormt geen offerte of aanvaarding van een opdracht. Contractvoorwaarden, aansprakelijkheid en toepasselijk recht moeten nog worden beoordeeld."
+      ],
+      [
+        "Intellectuele eigendom en links",
+        "Eigendom en licenties van inhoud, middelen en merken moeten worden gecontroleerd. Gebruiksvoorwaarden en verwijzingen naar derden moeten worden aangevuld."
+      ]
+    ],
+    "privacy": [
+      [
+        "Verwerkingsverantwoordelijke en doel",
+        "Manuel Adolfo García Rodríguez. Contact: garciarodriguezadolfo@gmail.com. Uw naam, e-mailadres, gekozen dienst en aanvraag worden uitsluitend gebruikt om uw verzoek te behandelen en te beantwoorden, niet voor reclame. Vermeld geen gevoelige gegevens of gegevens van derden."
+      ],
+      [
+        "Rechtsgrond en bewaartermijnen",
+        "Aanvragen voor een dienst worden behandeld als maatregelen op verzoek van de betrokkene voorafgaand aan een overeenkomst. Andere vragen worden beoordeeld op grond van het gerechtvaardigde belang om aan de professional gerichte communicatie te beantwoorden. Het selectievakje bevestigt dat u deze informatie hebt gelezen en is geen inschrijving voor reclame. Voordat verzending wordt ingeschakeld, moet de eigenaar de bewaartermijnen voor aanvragen, e-mails en logboeken en eventuele wettelijke bewaarplichten vaststellen en beoordelen."
+      ],
+      [
+        "Verwerking en dienstverleners",
+        "Het formulier verstuurt gegevens via HTTPS naar een Cloudflare Pages Function en via Resend naar garciarodriguezadolfo@gmail.com. Resend ontvangt de inhoud en het antwoordadres; ook de aanbieder van de ontvangende mailbox verwerkt het bericht. Cloudflare Turnstile controleert interacties om spam te voorkomen en kan apparaat- en verbindingsgegevens verwerken. De code slaat geen aanvragen op in een database, registreert de inhoud niet in logboeken en gebruikt geen lokale browseropslag. Aanbieders kunnen eigen logboeken bijhouden; hun overeenkomsten en privacyvoorwaarden moeten worden beoordeeld."
+      ],
+      [
+        "Rechten en internationale doorgifte",
+        "Neem contact op via garciarodriguezadolfo@gmail.com om, waar van toepassing, uw rechten op inzage, rectificatie, wissing, bezwaar, beperking en overdraagbaarheid uit te oefenen. U kunt een klacht indienen bij de Spaanse toezichthouder AEPD. De eigenaar moet fiscale identificatie, procedures voor rechten, verwerkers en subverwerkers, waarborgen voor internationale doorgifte en bewaartermijnen beoordelen. Verzending mag pas na deze beoordeling worden ingeschakeld."
+      ],
+      [
+        "Externe bronnen en WhatsApp",
+        "De website laadt Google Fonts, die verbindingsgegevens kunnen ontvangen. Het feitelijke gebruik van cookies en logboeken door Cloudflare en andere aanbieders moet vóór activering worden beoordeeld. De WhatsApp-link opent een externe dienst van WhatsApp/Meta. Bij het openen gelden de gegevensverwerking en privacyvoorwaarden van die dienst. De website laadt geen WhatsApp-widget en verstuurt geen berichten automatisch."
+      ]
+    ]
   }
 }
