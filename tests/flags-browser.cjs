@@ -13,11 +13,18 @@ const names=['Español','English','Deutsch','Norsk bokmål','Русский','Ne
   fs.mkdirSync('/tmp/adolfo-preview',{recursive:true});
   for(const width of [1440,390,320]){
    await page.setViewportSize({width,height:900});
-   for(const path of ['/','/nl/','/nl/energiecertificaten-alicante/','/nl/contact/']){
+   for(const path of ['/','/en/','/de/','/no/','/ru/','/nl/','/nl/energiecertificaten-alicante/','/nl/contact/']){
     await page.goto(base+path);
     const links=page.locator('.language-switch a');
     assert.equal(await links.count(),6);
     assert.deepEqual(await links.evaluateAll(a=>a.map(x=>x.getAttribute('aria-label'))),names);
+    assert.deepEqual(await links.locator('.language-code').allTextContents(),['ES','EN','DE','NO','RU','NL']);
+    for(const link of await links.all()){
+     const flag=await link.locator('img').boundingBox(),code=await link.locator('.language-code').boundingBox();
+     assert(code.y>=flag.y+flag.height+3,'Code must be below flag');
+     assert(Math.abs((code.x+code.width/2)-(flag.x+flag.width/2))<1,'Code must be centered under flag');
+     assert.equal(await link.locator('.language-code').getAttribute('aria-hidden'),'true');
+    }
     const images=await links.locator('img').evaluateAll(imgs=>imgs.map(img=>({complete:img.complete,loaded:img.naturalWidth>0,rect:{width:img.getBoundingClientRect().width,height:img.getBoundingClientRect().height}})));
     for(const image of images){assert(image.complete && image.loaded);assert.deepEqual(image.rect,{width:24,height:16});}
     const boxes=await links.evaluateAll(a=>a.map(x=>({x:x.getBoundingClientRect().x,y:x.getBoundingClientRect().y,width:x.getBoundingClientRect().width,height:x.getBoundingClientRect().height})));
@@ -42,6 +49,20 @@ const names=['Español','English','Deutsch','Norsk bokmål','Русский','Ne
     await page.screenshot({path:`/tmp/adolfo-preview/flags-${width}-${path.replaceAll('/','_')}.png`});
    }
   }
-  console.log('OK: six local flags loaded at 24x16; one compact row at 1440/390/320px; accessible names; active indicator; Tab order, visible focus and Enter navigation.');
+  const nojs=await browser.newContext({javaScriptEnabled:false});
+  await nojs.route('https://fonts.googleapis.com/**',r=>r.abort());
+  const staticPage=await nojs.newPage({viewport:{width:320,height:900}});
+  await staticPage.goto(base+'/nl/energiecertificaten-alicante/');
+  const alternatives=await staticPage.locator('.language-switch a').evaluateAll(links=>links.map(a=>({href:a.getAttribute('href'),lang:a.lang})));
+  for(const target of alternatives){
+   await staticPage.locator(`.language-switch a[lang="${target.lang}"]`).click();
+   await staticPage.waitForURL(base+target.href);
+   assert.equal(await staticPage.locator('html').getAttribute('lang'),target.lang);
+   assert.equal(await staticPage.locator('.language-code').count(),6);
+  }
+  await staticPage.goto(base+'/404.html');
+  assert.deepEqual(await staticPage.locator('.language-code').allTextContents(),['ES','EN','DE','NO','RU','NL']);
+  await nojs.close();
+  console.log('OK: centered codes under all flags; six equivalent service pages without JS; 404; six local flags loaded at 24x16; one compact row at 1440/390/320px; accessible names; active indicator; Tab order, visible focus and Enter navigation.');
  } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});
