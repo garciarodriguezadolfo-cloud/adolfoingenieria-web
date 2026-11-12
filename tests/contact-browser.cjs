@@ -25,6 +25,10 @@ const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:8877';
   for(const path of ['/contacto/','/en/contact/','/de/kontakt/','/no/kontakt/','/ru/kontakty/','/nl/contact/','/','/en/','/de/','/no/','/ru/','/nl/']){
    for(scenario of ['accepted','delivery','verification','unavailable','network']){
     await page.goto(base+path);
+    const email=page.getByRole('link',{name:'info@adolfoingenieria.es',exact:true});
+    assert.equal(await email.count(),1);
+    assert.equal(await email.getAttribute('href'),'mailto:info@adolfoingenieria.es');
+    assert(await email.isVisible());
     await page.waitForFunction(()=>!document.querySelector('button[type=submit]').disabled);
     await page.locator('[name=nombre]').fill('Test User');
     await page.locator('[name=email]').fill('test@example.org');
@@ -63,6 +67,6 @@ const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:8877';
   await page.evaluate(()=>window.testOptions['expired-callback']());
   assert(await page.locator('button[type=submit]').isDisabled());
   assert.deepEqual(errors,[]);
-  console.log('OK: six-language UI fixtures: provider acceptance, errors, unavailable service, network failure, required fields, captcha expiry, mobile layout and no persistent storage. No real emails sent.');
+  console.log('OK: six-language professional mailto and UI fixtures: provider acceptance, errors, unavailable service, network failure, required fields, captcha expiry, mobile layout and no persistent storage. No real emails sent.');
  } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});

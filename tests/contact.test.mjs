@@ -63,7 +63,7 @@ test('fixed recipient, verified sender, reply-to and plain text; accepts only pr
   assert.deepEqual(await response.json(),{accepted:true});
   assert.equal(response.headers.get('Cache-Control'),'no-store');
   const payload=JSON.parse(calls[1].options.body);
-  assert.deepEqual(payload.to,['garciarodriguezadolfo@gmail.com']);
+  assert.deepEqual(payload.to,['info@adolfoingenieria.es']);
   assert.equal(payload.from,env.CONTACT_FROM);assert.equal(payload.reply_to,body.email);
   assert(payload.text.includes('<script>test</script>'));assert.equal(payload.html,undefined);
   assert(!calls[0].options.body.has('remoteip'));
@@ -96,7 +96,7 @@ test('all six page languages pass validation and preserve the fixed recipient', 
   for(const language of ['es','en','de','nb','ru','nl']){
     assert.equal((await call(makeRequest({...body,language}))).status,200,language);
     const payload=JSON.parse(calls.at(-1).options.body);
-    assert.deepEqual(payload.to,['garciarodriguezadolfo@gmail.com']);
+    assert.deepEqual(payload.to,['info@adolfoingenieria.es']);
     assert(payload.text.includes(`Idioma / Language: ${language}`));
   }
 });

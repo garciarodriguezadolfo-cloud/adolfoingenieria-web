@@ -35,6 +35,7 @@ for key, paths in PATHS.items():
     for lang, path in paths.items():
         file = ROOT / path.lstrip('/') / 'index.html'
         text = file.read_text()
+        assert '@gmail.com' not in text.lower(), path
         page = Page(text)
         pages[path] = page
         url = BASE + path
@@ -84,6 +85,7 @@ for key, paths in PATHS.items():
         assert graph[0]['jobTitle']
         assert graph[1]['url'] == url and graph[1]['inLanguage'] == HTML_LANG[lang]
         assert graph[0]['telephone'] == '+34638651175'
+        assert graph[0]['email'] == 'info@adolfoingenieria.es'
         assert not any(field in graph[0] for field in ('address','aggregateRating','priceRange'))
         if key not in ('home','contact','legal','privacy'):
             assert graph[2]['@type'] == 'Service'
@@ -117,7 +119,9 @@ for key, paths in PATHS.items():
             assert 'required' in page.find('input',name='privacy')[0]
             assert page.find('p',id='contact-notice')
             assert 'disabled' in page.find('button',type='submit')[0]
-            assert page.find('a',href='mailto:garciarodriguezadolfo@gmail.com')
+            emails = page.find('a',href='mailto:info@adolfoingenieria.es')
+            assert len(emails) == 1, path
+            assert [a['href'] for a in page.find('a') if a.get('href','').startswith('mailto:')] == ['mailto:info@adolfoingenieria.es'], path
 
 for path,page in pages.items():
     for tag,attr in [('a','href'),('link','href'),('script','src'),('img','src')]:
