@@ -125,6 +125,31 @@
           "Нужны хронология событий, оригиналы фотографий, договоры, счета, прежние отчёты и технические вопросы, требующие ответа. Сохраняйте повреждённые элементы и фиксируйте их состояние до вмешательства. Расследованию и реконструкции аварий посвящена отдельная страница."
         ]
       ]
+    },
+    "nl": {
+      "slug": "technische-deskundigenrapporten",
+      "title": "Technisch deskundige in Spanje | Werktuigbouwkundig ingenieur",
+      "description": "Technische onderzoeken, deskundigenrapporten en adviezen in heel Spanje, vooral Valencia en Alicante. Onafhankelijke analyse en toelichting voor de rechtbank.",
+      "name": "Technische expertises",
+      "lead": "Onafhankelijk onderzoek naar feiten, schade en oorzaken als basis voor weloverwogen beslissingen. Werktuigbouwkundig deskundigenonderzoek in heel Spanje, met bijzondere aandacht voor de autonome regio Valencia en Alicante.",
+      "sections": [
+        [
+          "Werktuigbouwkundig onderzoek en deskundigenrapporten",
+          "Manuel Adolfo García Rodríguez, werktuigbouwkundig ingenieur en technisch deskundige, onderzoekt de beschikbare documenten, betrokken onderdelen en vragen van de opdrachtgever. Het technisch rapport beschrijft de onderzoeksmethode, resultaten en beperkingen en maakt onderscheid tussen vastgestelde feiten en hypothesen."
+        ],
+        [
+          "Deskundigenadvies en toelichting voor de rechtbank",
+          "Een deskundigenrapport kan een schadeclaim of een gerechtelijke of buitengerechtelijke procedure ondersteunen. Als de opdracht dat vereist, wordt beoordeeld of een toelichting op de conclusies voor de rechtbank nodig is. Aanvaarding van de opdracht hangt af van het onderwerp, de beschikbare stukken en de professionele bevoegdheden; een benoeming door de rechtbank wordt niet verondersteld."
+        ],
+        [
+          "De opdracht afbakenen",
+          "Bij de eerste beoordeling worden het doel, de termijnen en de beschikbare informatie vastgesteld. Daarna wordt bepaald of inspecties, metingen of aanvullende documenten nodig zijn en volgt een voorstel voor de omvang en een offerte. Honorarium en reiskosten worden vóór aanvang van de werkzaamheden afgesproken."
+        ],
+        [
+          "Informatie voor een eerste beoordeling",
+          "Verzamel een tijdlijn, originele foto’s, overeenkomsten, facturen, eerdere rapporten en de technische vragen die u wilt laten beantwoorden. Bewaar betrokken onderdelen en leg hun toestand vast voordat u eraan werkt. Ongevalsonderzoek en reconstructie worden op een afzonderlijke dienstenpagina toegelicht."
+        ]
+      ]
     }
   },
   {
@@ -251,6 +276,31 @@
         [
           "Сохраняйте информацию с самого начала",
           "Подготовьте дату и место, хронологию, оригиналы фотографий, имеющиеся отчёты и сведения об участвовавших объектах. Не подвергайте себя риску ради получения доказательств и фиксируйте состояние элементов до изменений. Укажите известные сроки судебного разбирательства или предъявления претензий."
+        ]
+      ]
+    },
+    "nl": {
+      "slug": "ongevalsonderzoek-reconstructie",
+      "title": "Ongevalsonderzoek en reconstructie in Spanje",
+      "description": "Ongevalsonderzoek, oorzaakanalyse en technische reconstructie in Spanje, vooral Valencia en Alicante. Rapporten op basis van bewijs, met duidelijke beperkingen.",
+      "name": "Onderzoek en reconstructie van ongevallen",
+      "lead": "Om te begrijpen hoe een ongeval is ontstaan, moeten de bewijzen worden verbonden met een samenhangende technische analyse. Beschikbaar in heel Spanje, vooral in de autonome regio Valencia en Alicante.",
+      "sections": [
+        [
+          "Ervaring met onderzoek en oorzaakanalyse",
+          "Ervaring met ongevalsonderzoek en rapportage vormt de basis voor een feitelijke aanpak. Het verloop van de gebeurtenis, de vastgestelde schade en relevante mechanische factoren worden onderzocht om mogelijke oorzaken en hun verenigbaarheid met het bewijsmateriaal te beoordelen."
+        ],
+        [
+          "Reconstructie op basis van beschikbaar bewijs",
+          "De technische reconstructie steunt op foto’s, tekeningen, metingen, documenten en waar nodig inspecties. Hypothesen worden getoetst aan de beschikbare gegevens. Ontbrekend bewijs en onzekerheden worden expliciet vermeld; een bepaalde conclusie kan niet worden gegarandeerd."
+        ],
+        [
+          "Een rapport met navolgbare onderbouwing",
+          "Het rapport beschrijft het doel, de bronnen, de methode, de analyse en de conclusies. Het kan onderdeel zijn van een deskundigenrapport en, indien afgesproken, een toelichting voor de rechtbank omvatten. De haalbaarheid wordt per zaak beoordeeld binnen het vakgebied werktuigbouwkunde."
+        ],
+        [
+          "Bewaar informatie vanaf het begin",
+          "Verzamel datum en locatie, een tijdlijn, originele foto’s, bestaande rapporten en gegevens over betrokken onderdelen. Neem geen risico’s om bewijs te verzamelen en leg de toestand vast voordat u iets verandert. Vermeld bekende gerechtelijke termijnen of termijnen voor het indienen van een claim."
         ]
       ]
     }
@@ -381,6 +431,31 @@
           "Перед продажей или сдачей в аренду заранее уточните необходимость сертификата, срок его действия и возможные исключения. Энергосертификат не заменяет документы, разрешающие использование жилья. Также может понадобиться услуга по повторному заселению."
         ]
       ]
+    },
+    "nl": {
+      "slug": "energiecertificaten-alicante",
+      "title": "Energiecertificaat in Alicante | Energieprestatiecertificaat CEE",
+      "description": "Energiecertificaten in de provincie Alicante: Altea, Benidorm, Villajoyosa, Calpe en Dénia. Plaatsbezoek, beoordeling en afgesproken registratie.",
+      "name": "Energiecertificaat (CEE)",
+      "lead": "Een Spaans energieprestatiecertificaat (CEE) geeft inzicht in de energiezuinigheid van een pand en dient voor de toepasselijke verplichtingen bij verkoop of verhuur. Dienstverlening in de hele provincie Alicante.",
+      "sections": [
+        [
+          "Wat omvat de energiebeoordeling?",
+          "Het onderzoek begint met de gegevens van het pand en een plaatsbezoek om onder meer de gebouwschil, ramen, deuren en relevante installaties vast te leggen. De deskundige beoordeelt de energieprestatie volgens de toepasselijke methode en stelt het certificaat op met de energieklasse en aanbevelingen voor verbetering."
+        ],
+        [
+          "Documenten en registratie",
+          "Voor een offerte zijn locatie, gebruik, geschatte oppervlakte en beschikbare documenten nodig, zoals tekeningen of eerdere certificaten. De offerte vermeldt het plaatsbezoek, het opstellen van het CEE en eventuele registratie en heffingen. Zonder beoordeling van het pand kan geen energieklasse of termijn worden toegezegd."
+        ],
+        [
+          "Alicante en Marina Baixa",
+          "Opdrachten worden aangenomen in Altea, Benidorm, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià en l’Alfàs del Pi, en in de rest van de provincie Alicante. Beschikbaarheid voor een plaatsbezoek en reiskosten worden per pand afgesproken."
+        ],
+        [
+          "Wanneer contact opnemen?",
+          "Controleer vóór verkoop of verhuur tijdig of een certificaat verplicht is, of het nog geldig is en of een uitzondering van toepassing is. Een energiecertificaat vervangt de documenten voor het bewonen van het pand niet. Bekijk ook de dienst voor hernieuwde bewoning."
+        ]
+      ]
     }
   },
   {
@@ -509,6 +584,31 @@
           "Услуги в Altea, Benidorm, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià, l’Alfàs del Pi и других муниципалитетах Аликанте. Если требуется энергосертификат, объём каждого задания определяется отдельно."
         ]
       ]
+    },
+    "nl": {
+      "slug": "verklaring-hernieuwde-bewoning-alicante",
+      "title": "Verklaring voor hernieuwde bewoning in Alicante",
+      "description": "Technische documenten voor segunda ocupación in Alicante, Altea, Benidorm en Marina Baixa. Beoordeling van de woning en gemeentelijke vereisten.",
+      "name": "Verklaringen voor hernieuwde bewoning",
+      "lead": "Technische beoordeling en documentatie voor de Spaanse procedure segunda ocupación voor woningen in de provincie Alicante, afgestemd op de woning en de gemeentelijke vereisten.",
+      "sections": [
+        [
+          "De situatie van de woning beoordelen",
+          "Voordat een technische verklaring voor hernieuwde bewoning wordt opgesteld, worden de beschikbare voorgeschiedenis, het woongebruik en de door de gemeente gevraagde documenten onderzocht. Een plaatsbezoek maakt de relevante technische controles mogelijk. Vastgestelde problemen worden toegelicht om de vervolgstappen te bepalen."
+        ],
+        [
+          "Vereisten verschillen per gemeente",
+          "De naam van de procedure, de vereiste documenten en de wijze van indiening kunnen verschillen. Soms is een eigen verklaring voor bewoning (declaración responsable de ocupación) of andere technische documentatie nodig. De dienst garandeert geen goedkeuring en legaliseert op zichzelf geen werken of gebruik die niet aan de regels voldoen."
+        ],
+        [
+          "Welke documenten zijn nodig?",
+          "Geef het adres van het pand, zo mogelijk de kadastrale referentie, tekeningen en eerdere bewoningsdocumenten, evenals informatie over verbouwingen. De offerte bepaalt de beoordeling, het plaatsbezoek en de technische documenten. Indiening, heffingen en eventuele extra werkzaamheden moeten uitdrukkelijk worden afgesproken."
+        ],
+        [
+          "Dienstverlening in de provincie Alicante",
+          "Beschikbaar in Altea, Benidorm, Villajoyosa, Calpe, Dénia, Benissa, Polop, La Nucía, Callosa d’en Sarrià, l’Alfàs del Pi en andere gemeenten in Alicante. Als u ook een energiecertificaat nodig hebt, wordt de omvang van beide opdrachten afzonderlijk beoordeeld."
+        ]
+      ]
     }
   },
   {
@@ -635,6 +735,31 @@
         [
           "Сведения для подготовки предложения",
           "Укажите муниципалитет, адрес объекта, планируемую деятельность, примерную площадь, состояние помещения и наличие прежнего разрешения или технических документов. Обслуживается провинция Аликанте. Сроки зависят от технических работ и административных процедур; выдача разрешения не гарантируется."
+        ]
+      ]
+    },
+    "nl": {
+      "slug": "bedrijfsopening-wijziging-exploitant-alicante",
+      "title": "Bedrijfsopening en wijziging van exploitant in Alicante",
+      "description": "Technische ondersteuning bij openingsvergunningen, eigen verklaringen en wijziging van exploitant in de provincie Alicante. Beoordeling van pand en documenten.",
+      "name": "Bedrijfsopening en wijziging van exploitant",
+      "lead": "Technische ondersteuning bij het starten van een bedrijfsactiviteit of een wijziging van exploitant in de provincie Alicante. De procedure hangt af van de activiteit, de bedrijfsruimte en de gemeentelijke vereisten.",
+      "sections": [
+        [
+          "Voordat u een bedrijf opent of een pand overneemt",
+          "Beoordeel de administratieve situatie en technische staat van de bedrijfsruimte voordat u een investering aangaat. Het voorgenomen gebruik, eerdere documenten en toepasselijke vereisten worden onderzocht om de benodigde stukken en aandachtspunten vast te stellen."
+        ],
+        [
+          "Openingsvergunning en eigen verklaring",
+          "Niet alle activiteiten volgen dezelfde procedure. Afhankelijk van de situatie is een openingsvergunning, een eigen verklaring (declaración responsable) of een andere procedure vereist. De documentatie kan technische ontwerpen en rapporten binnen de toepasselijke beroepsbevoegdheden omvatten. Haalbaarheid en omvang worden bevestigd na beoordeling van de opdracht."
+        ],
+        [
+          "Wijziging van exploitant",
+          "Een wijziging van exploitant is geen toestemming om de activiteit of de bedrijfsruimte te veranderen. Bestaande documenten en wijzigingen die gevolgen hebben voor de vergunde situatie worden beoordeeld. Indiening, heffingen en benodigde stukken worden bepaald volgens de vereisten van de gemeente."
+        ],
+        [
+          "Gegevens voor een offerte",
+          "Vermeld gemeente, adres van het pand, voorgenomen activiteit, geschatte oppervlakte, staat van de ruimte en eventuele eerdere vergunningen of technische documenten. De dienst bestrijkt de provincie Alicante. Termijnen hangen af van de technische werkzaamheden en administratieve procedures; goedkeuring kan niet worden gegarandeerd."
         ]
       ]
     }

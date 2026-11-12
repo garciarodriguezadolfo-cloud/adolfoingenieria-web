@@ -47,7 +47,7 @@ export async function onRequest({request, env}) {
   if (typeof nombre !== 'string' || nombre.trim().length < 2 || nombre.length > 150 || /[\r\n\x00-\x1f]/.test(nombre) ||
       !emailValid(email) || typeof servicio !== 'string' || !Object.hasOwn(SERVICES, servicio) ||
       typeof mensaje !== 'string' || mensaje.trim().length < 10 || mensaje.length > 5000 || /[\x00]/.test(mensaje) ||
-      privacy !== true || !['es','en','de','nb','ru'].includes(language) ||
+      privacy !== true || !['es','en','de','nb','ru','nl'].includes(language) ||
       typeof requestId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(requestId) ||
       typeof token !== 'string' || !token || token.length > 2048) return json(400, {error:'invalid'});
   try {

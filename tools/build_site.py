@@ -14,11 +14,14 @@ CONTACT_EMAIL = CONFIG['contact_email']
 CONTACT_PHONE = CONFIG['contact_phone']
 CONTACT_PHONE_DISPLAY = CONFIG['contact_phone_display']
 SERVICES = json.loads((ROOT / 'site/services.json').read_text())
-LANGS = ('es', 'en', 'de', 'no', 'ru')
+LANGS = ('es', 'en', 'de', 'no', 'ru', 'nl')
 HTML_LANG = {lang: ('nb' if lang == 'no' else lang) for lang in LANGS}
-LOCALES = {lang: json.loads((ROOT / f'site/locales/{lang}.json').read_text()) for lang in ('de', 'no', 'ru')}
-LANG_NAMES = {'es':'Español', 'en':'English', 'de':'Deutsch', 'no':'Norsk bokmål', 'ru':'Русский'}
+LOCALES = {lang: json.loads((ROOT / f'site/locales/{lang}.json').read_text()) for lang in ('de', 'no', 'ru', 'nl')}
+LANG_NAMES = {'es':'Español', 'en':'English', 'de':'Deutsch', 'no':'Norsk bokmål', 'ru':'Русский', 'nl':'Nederlands'}
+FLAGS = {'es':'es', 'en':'gb', 'de':'de', 'no':'no', 'ru':'ru', 'nl':'nl'}
+LANGUAGE_LABELS = {'es':'Idiomas','en':'Languages','de':'Sprachen','no':'Språk','ru':'Языки','nl':'Talen'}
 WHATSAPP = {
+'nl': ('Goedendag, ik wil graag informatie over uw ingenieursdiensten.', 'Contact via WhatsApp'),
 'es': ('Hola, me gustaría consultar sobre sus servicios de ingeniería.', 'Consultar por WhatsApp'),
 'en': ('Hello, I would like to enquire about your engineering services.', 'Contact via WhatsApp'),
 'de': ('Guten Tag, ich möchte mich über Ihre Ingenieurleistungen informieren.', 'Kontakt über WhatsApp'),
@@ -31,7 +34,8 @@ PATHS = {'home': {'es': '/', 'en': '/en/'}, 'contact': {'es': '/contacto/', 'en'
 for lang, contact, legal, privacy in (
     ('de', 'kontakt', 'impressum', 'datenschutz'),
     ('no', 'kontakt', 'juridisk-informasjon', 'personvern'),
-    ('ru', 'kontakty', 'pravovaya-informatsiya', 'konfidentsialnost')):
+    ('ru', 'kontakty', 'pravovaya-informatsiya', 'konfidentsialnost'),
+    ('nl', 'contact', 'juridische-informatie', 'privacybeleid')):
     for key, slug in [('home',''), ('contact',contact), ('legal',legal), ('privacy',privacy)]:
         PATHS[key][lang] = f'/{lang}/' + (slug+'/' if slug else '')
 for s in SERVICES:
@@ -46,14 +50,22 @@ def link(key, lang, label, cls=''):
     return f'<a href="{PATHS[key][lang]}" class="{cls}">{esc(label)}</a>'
 
 
+def language_switch(key, lang):
+    links = ''.join(
+        f'<a href="{PATHS[key][target]}" lang="{HTML_LANG[target]}" hreflang="{HTML_LANG[target]}" '
+        f'aria-label="{LANG_NAMES[target]}" title="{LANG_NAMES[target]}"'
+        + (' aria-current="page"' if target == lang else '')
+        + f'><img src="/assets/flags/{FLAGS[target]}.svg" width="24" height="16" alt="" aria-hidden="true"></a>'
+        for target in LANGS)
+    return f'<div class="language-switch" role="group" aria-label="{LANGUAGE_LABELS[lang]}">{links}</div>'
+
+
 def header(key, lang):
     nav = link('home', lang, tr(lang, 'Inicio', 'Home')) + link('expert', lang, tr(lang, 'Peritajes', 'Expert reports'))
     nav += f'<a href="{PATHS["home"][lang]}#servicios">{tr(lang, "Servicios", "Services")}</a>'
     nav += f'<a href="{PATHS["home"][lang]}#perfil">{tr(lang, "Sobre mí", "About")}</a>'
     nav += link('contact', lang, tr(lang, 'Contacto', 'Contact'))
-    selector = '<div class="language-switch" role="group" aria-label="'+{'es':'Idiomas','en':'Languages','de':'Sprachen','no':'Språk','ru':'Языки'}[lang]+'">'
-    selector += ''.join(f'<a href="{PATHS[key][target]}" lang="{HTML_LANG[target]}" hreflang="{HTML_LANG[target]}" aria-current="{"page" if target == lang else "false"}">{LANG_NAMES[target]}</a>' for target in LANGS)
-    selector += '</div>'
+    selector = language_switch(key, lang)
     return f'''<a class="skip-link" href="#contenido">{tr(lang, 'Saltar al contenido', 'Skip to content')}</a>
 <header class="site-header"><a class="brand" href="{PATHS['home'][lang]}"><span class="brand-name">Manuel Adolfo<br>García Rodríguez</span><span class="brand-sub">{tr(lang, 'Ingeniero Mecánico | Perito Técnico', 'Mechanical Engineer | Technical Expert')}</span></a><nav aria-label="{tr(lang, 'Navegación principal', 'Main navigation')}">{nav}</nav>{selector}</header>'''
 
@@ -95,7 +107,7 @@ def service_list(lang, exclude=None):
 
 def shell(key, lang, title, description, body, service=None, draft=False):
     url = BASE + PATHS[key][lang]
-    og_locale = {'es':'es_ES','en':'en_GB','de':'de_DE','no':'nb_NO','ru':'ru_RU'}[lang]
+    og_locale = {'es':'es_ES','en':'en_GB','de':'de_DE','no':'nb_NO','ru':'ru_RU','nl':'nl_NL'}[lang]
     body = body.replace('↗', '<svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.8"/></svg>')
     provider = {'@type':'Organization', '@id':BASE+'/#professional', 'name':NAME+' | Ingeniero Mecánico', 'url':BASE+'/', 'email':CONTACT_EMAIL, 'telephone':CONTACT_PHONE}
     graph = [provider, {'@type':'WebPage','@id':url+'#page','url':url,'name':title,'description':description,'inLanguage':HTML_LANG[lang],'about':{'@id':BASE+'/#professional'}}]
@@ -194,9 +206,9 @@ def build():
             file.parent.mkdir(parents=True,exist_ok=True)
             file.write_text(html)
     # Cloudflare serves one shared 404 document; offer every language without indexing it.
-    not_found = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>404 | '+NAME+'</title><link rel="stylesheet" href="/styles.css"></head><body><main class="legal-content"><h1>404</h1><p>Página no encontrada · Page not found · Seite nicht gefunden · Siden finnes ikke · Страница не найдена</p><div class="language-switch">'
-    not_found += ''.join(f'<a href="{PATHS["home"][lang]}" lang="{HTML_LANG[lang]}">{LANG_NAMES[lang]}</a>' for lang in LANGS)
-    not_found += '</div></main>'+whatsapp('es')+'</body></html>'
+    not_found = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>404 | '+NAME+'</title><link rel="stylesheet" href="/styles.css"></head><body><main class="legal-content"><h1>404</h1><p>Página no encontrada · Page not found · Seite nicht gefunden · Siden finnes ikke · Страница не найдена · Pagina niet gevonden</p>'
+    not_found += language_switch('home', 'es')
+    not_found += '</main>'+whatsapp('es')+'</body></html>'
     (ROOT / '404.html').write_text(not_found)
     ET.register_namespace('', 'http://www.sitemaps.org/schemas/sitemap/0.9')
     ns = '{http://www.sitemaps.org/schemas/sitemap/0.9}'

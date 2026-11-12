@@ -13,7 +13,7 @@ const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:8765';
   fs.mkdirSync('/tmp/adolfo-preview',{recursive:true});
   for(const width of [1440,390,320]){
    await page.setViewportSize({width,height:900});
-   for(const [lang,path] of [['es','/contacto/'],['en','/en/contact/'],['de','/de/kontakt/'],['nb','/no/kontakt/'],['ru','/ru/kontakty/']]){
+   for(const [lang,path] of [['es','/contacto/'],['en','/en/contact/'],['de','/de/kontakt/'],['nb','/no/kontakt/'],['ru','/ru/kontakty/'],['nl','/nl/contact/']]){
     await page.goto(base+path);
     const link=page.locator('.whatsapp-float');
     const href=await link.getAttribute('href');
@@ -30,7 +30,7 @@ const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:8765';
     await page.screenshot({path:`/tmp/adolfo-preview/contact-${lang}-${width}.png`,fullPage:true});
    }
   }
-  await page.goto(base+'/404.html');assert.equal(await page.locator('.language-switch a').count(),5);assert(await page.locator('.whatsapp-float').isVisible());
-  console.log('OK: WhatsApp clicks open the exact translated URL in a new tab for all five languages at 1440/390/320px; form controls usable; footer unobscured; shared 404. No external WhatsApp requests.');
+  await page.goto(base+'/404.html');assert.equal(await page.locator('.language-switch a').count(),6);assert(await page.locator('.whatsapp-float').isVisible());
+  console.log('OK: WhatsApp clicks open the exact translated URL in a new tab for all six languages at 1440/390/320px; form controls usable; footer unobscured; shared 404. No external WhatsApp requests.');
  } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});

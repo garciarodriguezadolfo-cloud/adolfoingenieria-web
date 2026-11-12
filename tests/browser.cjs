@@ -5,9 +5,9 @@ const assert = require('node:assert/strict');
 const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:8765';
 const root = require('node:path').resolve(__dirname, '..');
 const urls = [...fs.readFileSync(root+'/sitemap.xml','utf8').matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
-urls.push('/aviso-legal/','/en/legal-notice/','/politica-privacidad/','/en/privacy-policy/','/de/impressum/','/de/datenschutz/','/no/juridisk-informasjon/','/no/personvern/','/ru/pravovaya-informatsiya/','/ru/konfidentsialnost/');
-const language = path => ({no:'nb'}[path.split('/')[1]] || (['en','de','ru'].includes(path.split('/')[1])?path.split('/')[1]:'es'));
-const messages = {es:'no está disponible',en:'unavailable',de:'nicht verfügbar',nb:'ikke tilgjengelig',ru:'недоступна'};
+urls.push('/nl/juridische-informatie/','/nl/privacybeleid/','/aviso-legal/','/en/legal-notice/','/politica-privacidad/','/en/privacy-policy/','/de/impressum/','/de/datenschutz/','/no/juridisk-informasjon/','/no/personvern/','/ru/pravovaya-informatsiya/','/ru/konfidentsialnost/');
+const language = path => ({no:'nb'}[path.split('/')[1]] || (['en','de','ru','nl'].includes(path.split('/')[1])?path.split('/')[1]:'es'));
+const messages = {es:'no está disponible',en:'unavailable',de:'nicht verfügbar',nb:'ikke tilgjengelig',ru:'недоступна',nl:'niet beschikbaar'};
 (async()=>{
  const browser = await chromium.launch({executablePath:process.env.CHROMIUM_PATH || '/usr/bin/chromium',headless:true,args:['--no-sandbox']});
  try {
@@ -25,7 +25,7 @@ const messages = {es:'no está disponible',en:'unavailable',de:'nicht verfügbar
     assert.equal(await page.locator('h1').count(),1);
     assert.equal(await page.locator('link[rel=canonical]').getAttribute('href'),'https://adolfoingenieria.es'+path);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`Horizontal overflow: ${path} at ${width}`);
-    assert.equal(await page.locator('.language-switch a').count(),5);
+    assert.equal(await page.locator('.language-switch a').count(),6);
     const alternatives=await page.locator('.language-switch a').evaluateAll(links=>links.map(a=>({href:a.getAttribute('href'),lang:a.lang})));
     for(const target of alternatives){
       await page.locator(`.language-switch a[lang="${target.lang}"]`).click();
@@ -42,7 +42,7 @@ const messages = {es:'no está disponible',en:'unavailable',de:'nicht verfügbar
     assert(url.searchParams.get('text').length>15);
    }
   }
-  for(const path of ['/contacto/','/en/contact/','/de/kontakt/','/no/kontakt/','/ru/kontakty/','/','/en/','/de/','/no/','/ru/']){
+  for(const path of ['/contacto/','/en/contact/','/de/kontakt/','/no/kontakt/','/ru/kontakty/','/nl/contact/','/','/en/','/de/','/no/','/ru/','/nl/']){
    await page.goto(base+path);
    assert(await page.locator('#contact-form button[type=submit]').isDisabled());
    await page.waitForFunction(()=>document.getElementById('contact-status').dataset.state==='error');
@@ -67,6 +67,6 @@ const messages = {es:'no está disponible',en:'unavailable',de:'nicht verfügbar
   await page.setViewportSize({width:390,height:844});await page.goto(base+'/certificados-energeticos-alicante/');
   await page.screenshot({path:'/tmp/adolfo-preview/energy-mobile.png',fullPage:true});
   assert.deepEqual(errors,[]);
-  console.log('OK: 45 routes at desktop/390px/320px; all five equivalent languages with/without JS; WhatsApp; canonical; honest unconfigured form state; no JS errors.');
+  console.log('OK: 54 routes at desktop/390px/320px; all six equivalent languages with/without JS; WhatsApp; canonical; honest unconfigured form state; no JS errors.');
  } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});

@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
-from build_site import PATHS, BASE, LANGS, HTML_LANG, WHATSAPP
+from build_site import PATHS, BASE, LANGS, HTML_LANG, WHATSAPP, LANG_NAMES, FLAGS, LOCALES
 
 
 class Page(HTMLParser):
@@ -41,7 +41,7 @@ for key, paths in PATHS.items():
         assert page.find('html') == [{'lang':HTML_LANG[lang]}], path
         assert [a['href'] for a in page.find('link',rel='canonical')] == [url], path
         alternates = page.find('link',rel='alternate')
-        assert len(alternates) == 6, path
+        assert len(alternates) == len(LANGS)+1, path
         assert {a['hreflang']:a['href'] for a in alternates} == {
             **{HTML_LANG[l]:BASE+paths[l] for l in LANGS}, 'x-default':BASE+paths['es']}, path
         assert [a['content'] for a in page.find('meta',property='og:url')] == [url]
@@ -62,7 +62,13 @@ for key, paths in PATHS.items():
         selectors = page.find('a', **{'aria-current':'page'})
         assert len(selectors) == 1 and selectors[0]['href'] == path
         for target in LANGS:
-            assert page.find('a', href=paths[target], hreflang=HTML_LANG[target]), (path, target)
+            choices = page.find('a', href=paths[target], hreflang=HTML_LANG[target])
+            assert len(choices) == 1 and choices[0]['aria-label'] == LANG_NAMES[target], (path, target)
+            assert choices[0]['title'] == LANG_NAMES[target]
+            flags = page.find('img', src=f'/assets/flags/{FLAGS[target]}.svg')
+            assert len(flags) == 1 and flags[0]['alt'] == '' and flags[0]['aria-hidden'] == 'true'
+            assert flags[0]['width'] == '24' and flags[0]['height'] == '16'
+            assert ET.parse(ROOT / f'assets/flags/{FLAGS[target]}.svg').getroot().get('viewBox') == '0 0 24 16'
         whatsapp = page.find('a', **{'class':'whatsapp-float'})
         assert len(whatsapp) == 1
         from urllib.parse import parse_qs
@@ -92,7 +98,7 @@ for key, paths in PATHS.items():
             assert page.find('a',href='mailto:garciarodriguezadolfo@gmail.com')
 
 for path,page in pages.items():
-    for tag,attr in [('a','href'),('link','href'),('script','src')]:
+    for tag,attr in [('a','href'),('link','href'),('script','src'),('img','src')]:
         for a in page.find(tag):
             value = a.get(attr,'')
             if not value or value.startswith(('https:', 'mailto:', 'tel:')):
@@ -111,7 +117,7 @@ ns = '{http://www.sitemaps.org/schemas/sitemap/0.9}'
 root = ET.parse(ROOT/'sitemap.xml').getroot()
 assert root.tag == ns+'urlset'
 urls = [loc.text for loc in root.findall(ns+'url/'+ns+'loc')]
-assert len(urls) == len(set(urls)) == 35 and set(urls) == indexable
+assert len(urls) == len(set(urls)) == 42 and set(urls) == indexable
 # Detect orphan indexable HTML outside the generator's route table as well.
 actual_indexable = set()
 for file in ROOT.rglob('*.html'):
@@ -127,4 +133,8 @@ headers = (ROOT/'_headers').read_text()
 assert '/sitemap.xml\n  Content-Type: application/xml; charset=utf-8' in headers
 assert '/robots.txt\n  Content-Type: text/plain; charset=utf-8' in headers
 assert 'noindex' in Page((ROOT/'404.html').read_text()).find('meta',name='robots')[0]['content']
-print(f'OK: {len(pages)} pages, unique metadata, reciprocal languages, schema, internal links/anchors, 35 sitemap URLs, robots and headers.')
+print(f'OK: {len(pages)} pages, unique metadata, reciprocal languages, schema, internal links/anchors, 42 sitemap URLs, robots and headers.')
+
+assert set(LOCALES['nl']) == set(LOCALES['de']) == set(LOCALES['no']) == set(LOCALES['ru'])
+assert all(value.strip() for value in LOCALES['nl'].values())
+print('OK: local SVG flags, native accessible language names, uniform dimensions and complete Dutch shared translation keys.')
