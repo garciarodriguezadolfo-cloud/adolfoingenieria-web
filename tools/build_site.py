@@ -4,10 +4,12 @@ from html import escape as esc
 import json
 import re
 from urllib.parse import quote
+from hashlib import sha256
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://adolfoingenieria.es'
+SELECTOR_CSS = '/language-selector.css?v=' + sha256((ROOT / 'language-selector.css').read_bytes()).hexdigest()[:12]
 NAME = 'Manuel Adolfo García Rodríguez'
 CONFIG = json.loads((ROOT / 'site/config.json').read_text())
 CONTACT_EMAIL = CONFIG['contact_email']
@@ -132,6 +134,7 @@ def shell(key, lang, title, description, body, service=None, draft=False):
 <meta property="og:description" content="{esc(description, quote=True)}">
 <meta property="og:locale" content="{og_locale}">
 <link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="{SELECTOR_CSS}">
 <script type="application/ld+json">{json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False)}</script>
 <script id="contact-translations" type="application/json">{json.dumps(LOCALES.get(lang, {}), ensure_ascii=False)}</script>
 <script src="/script.js" defer></script>
@@ -207,6 +210,7 @@ def build():
             file.write_text(html)
     # Cloudflare serves one shared 404 document; offer every language without indexing it.
     not_found = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>404 | '+NAME+'</title><link rel="stylesheet" href="/styles.css"></head><body><main class="legal-content"><h1>404</h1><p>Página no encontrada · Page not found · Seite nicht gefunden · Siden finnes ikke · Страница не найдена · Pagina niet gevonden</p>'
+    not_found = not_found.replace('</head>', f'<link rel="stylesheet" href="{SELECTOR_CSS}"></head>')
     not_found += language_switch('home', 'es')
     not_found += '</main>'+whatsapp('es')+'</body></html>'
     (ROOT / '404.html').write_text(not_found)
