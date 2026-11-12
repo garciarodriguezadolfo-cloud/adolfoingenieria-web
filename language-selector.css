@@ -1,4 +1,4 @@
-/* Selector-only stylesheet, loaded after the site's shared styles.
+/* Header and language-selector stylesheet, loaded after the shared styles.
    Keep the flag/code stack even when older CSS or generic link rules are present. */
 .language-switch.language-switch {
   display: flex;
@@ -46,4 +46,116 @@
   left: 14px;
   right: 14px;
   bottom: 3px;
+}
+
+/* Header identity and navigation: keep the selector at the upper right. */
+.site-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "identity languages" "navigation navigation";
+  align-items: start;
+  column-gap: 32px;
+  row-gap: 22px;
+  padding-block: 24px 28px;
+}
+.site-header > .brand {
+  grid-area: identity;
+  inline-size: max-content;
+  max-inline-size: 100%;
+  gap: 8px;
+}
+.site-header .brand-name {
+  font-size: 28px;
+  line-height: 1.15;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: manual;
+}
+.site-header .brand-sub {
+  font-size: 14px;
+  line-height: 1.45;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: manual;
+}
+.site-header > nav {
+  grid-area: navigation;
+  justify-self: start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  inline-size: max-content;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  padding-block-end: 14px;
+  border-block-end: 1px solid var(--navy);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--navy);
+}
+.site-header > nav > a {
+  white-space: nowrap;
+}
+.site-header > .language-switch.language-switch {
+  grid-area: languages;
+  justify-self: end;
+  align-self: start;
+  gap: 4px;
+  margin: 0;
+}
+.site-header > .language-switch.language-switch > a {
+  flex-basis: 32px;
+  width: 32px;
+  height: 44px;
+  gap: 4px;
+  padding: 4px 0 7px;
+}
+.site-header > .language-switch.language-switch > a > img {
+  width: 21px;
+  height: 14px;
+}
+.site-header > .language-switch.language-switch > a > .language-code {
+  font-size: 10px;
+  line-height: 11px;
+}
+.site-header > .language-switch.language-switch > a[aria-current=page]::after {
+  left: 11px;
+  right: 11px;
+  bottom: 2px;
+}
+@media (max-width: 640px) {
+  .site-header {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "languages" "identity" "navigation";
+    row-gap: 14px;
+    padding-block: 16px 24px;
+  }
+  .site-header .brand-name {
+    font-size: 24px;
+  }
+  .site-header .brand-sub {
+    font-size: 13px;
+  }
+  .site-header > nav {
+    font-size: 13px;
+    column-gap: 14px;
+    padding-block-end: 12px;
+  }
+}
+@media (max-width: 640px) {
+  /* Balance whole navigation links across rows instead of stranding one item. */
+  .site-header > nav {
+    display: block;
+    text-wrap: balance;
+    line-height: calc(1.5em + 12px);
+  }
+  .site-header > nav > a {
+    display: inline-block;
+    margin-inline-end: 14px;
+    line-height: 1.5;
+    vertical-align: baseline;
+  }
+  .site-header > nav > a:last-child {
+    margin-inline-end: 0;
+  }
 }
