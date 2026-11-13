@@ -39,6 +39,24 @@ for left, top, right, bottom in regions:
     foreground = ndimage.binary_dilation(foreground, iterations=1)
     alpha[top:bottom,left:right] = np.maximum(
         alpha[top:bottom,left:right], foreground.astype('uint8') * 255)
+# Recover source edges, especially the complete A of Adolfo and its gold inset.
+# This is raster background separation, not vectorisation or glyph reconstruction.
+regions = [(425,65,980,350),(195,350,1135,452),(280,453,1065,512),
+           (440,520,890,552),(330,555,1010,618),(420,615,920,670)]
+for left, top, right, bottom in regions:
+    value = rgb[top:bottom,left:right].max(axis=2)
+    labels, _ = ndimage.label(value >= 75)
+    sizes = np.bincount(labels.ravel())
+    seed = (labels > 0) & (sizes[labels] >= 3)
+    edge = ndimage.binary_dilation(seed, iterations=2) & (value >= 30)
+    if top >= 350:
+        preserve = np.zeros(seed.shape, dtype=bool)
+        if top == 350:
+            preserve[:, :180] = alpha[top:bottom,left:left+180] > 0
+        alpha[top:bottom,left:right] = (seed | edge | preserve).astype('uint8') * 255
+    else:
+        alpha[top:bottom,left:right] = np.maximum(
+            alpha[top:bottom,left:right], (seed | edge).astype('uint8') * 255)
 image.putalpha(Image.fromarray(alpha))
 assert image.convert('RGB').tobytes() == rgb.tobytes()
 image.save(ROOT / 'assets/branding/complete-logo-transparent.png', optimize=True)
