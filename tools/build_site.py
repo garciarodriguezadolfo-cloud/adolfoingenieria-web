@@ -72,11 +72,11 @@ def header(key, lang):
     nav += link('contact', lang, tr(lang, 'Contacto', 'Contact'))
     selector = language_switch(key, lang)
     return f'''<a class="skip-link" href="#contenido">{tr(lang, 'Saltar al contenido', 'Skip to content')}</a>
-<header class="site-header"><a class="brand" href="{PATHS['home'][lang]}"><span class="brand-name">Manuel Adolfo<br>García Rodríguez</span><span class="brand-sub">{tr(lang, 'Ingeniero Mecánico | Perito Técnico', 'Mechanical Engineer | Technical Expert')}</span></a><nav aria-label="{tr(lang, 'Navegación principal', 'Main navigation')}">{nav}</nav>{selector}</header>'''
+<header class="site-header"><a class="brand" href="{PATHS['home'][lang]}"><img class="brand-symbol" src="/assets/branding/symbol.png" width="1012" height="497" alt="" aria-hidden="true"><span class="brand-name" role="img" aria-label="{NAME}"><span class="brand-given" aria-hidden="true"><span class="brand-word"><img class="brand-initial" src="/assets/branding/initial-m.png" width="166" height="85" alt="">anuel</span><span class="brand-word"><img class="brand-initial" src="/assets/branding/initial-a.png" width="116" height="83" alt="">dolfo</span></span><span class="brand-surname" aria-hidden="true">García Rodríguez</span></span><span class="brand-sub">{tr(lang, 'Ingeniero Mecánico | Perito Técnico', 'Mechanical Engineer | Technical Expert')}</span></a><nav aria-label="{tr(lang, 'Navegación principal', 'Main navigation')}">{nav}</nav>{selector}</header>'''
 
 
 def footer(lang):
-    return f'''<footer><span>© <span id="year"></span> {NAME}</span><span>{tr(lang, 'Ingeniero Mecánico', 'Mechanical Engineer')}</span><div class="footer-links">{link('legal',lang,tr(lang,'Aviso legal (borrador)','Legal notice (draft)'))}{link('privacy',lang,tr(lang,'Privacidad (borrador)','Privacy (draft)'))}</div></footer>'''
+    return f'''<footer class="branded-footer"><img class="footer-logo" src="/assets/branding/original-logo.jpg" width="1254" height="765" loading="lazy" decoding="async" alt="{NAME} — {tr(lang, 'Ingeniero Mecánico | Perito Técnico', 'Mechanical Engineer | Technical Expert')}"><div class="footer-details"><span>© <span id="year"></span> {NAME}</span><span>{tr(lang, 'Ingeniero Mecánico', 'Mechanical Engineer')}</span><div class="footer-links">{link('legal',lang,tr(lang,'Aviso legal (borrador)','Legal notice (draft)'))}{link('privacy',lang,tr(lang,'Privacidad (borrador)','Privacy (draft)'))}</div></div></footer>'''
 
 
 def whatsapp(lang):

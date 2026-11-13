@@ -42,7 +42,7 @@ const languages=[['es','/'],['en','/en/'],['de','/de/'],['nb','/no/'],['ru','/ru
      const previous=g.links[i-1],current=g.links[i];
      if(Math.abs(previous.y-current.y)<1)assert(Math.abs(current.x-previous.right-g.columnGap)<1,'Even menu spacing');
     }
-    assert.equal((await page.locator('.brand-name').innerText()).replace(/\s+/g,' '),'Manuel Adolfo García Rodríguez');
+    assert.equal(await page.locator('.brand-name').getAttribute('aria-label'),'Manuel Adolfo García Rodríguez');
     assert.equal(await page.locator('header nav a').count(),5);
     assert.deepEqual(await page.locator('header .language-code').allTextContents(),['ES','EN','DE','NO','RU','NL']);
     // A word in the professional identity must not be split over separate lines.

@@ -159,3 +159,18 @@
     margin-inline-end: 0;
   }
 }
+
+/* Original raster branding. Masks only remove exterior background; no recolouring. */
+.site-header > .brand{display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:12px;row-gap:8px;align-items:center;min-width:0}
+.site-header .brand-symbol{display:block;width:52px;height:auto;max-width:100%}
+.site-header .brand-name{min-width:0;grid-column:2}
+.site-header .brand-given{display:flex;flex-wrap:wrap;gap:0 .28em;align-items:baseline}
+.site-header .brand-word{display:inline-flex;align-items:baseline;white-space:nowrap}
+.site-header .brand-initial{display:inline-block;width:auto;height:.82em;flex:none;object-fit:contain;align-self:baseline}
+.site-header .brand-surname{display:block;white-space:nowrap}
+.site-header .brand-sub{grid-column:1/-1}
+.branded-footer{background:#111213;color:#cbd3db;align-items:center;gap:28px 40px}
+.branded-footer .footer-logo{display:block;width:340px;max-width:100%;height:auto;object-fit:contain;flex:none}
+.branded-footer .footer-details{display:flex;flex:1 1 220px;flex-direction:column;gap:16px;min-width:0}
+.branded-footer .footer-links{line-height:1.8}
+@media(max-width:640px){.site-header > .brand{grid-template-columns:32px minmax(0,1fr);column-gap:8px}.site-header .brand-symbol{width:32px}.branded-footer .footer-logo{width:300px}.branded-footer{gap:22px}}
