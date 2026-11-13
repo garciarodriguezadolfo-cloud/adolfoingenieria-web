@@ -160,11 +160,20 @@
   }
 }
 
-/* One complete original logo, with a transparent matte; no separate initials. */
-.site-header > .brand{display:block;inline-size:330px;max-inline-size:100%;min-width:0}
+/* Uniform black framing; the same complete original raster logo in both areas. */
+.site-header{grid-template-columns:minmax(0,1fr);grid-template-areas:"languages" "identity" "navigation";row-gap:14px;padding-block:18px 28px;background:#000;border-bottom-color:#000}
+.site-header > .brand{display:block;justify-self:center;inline-size:min(100%,480px);max-inline-size:100%;min-width:0}
 .site-header .brand-logo{display:block;width:100%;height:auto;object-fit:contain}
-.branded-footer{background:#111213;color:#cbd3db;align-items:center;gap:28px 40px}
-.branded-footer .footer-logo{display:block;width:340px;max-width:100%;height:auto;object-fit:contain;flex:none}
+.site-header > nav{justify-self:center;color:#fff;border-bottom-color:#fff;font-size:15px}
+.site-header > nav a:hover{color:#e0d3bf}
+.site-header a:focus-visible{outline-color:#e0c18b}
+.site-header > .language-switch.language-switch > a{flex-basis:28px;width:28px;height:40px;color:#fff}
+.site-header > .language-switch.language-switch > a > img{width:18px;height:12px}
+.site-header > .language-switch.language-switch > a > .language-code{font-size:9.5px;line-height:11px;color:#fff}
+.site-header > .language-switch.language-switch > a[aria-current=page]::after{left:10px;right:10px;background:#e0c18b}
+.branded-footer{background:#000;color:#e5e5e5;align-items:center;gap:24px 40px}
+.branded-footer .footer-logo{display:block;width:min(100%,260px);max-width:100%;height:auto;object-fit:contain;flex:none}
 .branded-footer .footer-details{display:flex;flex:1 1 220px;flex-direction:column;gap:16px;min-width:0}
-.branded-footer .footer-links{line-height:1.8}
-@media(max-width:640px){.branded-footer .footer-logo{width:300px}.branded-footer{gap:22px}}
+.branded-footer .footer-links{line-height:1.8;color:#e5e5e5}
+.branded-footer a:focus-visible{outline-color:#e0c18b}
+@media(max-width:640px){.site-header{padding-block:16px 24px;row-gap:14px}.site-header > nav{font-size:14px}.branded-footer{gap:20px}}

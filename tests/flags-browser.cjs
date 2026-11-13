@@ -28,9 +28,9 @@ const names=['Español','English','Deutsch','Norsk bokmål','Русский','Ne
      assert.equal(await link.locator('.language-code').getAttribute('aria-hidden'),'true');
     }
     const images=await links.locator('img').evaluateAll(imgs=>imgs.map(img=>({complete:img.complete,loaded:img.naturalWidth>0,rect:{width:img.getBoundingClientRect().width,height:img.getBoundingClientRect().height}})));
-    for(const image of images){assert(image.complete && image.loaded);assert.deepEqual(image.rect,{width:21,height:14});}
+    for(const image of images){assert(image.complete && image.loaded);assert.deepEqual(image.rect,{width:18,height:12});}
     const boxes=await links.evaluateAll(a=>a.map(x=>({x:x.getBoundingClientRect().x,y:x.getBoundingClientRect().y,width:x.getBoundingClientRect().width,height:x.getBoundingClientRect().height})));
-    assert(boxes.every(b=>b.height===44 && b.width===32),'Equal link dimensions');
+    assert(boxes.every(b=>b.height===40 && b.width===28),'Equal link dimensions');
     assert(boxes.slice(1).every((b,i)=>Math.abs(b.x-boxes[i].x-boxes[i].width-4)<0.1),'Uniform horizontal gap');
     assert(boxes.every(b=>b.y===boxes[0].y && b.x>=0 && b.x+b.width<=width),'Flags must fit in one row');
     const active=page.locator('.language-switch [aria-current=page]');
@@ -85,6 +85,6 @@ const names=['Español','English','Deutsch','Norsk bokmål','Русский','Ne
    await stalePage.screenshot({path:`/tmp/adolfo-preview/selector-stale-css-${width}.png`});
   }
   await stale.close();
-  console.log('OK: exact 4px vertical gaps; equal dimensions; cached CSS and conflicting-rule regression; centered codes under all flags; six equivalent service pages without JS; 404; six local flags loaded at 21x14; one compact row at 1440/768/390/320px; accessible names; active indicator; Tab order, visible focus and Enter navigation.');
+  console.log('OK: exact 4px vertical gaps; equal dimensions; cached CSS and conflicting-rule regression; centered codes under all flags; six equivalent service pages without JS; 404; six local flags loaded at 18x12; one compact row at 1440/768/390/320px; accessible names; active indicator; Tab order, visible focus and Enter navigation.');
  } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});

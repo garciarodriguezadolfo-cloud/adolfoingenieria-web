@@ -32,12 +32,12 @@ const languages=[['es','/'],['en','/en/'],['de','/de/'],['nb','/no/'],['ru','/ru
     assert(Math.abs(g.selector.right-(g.header.right-g.paddingRight))<1,'Selector must align at the upper right');
     assert(Math.abs(g.selector.y-(g.header.y+g.paddingTop))<1,'Selector must occupy the top row');
     assert(g.nav.y>=g.brand.bottom+12,'Menu must be below identity');
-    if(width<=640)assert(g.brand.y>=g.selector.bottom+12,'Mobile identity must clear the flag row');
-    else assert(g.brand.right<=g.selector.x-20,'Desktop/tablet blocks must not overlap');
+    assert(g.brand.y>=g.selector.bottom+12,'Identity must clear the flag row');
+    assert(Math.abs(g.brand.x+g.brand.width/2-width/2)<1,'Logo must be exactly centred');
     assert(g.flags.every(r=>r.y===g.flags[0].y),'All six flags must stay in one row');
     assert(g.flags.every(r=>r.right<=g.header.right && r.x>=g.header.x));
-    assert.equal(g.border,'1px');assert.equal(g.borderColor,'rgb(20, 40, 61)');assert(g.menuPadding>=12);
-    assert.equal(g.menuSize,width<=640?13:15);
+    assert.equal(g.border,'1px');assert.equal(g.borderColor,'rgb(255, 255, 255)' );assert(g.menuPadding>=12);
+    assert.equal(g.menuSize,width<=640?14:15);
     for(let i=1;i<g.links.length;i++){
      const previous=g.links[i-1],current=g.links[i];
      if(Math.abs(previous.y-current.y)<1)assert(Math.abs(current.x-previous.right-g.columnGap)<1,'Even menu spacing');
@@ -67,6 +67,6 @@ const languages=[['es','/'],['en','/en/'],['de','/de/'],['nb','/no/'],['ru','/ru
    }
   }
   assert.deepEqual(errors,[]);
-  console.log('OK: six languages at 320/390/768/1440; one complete original logo; menu below identity with navy rule; upper-right six-flag row; no overlap/overflow or split identity words; header links; two preliminary paragraphs; real screenshots.');
+  console.log('OK: six languages at 320/390/768/1440; one complete original logo; menu below identity with white rule; upper-right six-flag row; no overlap/overflow or split identity words; header links; two preliminary paragraphs; real screenshots.');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});
