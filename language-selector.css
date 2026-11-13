@@ -159,3 +159,12 @@
     margin-inline-end: 0;
   }
 }
+
+/* One complete original logo, with a transparent matte; no separate initials. */
+.site-header > .brand{display:block;inline-size:330px;max-inline-size:100%;min-width:0}
+.site-header .brand-logo{display:block;width:100%;height:auto;object-fit:contain}
+.branded-footer{background:#111213;color:#cbd3db;align-items:center;gap:28px 40px}
+.branded-footer .footer-logo{display:block;width:340px;max-width:100%;height:auto;object-fit:contain;flex:none}
+.branded-footer .footer-details{display:flex;flex:1 1 220px;flex-direction:column;gap:16px;min-width:0}
+.branded-footer .footer-links{line-height:1.8}
+@media(max-width:640px){.branded-footer .footer-logo{width:300px}.branded-footer{gap:22px}}
