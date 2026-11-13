@@ -111,7 +111,7 @@ def service_icon(key):
 
 
 def service_list(lang, exclude=None, custom_icons=False):
-    return '<div class="service-list">' + ''.join(f'''<article><span>{i:02d}</span><div><h3>{link(s['key'],lang,s[lang]['name'])}</h3><p>{esc(s[lang]['coverage']) if 'coverage' in s[lang] and (custom_icons or exclude in ('expert','occupancy','opening')) else (tr(lang,'Toda España · Comunidad Valenciana','Spain · Valencian Community') if s['key'] in ('expert','accidents') else tr(lang,'Provincia de Alicante','Alicante province'))}</p></div><span class="arrow" aria-hidden="true">{service_icon(s["key"]) if custom_icons else "↗"}</span></article>''' for i,s in enumerate(SERVICES,1) if s['key'] != exclude) + '</div>'
+    return '<div class="service-list">' + ''.join(f'''<article><span>{i:02d}</span><div><h3>{link(s['key'],lang,s[lang]['name'])}</h3><p>{esc(s[lang]['coverage']) if 'coverage' in s[lang] and (custom_icons or exclude in ('expert','energy','occupancy','opening')) else (tr(lang,'Toda España · Comunidad Valenciana','Spain · Valencian Community') if s['key'] in ('expert','accidents') else tr(lang,'Provincia de Alicante','Alicante province'))}</p></div><span class="arrow" aria-hidden="true">{service_icon(s["key"]) if custom_icons else "↗"}</span></article>''' for i,s in enumerate(SERVICES,1) if s['key'] != exclude) + '</div>'
 
 
 def mark_reading_prose(match):
