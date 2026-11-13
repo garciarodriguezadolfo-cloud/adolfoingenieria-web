@@ -180,6 +180,6 @@
 
 /* Preserve PR18 geometry and typography; only the requested line is unbroken. */
 .branded-footer .footer-professional{white-space:nowrap}
-.branded-footer .footer-logo{margin-inline:auto}
-@media(max-width:568px){.branded-footer .footer-logo{transform:translateX(-1.640625%)}}
+.branded-footer .footer-logo{margin-inline:0}
+@media(max-width:568px){.branded-footer .footer-logo{margin-inline:auto;transform:translateX(-1.640625%)}}
 .site-header .brand-logo{transform:translateX(-1.640625%)}

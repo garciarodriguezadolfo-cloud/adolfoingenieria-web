@@ -1,29 +1,31 @@
-# PR #19 corregida: referencia obligatoria PR #18
+# PR #19: distribución final del pie
 
-Se eliminan la redistribución y la reducción de letra de la primera propuesta de #19. La referencia es main 612e770, fusión de la PR #18. Las capturas `before-*` se han vuelto a obtener directamente de ese commit; `after-*` muestra la corrección actual, en 320, 390, 768 y 1440 px.
+Referencia: versión aprobada de PR #18, commit 612e770. La aclaración final resuelve el criterio de escritorio: el logo permanece a la izquierda y la información a su derecha; no se centra el logo respecto a toda la pantalla cuando comparte fila con los textos.
 
-## Cambios compatibles con las restricciones
+## Resultado
 
-- Cabecera: centrado del dibujo visible con una traslación horizontal del 1,640625 %, compensando los márgenes transparentes asimétricos del archivo. No cambian tamaño, proporciones, altura ni posición vertical. Menú y banderas tienen exactamente las coordenadas y dimensiones de #18.
-- Pie: se restaura el `flex-wrap` de #18. Sin grid, sin redistribuir ni cambiar el orden de los textos. Cuando el logo ya ocupa su propia fila en móvil, se centra mediante márgenes horizontales automáticos y compensación del margen transparente. No cambia su posición vertical ni su tamaño.
-- Orden de información de #18: copyright, profesión/colegiación y enlaces legales. La segunda línea es exactamente «Ingeniero Mecánico | Colegiado n.º 4.702 COITIA» en español, con traducciones equivalentes en los otros cinco idiomas. Permanece entera en una línea en los 24 casos.
-- Se conservan los 11 px originales, la fuente, el interlineado, las separaciones y las coordenadas del copyright y los enlaces legales. No se añaden separadores ni se cambian los destinos de los enlaces.
+- Móvil (320 y 390 px): logo centrado horizontalmente en su fila original; debajo, copyright, profesión/colegiación y enlaces legales alineados a la izquierda, con la sangría de #18.
+- Escritorio/tableta (768 y 1440 px): distribución de #18, con logo a la izquierda y textos a la derecha, separados por los 40 px originales y sin superposición.
+- Los márgenes automáticos del logo se aplican exclusivamente en la franja móvil en que ya ocupa una fila propia. No se introduce grid ni se reorganizan los bloques.
+- Tamaño de logos, posiciones verticales, fuente de 11 px, separaciones, colores y fondos originales conservados.
+- La segunda línea española permanece exactamente «Ingeniero Mecánico | Colegiado n.º 4.702 COITIA», entera en una línea, con traducciones equivalentes en los otros cinco idiomas.
+- Se conserva sin cambios el ajuste horizontal de cabecera ya realizado. En esta revisión no se toca la cabecera, el menú ni las banderas.
 
-## Conflicto pendiente: centrado del pie en escritorio
-
-No es posible centrar el logotipo del pie respecto a toda la pantalla a 768 px y simultáneamente conservar su posición vertical y las posiciones originales de los textos. La distribución aprobada tiene el logo y la información en la misma fila. Al desplazar solo el logo hasta el centro de la pantalla, el logo se superpone a los textos.
-
-Se ha medido a 768 px: el bloque de textos empieza en x346,078; la segunda línea ocupa 244,125 px. El logo mide 260 × 155,391 px. La captura `rejected-overlap-768.png` muestra una prueba real de la traslación aislada al centro, descartada por superposición. Esa traslación **no** se incorpora al sitio.
-
-Para respetar la restricción absoluta de no reorganizar ni desplazar verticalmente, en 768 y 1440 px se conserva la posición original del logo del pie. No se presenta este punto como completado: el centrado de escritorio queda pendiente de resolver la incompatibilidad entre los requisitos. No se modifica la distribución unilateralmente.
+La compensación horizontal del margen transparente del archivo conserva los píxeles originales. La imagen, sus proporciones y su tamaño no se modifican. El logotipo móvil tiene el centro visible en el centro de la pantalla; el de escritorio conserva la posición izquierda aprobada.
 
 ## Validación
 
-- `tests/registration-layout-browser.cjs`: comparación contra una copia servida del commit 612e770, en seis idiomas × cuatro anchuras. Coinciden exactamente altura de cabecera, menú, banderas, posición vertical y dimensiones de los logos, distribución del pie, copyright y enlaces legales, fuente de 11 px y separaciones. Colegiación completa sin saltos ni desbordamientos.
-- `tests/branding-browser.cjs`, `tests/header-browser.cjs`: regresión de navegación, teclado y presentación.
-- `python3 tests/check_seo.py`, `npm test`, `git diff --check`. Pruebas del formulario simuladas; no se han enviado correos reales.
-- Todos los archivos de imágenes y logos son idénticos byte por byte a #18. HTML de cabecera y contenido fuera del pie, enlaces, canonical, hreflang y sitemap de 42 URL intactos; solo cambia también la referencia de caché del CSS.
+`tests/registration-layout-browser.cjs` compara las medidas con una copia servida de la PR #18, en seis idiomas × 320/390/768/1440 px. Verifica:
 
-Capturas reales de Chromium con las fuentes actuales mediante fixtures temporales. El servidor de referencia usó el puerto 8773; la propuesta, 8772. `CORRECTION_BASELINE=1` obtiene las medidas de la referencia en `/tmp/adolfo-pr18-layout.json`; las capturas están en `/tmp/adolfo-pr19-correction`. La comparación geométrica se activa si existe ese archivo.
+- Mismas coordenadas y dimensiones de cabecera, menú y selector.
+- Tamaños y posiciones verticales de ambos logos sin cambios.
+- Copyright y enlaces legales con iguales textos, coordenadas y dimensiones, fuente de 11 px, interlineado y separaciones originales.
+- Logo centrado y textos debajo en móvil, con las tres líneas alineadas a la izquierda.
+- Logo a la izquierda y textos a la derecha en escritorio, con separación de 40 px y sin superposición.
+- Línea completa de colegiación y ausencia de desbordamiento en los 24 casos.
 
-Sin cambios de imágenes, fondos, colores, tamaños de logos, otros textos, funcionalidades ni configuración. Misma PR #19, sin fusionar ni publicar automáticamente.
+`python3 tools/build_site.py`, `python3 tests/check_seo.py` y `git diff --check` completados. Comparación de esta revisión contra la versión anterior de #19: todo el HTML de cabecera/pie y contenido de páginas es idéntico salvo la referencia de caché del CSS; imágenes y sitemap también idénticos byte por byte. No se han modificado textos, enlaces, SEO ni funcionalidades.
+
+Las capturas `before-*` corresponden a #18 y `after-*` al resultado final, a las cuatro anchuras. Chromium real, con las fuentes actuales DM Sans y Manrope servidas como fixtures temporales, sin nuevas dependencias de la web. El servidor final usado fue el puerto 8774; las capturas están en `/tmp/adolfo-pr19-correction`. `CORRECTION_BASELINE=1` obtiene las medidas de referencia para la comparación opcional en `/tmp/adolfo-pr18-layout.json`.
+
+Misma PR #19. Pendiente de revisión visual; no fusionar ni publicar automáticamente.

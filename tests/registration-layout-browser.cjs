@@ -18,7 +18,13 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:8768',out='/tmp/adolfo-p
  if(!before){const p='/tmp/adolfo-pr18-layout.json';const old=fs.existsSync(p)?JSON.parse(fs.readFileSync(p))[key]:null;
  if(old){for(const field of ['header','nav','flags','footer','copyright','legal','copyrightText','legalText','professional','font','gap'])assert.deepEqual(m[field],old[field],`${key}: preserve ${field}`);assert.equal(m.logo.w,old.logo.w);assert.equal(m.logo.h,old.logo.h);assert.equal(m.logo.y,old.logo.y);assert.equal(m.footerLogo.w,old.footerLogo.w);assert.equal(m.footerLogo.h,old.footerLogo.h);assert.equal(m.footerLogo.y,old.footerLogo.y);if(width>=768)assert.equal(m.footerLogo.x,old.footerLogo.x,'Desktop footer follows mandatory PR18 distribution');}
  assert(Math.abs(m.logo.x+m.logo.w*661/1280-width/2)<1,'Visible header logo centered');
- if(width<=390)assert(Math.abs(m.footerLogo.x+m.footerLogo.w*661/1280-width/2)<1,'Mobile footer logo centered without reflow');
+ if(width<=390){
+ assert(Math.abs(m.footerLogo.x+m.footerLogo.w*661/1280-width/2)<1,'Mobile footer logo centered without reflow');
+ assert(m.copyright.y>=m.footerLogo.y+m.footerLogo.h+19.9,'Mobile information stays below the logo');
+ assert.equal(m.copyright.x,m.professional.x);assert.equal(m.copyright.x,m.legal.x);
+ }else{
+ for(const block of [m.copyright,m.professional,m.legal])assert(block.x>=m.footerLogo.x+m.footerLogo.w+39.9,'Desktop text stays right of the logo with original gap and no overlap');
+ }
  const line=page.locator('.footer-professional');assert((await line.innerText()).includes('4.702 COITIA'));if(lang==='es')assert.equal(await line.innerText(),'Ingeniero Mecánico | Colegiado n.º 4.702 COITIA');assert.equal(m.font,'11px');
  assert(await line.evaluate(e=>{const range=document.createRange();range.selectNodeContents(e);const r=[...range.getClientRects()];return new Set(r.map(x=>x.y)).size===1&&r.every(x=>x.right<=innerWidth-20);}),'One complete registration line');assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
  }
