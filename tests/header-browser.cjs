@@ -33,11 +33,12 @@ const languages=[['es','/'],['en','/en/'],['de','/de/'],['nb','/no/'],['ru','/ru
     assert(Math.abs(g.selector.y-(g.header.y+g.paddingTop))<1,'Selector must occupy the top row');
     assert(g.nav.y>=g.brand.bottom+12,'Menu must be below identity');
     assert(g.brand.y>=g.selector.bottom+12,'Identity must clear the flag row');
-    assert(Math.abs(g.brand.x+g.brand.width/2-width/2)<1,'Logo must be exactly centred');
+    const imageBox=await page.locator('.brand-logo').boundingBox();
+    assert(Math.abs(imageBox.x+imageBox.width*661/1280-width/2)<1,'Visible logo must be exactly centred');
     assert(g.flags.every(r=>r.y===g.flags[0].y),'All six flags must stay in one row');
     assert(g.flags.every(r=>r.right<=g.header.right && r.x>=g.header.x));
     assert.equal(g.border,'1px');assert.equal(g.borderColor,'rgb(255, 255, 255)' );assert(g.menuPadding>=12);
-    assert.equal(g.menuSize,width<=640?14:15);
+    assert(g.menuSize>=9.5&&g.menuSize<=15);assert(g.links.every(r=>Math.abs(r.y-g.links[0].y)<.1),'All five menu links must remain on one row');
     for(let i=1;i<g.links.length;i++){
      const previous=g.links[i-1],current=g.links[i];
      if(Math.abs(previous.y-current.y)<1)assert(Math.abs(current.x-previous.right-g.columnGap)<1,'Even menu spacing');

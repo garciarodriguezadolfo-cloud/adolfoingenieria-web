@@ -1,0 +1,146 @@
+[
+  {
+    "lang": "es",
+    "width": 320,
+    "font": 14,
+    "menuWidth": 303.75
+  },
+  {
+    "lang": "en",
+    "width": 320,
+    "font": 13,
+    "menuWidth": 295.171875
+  },
+  {
+    "lang": "de",
+    "width": 320,
+    "font": 12,
+    "menuWidth": 303.609375
+  },
+  {
+    "lang": "no",
+    "width": 320,
+    "font": 11.25,
+    "menuWidth": 300.640625
+  },
+  {
+    "lang": "ru",
+    "width": 320,
+    "font": 9.5,
+    "menuWidth": 313.046875
+  },
+  {
+    "lang": "nl",
+    "width": 320,
+    "font": 11,
+    "menuWidth": 303.828125
+  },
+  {
+    "lang": "es",
+    "width": 390,
+    "font": 14,
+    "menuWidth": 317.75
+  },
+  {
+    "lang": "en",
+    "width": 390,
+    "font": 14,
+    "menuWidth": 329.6875
+  },
+  {
+    "lang": "de",
+    "width": 390,
+    "font": 14,
+    "menuWidth": 365.515625
+  },
+  {
+    "lang": "no",
+    "width": 390,
+    "font": 13.5,
+    "menuWidth": 371.5625
+  },
+  {
+    "lang": "ru",
+    "width": 390,
+    "font": 11.25,
+    "menuWidth": 382.515625
+  },
+  {
+    "lang": "nl",
+    "width": 390,
+    "font": 13,
+    "menuWidth": 370.15625
+  },
+  {
+    "lang": "es",
+    "width": 768,
+    "font": 15,
+    "menuWidth": 395.734375
+  },
+  {
+    "lang": "en",
+    "width": 768,
+    "font": 15,
+    "menuWidth": 408.890625
+  },
+  {
+    "lang": "de",
+    "width": 768,
+    "font": 15,
+    "menuWidth": 455.5
+  },
+  {
+    "lang": "no",
+    "width": 768,
+    "font": 15,
+    "menuWidth": 475.53125
+  },
+  {
+    "lang": "ru",
+    "width": 768,
+    "font": 15,
+    "menuWidth": 571.328125
+  },
+  {
+    "lang": "nl",
+    "width": 768,
+    "font": 15,
+    "menuWidth": 488.484375
+  },
+  {
+    "lang": "es",
+    "width": 1440,
+    "font": 15,
+    "menuWidth": 395.734375
+  },
+  {
+    "lang": "en",
+    "width": 1440,
+    "font": 15,
+    "menuWidth": 408.890625
+  },
+  {
+    "lang": "de",
+    "width": 1440,
+    "font": 15,
+    "menuWidth": 455.5
+  },
+  {
+    "lang": "no",
+    "width": 1440,
+    "font": 15,
+    "menuWidth": 475.53125
+  },
+  {
+    "lang": "ru",
+    "width": 1440,
+    "font": 15,
+    "menuWidth": 571.328125
+  },
+  {
+    "lang": "nl",
+    "width": 1440,
+    "font": 15,
+    "menuWidth": 488.484375
+  }
+]

@@ -76,7 +76,8 @@ def header(key, lang):
 
 
 def footer(lang):
-    return f'''<footer class="branded-footer"><img class="footer-logo" src="/assets/branding/complete-logo-transparent.png" width="1280" height="765" loading="lazy" decoding="async" alt="{NAME} — {tr(lang, 'Ingeniero Mecánico | Perito Técnico', 'Mechanical Engineer | Technical Expert')}"><div class="footer-details"><span>© <span id="year"></span> {NAME}</span><span>{tr(lang, 'Ingeniero Mecánico', 'Mechanical Engineer')}</span><div class="footer-links">{link('legal',lang,tr(lang,'Aviso legal (borrador)','Legal notice (draft)'))}{link('privacy',lang,tr(lang,'Privacidad (borrador)','Privacy (draft)'))}</div></div></footer>'''
+    registration = {'es':'Colegiado n.º', 'en':'Member no.', 'de':'Mitglied Nr.', 'no':'Medlemsnr.', 'ru':'Рег. №', 'nl':'Lidnr.'}[lang]
+    return f'''<footer class="branded-footer"><img class="footer-logo" src="/assets/branding/complete-logo-transparent.png" width="1280" height="765" loading="lazy" decoding="async" alt="{NAME} — {tr(lang, 'Ingeniero Mecánico | Perito Técnico', 'Mechanical Engineer | Technical Expert')}"><div class="footer-details"><span>© <span id="year"></span> {NAME}</span><span class="footer-professional">{tr(lang, 'Ingeniero Mecánico', 'Mechanical Engineer')} | {registration} 4.702 COITIA</span><div class="footer-links">{link('legal',lang,tr(lang,'Aviso legal (borrador)','Legal notice (draft)'))}{link('privacy',lang,tr(lang,'Privacidad (borrador)','Privacy (draft)'))}</div></div></footer>'''
 
 
 def whatsapp(lang):
