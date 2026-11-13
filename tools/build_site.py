@@ -106,8 +106,12 @@ def contact_block(lang):
     return f'''<section class="contact" id="contacto"><p class="eyebrow">{tr(lang,'CONTACTO','CONTACT')}</p><h2>{tr(lang,'¿Necesita un informe<br>o asesoramiento técnico?','Need an expert report<br>or technical advice?')}</h2><p>{tr(lang,'Prepare los datos de su encargo para solicitar una valoración de alcance y presupuesto.', 'Prepare the details of your assignment for a scope review and quotation.')}</p>{form(lang)}</section>'''
 
 
-def service_list(lang, exclude=None):
-    return '<div class="service-list">' + ''.join(f'''<article><span>{i:02d}</span><div><h3>{link(s['key'],lang,s[lang]['name'])}</h3><p>{tr(lang,'Toda España · Comunidad Valenciana','Spain · Valencian Community') if s['key'] in ('expert','accidents') else tr(lang,'Provincia de Alicante','Alicante province')}</p></div><span class="arrow" aria-hidden="true">↗</span></article>''' for i,s in enumerate(SERVICES,1) if s['key'] != exclude) + '</div>'
+def service_icon(key):
+    return f'<img class="service-icon" src="/assets/icons/services/{key}.svg" width="30" height="30" alt="" decoding="async">'
+
+
+def service_list(lang, exclude=None, custom_icons=False):
+    return '<div class="service-list">' + ''.join(f'''<article><span>{i:02d}</span><div><h3>{link(s['key'],lang,s[lang]['name'])}</h3><p>{tr(lang,'Toda España · Comunidad Valenciana','Spain · Valencian Community') if s['key'] in ('expert','accidents') else tr(lang,'Provincia de Alicante','Alicante province')}</p></div><span class="arrow" aria-hidden="true">{service_icon(s["key"]) if custom_icons else "↗"}</span></article>''' for i,s in enumerate(SERVICES,1) if s['key'] != exclude) + '</div>'
 
 
 def mark_reading_prose(match):
@@ -179,7 +183,7 @@ def render_home(lang):
     body = body.replace('href="#contacto"', f'href="{PATHS["contact"][lang]}"')
     start = body.index('<div class="service-list">')
     end = body.index('</section>', start)
-    body = body[:start] + service_list(lang) + body[end:]
+    body = body[:start] + service_list(lang, custom_icons=True) + body[end:]
     body = body.replace(tr(lang,'Otros servicios','Other services'),tr(lang,'Servicios de ingeniería','Engineering services'))
     body = body.replace(tr(lang,'SERVICIOS COMPLEMENTARIOS','ADDITIONAL SERVICES'),tr(lang,'SERVICIOS','SERVICES'))
     body = body.replace(tr(lang,'Peritajes en toda España','Expert assessments throughout Spain'),tr(lang,'Peritajes en toda España · Especial atención a la Comunidad Valenciana','Expert assessments throughout Spain · Particular focus on the Valencian Community'))

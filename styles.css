@@ -22,3 +22,9 @@ select{font:inherit;background:white;color:var(--ink);padding:15px;width:100%;bo
 body{padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))}.whatsapp-float{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:5;display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:28px;background:#17613b;color:#fff;box-shadow:0 3px 12px #0003;font-size:13px;font-weight:700;line-height:1.35}.whatsapp-float:hover{background:#124d2f}.whatsapp-float svg{width:30px;height:30px;flex-shrink:0}.whatsapp-number{display:block;font-size:11px;font-weight:500}
 @media(max-width:520px){.whatsapp-float{right:12px;bottom:max(8px,env(safe-area-inset-bottom,0px));padding:8px 12px}.language-switch{gap:4px}.language-switch a{width:40px;height:50px}.language-switch a[aria-current=page]::after{left:14px;right:14px}}
 html{scroll-padding-bottom:100px}input,textarea,select,button,.footer-links a{scroll-margin-bottom:100px}
+
+/* Home service icons occupy the original arrow column without changing row geometry. */
+#servicios .service-list .arrow{position:relative;width:100%;height:30px;pointer-events:none}
+#servicios .service-icon{position:absolute;right:0;top:0;display:block;width:30px;height:30px;max-width:none;object-fit:contain;pointer-events:none}
+#servicios .service-list article{position:relative}
+#servicios .service-list h3 a::after{content:"";position:absolute;inset:0}
