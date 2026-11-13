@@ -89,7 +89,7 @@ for key, paths in PATHS.items():
         assert not any(field in graph[0] for field in ('address','aggregateRating','priceRange'))
         if key not in ('home','contact','legal','privacy'):
             assert graph[2]['@type'] == 'Service'
-            assert graph[2]['areaServed'] == (['España','Comunidad Valenciana','Alicante'] if key in ('expert','accidents') else ['Provincia de Alicante','Marina Baixa','Costa Blanca'])
+            assert graph[2]['areaServed'] == ({'expert':['España','Comunidad Valenciana'], 'occupancy':['Costa Blanca','Marina Baixa'], 'opening':['Costa Blanca','Marina Baixa']}.get(key, ['España','Comunidad Valenciana','Alicante'] if key == 'accidents' else ['Provincia de Alicante','Marina Baixa','Costa Blanca']))
         if key not in ('legal','privacy'):
             website = next(item for item in graph if item['@type'] == 'WebSite')
             assert website['url'] == BASE+PATHS['home'][lang]

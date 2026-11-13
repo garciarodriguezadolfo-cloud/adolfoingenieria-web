@@ -111,7 +111,7 @@ def service_icon(key):
 
 
 def service_list(lang, exclude=None, custom_icons=False):
-    return '<div class="service-list">' + ''.join(f'''<article><span>{i:02d}</span><div><h3>{link(s['key'],lang,s[lang]['name'])}</h3><p>{tr(lang,'Toda España · Comunidad Valenciana','Spain · Valencian Community') if s['key'] in ('expert','accidents') else tr(lang,'Provincia de Alicante','Alicante province')}</p></div><span class="arrow" aria-hidden="true">{service_icon(s["key"]) if custom_icons else "↗"}</span></article>''' for i,s in enumerate(SERVICES,1) if s['key'] != exclude) + '</div>'
+    return '<div class="service-list">' + ''.join(f'''<article><span>{i:02d}</span><div><h3>{link(s['key'],lang,s[lang]['name'])}</h3><p>{esc(s[lang]['coverage']) if 'coverage' in s[lang] and (custom_icons or exclude in ('expert','occupancy','opening')) else (tr(lang,'Toda España · Comunidad Valenciana','Spain · Valencian Community') if s['key'] in ('expert','accidents') else tr(lang,'Provincia de Alicante','Alicante province'))}</p></div><span class="arrow" aria-hidden="true">{service_icon(s["key"]) if custom_icons else "↗"}</span></article>''' for i,s in enumerate(SERVICES,1) if s['key'] != exclude) + '</div>'
 
 
 def mark_reading_prose(match):
@@ -129,7 +129,7 @@ def shell(key, lang, title, description, body, service=None, draft=False):
     provider = {'@type':'Person', '@id':BASE+'/#professional', 'name':NAME, 'jobTitle':tr(lang,'Ingeniero Mecánico','Mechanical Engineer'), 'url':BASE+'/', 'email':CONTACT_EMAIL, 'telephone':CONTACT_PHONE}
     graph = [provider, {'@type':'WebPage','@id':url+'#page','url':url,'name':title,'description':description,'inLanguage':HTML_LANG[lang],'about':{'@id':BASE+'/#professional'}}]
     if service:
-        graph.append({'@type':'Service','@id':url+'#service','name':service[lang]['h1'],'serviceType':service[lang]['name'],'description':description,'url':url,'provider':{'@id':BASE+'/#professional'},'areaServed': ['España','Comunidad Valenciana','Alicante'] if service['key'] in ('expert','accidents') else ['Provincia de Alicante','Marina Baixa','Costa Blanca']})
+        graph.append({'@type':'Service','@id':url+'#service','name':service[lang]['h1'],'serviceType':service[lang]['name'],'description':description,'url':url,'provider':{'@id':BASE+'/#professional'},'areaServed': service.get('area_served', ['España','Comunidad Valenciana','Alicante'] if service['key'] in ('expert','accidents') else ['Provincia de Alicante','Marina Baixa','Costa Blanca'])})
     if not draft:
         website_id = BASE + PATHS['home'][lang] + '#website'
         graph[1]['isPartOf'] = {'@id':website_id}
@@ -194,9 +194,14 @@ def render_home(lang):
     return shell('home',lang,title,description,body)
 
 
+def content_paragraphs(text, css_class=None):
+    attribute = f' class="{css_class}"' if css_class else ''
+    return ''.join(f'<p{attribute}>{esc(part)}</p>' for part in text.split('\n\n'))
+
+
 def render_service(s, lang):
     data = s[lang]
-    body = f'''<section class="service-hero"><p class="eyebrow">{tr(lang,'INGENIERÍA · ANÁLISIS TÉCNICO','ENGINEERING · TECHNICAL ANALYSIS')}</p><h1>{esc(data['h1'])}<span class="dot">.</span></h1><p class="lead">{esc(data['lead'])}</p>{link('contact',lang,tr(lang,'Solicitar presupuesto ↗','Request a quotation ↗'),'primary')}</section>'''
+    body = f'''<section class="service-hero"><p class="eyebrow">{tr(lang,'INGENIERÍA · ANÁLISIS TÉCNICO','ENGINEERING · TECHNICAL ANALYSIS')}</p><h1>{esc(data['h1'])}<span class="dot">.</span></h1>{content_paragraphs(data['lead'], "lead")}{link('contact',lang,tr(lang,'Solicitar presupuesto ↗','Request a quotation ↗'),'primary')}</section>'''
     contextual_links = {'expert':(3,'accidents'), 'accidents':(2,'expert'), 'energy':(3,'occupancy'), 'occupancy':(3,'energy')}
     for i,(heading,text) in enumerate(data['sections']):
         anchor = ' id="preliminary-assessment"' if s['key'] == 'expert' and i == 0 else ''
@@ -205,7 +210,7 @@ def render_service(s, lang):
             target = contextual_links[s['key']][1]
             target_service = next(item for item in SERVICES if item['key'] == target)
             related = link(target, lang, target_service[lang]['name'], 'text-link')
-        body += f'<section{anchor} class="section expertise{" services" if i%2 else ""}"><div><p class="eyebrow dark">{i+1:02d}</p><h2>{esc(heading)}</h2></div><div><p>{esc(text)}</p>{related}</div></section>'
+        body += f'<section{anchor} class="section expertise{" services" if i%2 else ""}"><div><p class="eyebrow dark">{i+1:02d}</p><h2>{esc(heading)}</h2></div><div>{content_paragraphs(text)}{related}</div></section>'
     body += f'<section class="section services"><h2>{tr(lang,"Servicios relacionados","Related services")}</h2>{service_list(lang,s["key"])}</section>'
     body += f'<section class="contact"><h2>{tr(lang,"Definamos el alcance de su encargo.","Let’s define the scope of your assignment.")}</h2><p>{tr(lang,"Indique el lugar, los hechos o el inmueble y los plazos que necesita valorar. El presupuesto se concreta tras revisar la información.","Describe the location, events or property and the deadlines to be assessed. A quotation is defined after reviewing the information.")}</p>{link("contact",lang,tr(lang,"Preparar consulta ↗","Prepare an enquiry ↗"),"primary")}</section>'
     return shell(s['key'],lang,data['title'],data['description'],body,s)
