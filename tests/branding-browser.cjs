@@ -1,5 +1,4 @@
-// Verify energy-page content and responsive layout in all six languages.
-// Responsive content and geographic scope checks for the three affected services.
+// Complete raster logo: responsive geometry, images and comparative screenshots.
 const {chromium}=require('playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const base=process.env.TEST_BASE_URL||'http://127.0.0.1:8768',out='/tmp/adolfo-logo-review';
@@ -13,7 +12,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:8768',out='/tmp/adolfo-l
  for(const width of [320,390,768,1440])for(const lang of (before?['es']:(process.env.BRAND_LANGS?.split(',')||['es','en','de','no','ru','nl']))){
  await page.setViewportSize({width,height:1000});await page.goto(base+(lang==='es'?'/':`/${lang}/`));await page.evaluate(()=>document.fonts.ready);
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${lang} ${width}: overflow`);
- if(!before){const images=page.locator('.brand img,.footer-logo');assert.equal(await images.count(),4);await page.locator('footer').scrollIntoViewIfNeeded();await page.waitForFunction(()=>[...document.querySelectorAll('.brand img,.footer-logo')].every(i=>i.complete&&i.naturalWidth));assert.equal(await page.locator('.brand-name').getAttribute('aria-label'),'Manuel Adolfo García Rodríguez');
+ if(!before){const images=page.locator('.brand img,.footer-logo');assert.equal(await images.count(),2);await page.locator('footer').scrollIntoViewIfNeeded();await page.waitForFunction(()=>[...document.querySelectorAll('.brand img,.footer-logo')].every(i=>i.complete&&i.naturalWidth));assert((await page.locator('.brand-logo').getAttribute('alt')).startsWith('Manuel Adolfo García Rodríguez'));assert.equal(await page.locator('.brand-symbol,.brand-initial,.brand-name,.brand-sub').count(),0);
  const g=await page.evaluate(()=>{const rect=e=>{const r=e.getBoundingClientRect();return {y:r.y,right:r.right,bottom:r.bottom};};return {brand:rect(document.querySelector('.brand')),nav:rect(document.querySelector('header nav')),flags:[...document.querySelectorAll('header .language-switch a')].map(rect)};});assert(g.nav.y>=g.brand.bottom+10);assert(g.flags.every(f=>f.y===g.flags[0].y));
  for(const i of await images.evaluateAll(es=>es.map(e=>({w:e.width,h:e.height,nw:e.naturalWidth,nh:e.naturalHeight}))))assert(Math.abs(i.w/i.h-i.nw/i.nh)<.08);
  await page.locator('.brand').focus();assert(await page.locator('.brand').evaluate(e=>e===document.activeElement));assert.equal(await page.locator('header nav a').count(),5);assert.equal(await page.locator('.footer-links a').count(),2);}
