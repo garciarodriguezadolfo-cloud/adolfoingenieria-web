@@ -33,7 +33,8 @@ const languages=[['es','/'],['en','/en/'],['de','/de/'],['nb','/no/'],['ru','/ru
     assert(Math.abs(g.selector.y-(g.header.y+g.paddingTop))<1,'Selector must occupy the top row');
     assert(g.nav.y>=g.brand.bottom+12,'Menu must be below identity');
     assert(g.brand.y>=g.selector.bottom+12,'Identity must clear the flag row');
-    assert(Math.abs(g.brand.x+g.brand.width/2-width/2)<1,'Logo must be exactly centred');
+    const logoBox=await page.locator('.brand-logo').boundingBox();
+    assert(Math.abs(logoBox.x+logoBox.width/2-(width/2-(width<=640?4:0)))<1,'Approved 4px optical adjustment on mobile');
     assert(g.flags.every(r=>r.y===g.flags[0].y),'All six flags must stay in one row');
     assert(g.flags.every(r=>r.right<=g.header.right && r.x>=g.header.x));
     assert.equal(g.border,'1px');assert.equal(g.borderColor,'rgb(255, 255, 255)' );assert(g.menuPadding>=12);

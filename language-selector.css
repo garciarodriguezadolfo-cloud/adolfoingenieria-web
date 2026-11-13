@@ -177,3 +177,10 @@
 .branded-footer .footer-links{line-height:1.8;color:#e5e5e5}
 .branded-footer a:focus-visible{outline-color:#e0c18b}
 @media(max-width:640px){.site-header{padding-block:16px 24px;row-gap:14px}.site-header > nav{font-size:14px}.branded-footer{gap:20px}}
+
+/* Approved logo sizes stay unchanged; only alignment and footer text are adjusted. */
+.branded-footer{display:grid;grid-template-columns:minmax(0,1fr)}
+.branded-footer .footer-logo{justify-self:center;transform:translateX(-1.640625%)}
+.branded-footer .footer-details{width:100%;font-size:10px;text-align:left;align-items:flex-start}
+.branded-footer .footer-professional{white-space:nowrap;font-size:10px;line-height:1.5}
+@media(max-width:640px){.site-header .brand-logo{transform:translateX(-4px)}}
