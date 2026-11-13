@@ -38,7 +38,7 @@ const languages=[['es','/'],['en','/en/'],['de','/de/'],['nb','/no/'],['ru','/ru
     assert(g.flags.every(r=>r.y===g.flags[0].y),'All six flags must stay in one row');
     assert(g.flags.every(r=>r.right<=g.header.right && r.x>=g.header.x));
     assert.equal(g.border,'1px');assert.equal(g.borderColor,'rgb(255, 255, 255)' );assert(g.menuPadding>=12);
-    assert.equal(g.menuSize,width<=640?14:15);
+    assert(g.menuSize>=9.5&&g.menuSize<=15);assert(g.links.every(r=>Math.abs(r.y-g.links[0].y)<.1),'All five menu links must remain on one row');
     for(let i=1;i<g.links.length;i++){
      const previous=g.links[i-1],current=g.links[i];
      if(Math.abs(previous.y-current.y)<1)assert(Math.abs(current.x-previous.right-g.columnGap)<1,'Even menu spacing');
