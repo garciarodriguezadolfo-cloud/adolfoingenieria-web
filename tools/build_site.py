@@ -6,6 +6,7 @@ import re
 from urllib.parse import quote
 from hashlib import sha256
 import xml.etree.ElementTree as ET
+from article_content import load_articles, article_date, sections_html
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://adolfoingenieria.es'
@@ -19,11 +20,16 @@ CONTACT_PHONE = CONFIG['contact_phone']
 CONTACT_PHONE_DISPLAY = CONFIG['contact_phone_display']
 SERVICES = json.loads((ROOT / 'site/services.json').read_text())
 SEO = json.loads((ROOT / 'site/seo.json').read_text())
+SCHEMA_OVERRIDES = json.loads((ROOT / 'site/schema-overrides.json').read_text())
 LANGS = ('es', 'en', 'de', 'no', 'ru', 'nl')
 HTML_LANG = {lang: ('nb' if lang == 'no' else lang) for lang in LANGS}
 LOCALES = {lang: json.loads((ROOT / f'site/locales/{lang}.json').read_text()) for lang in ('de', 'no', 'ru', 'nl')}
 LANG_NAMES = {'es':'Español', 'en':'English', 'de':'Deutsch', 'no':'Norsk bokmål', 'ru':'Русский', 'nl':'Nederlands'}
 FLAGS = {'es':'es', 'en':'gb', 'de':'de', 'no':'no', 'ru':'ru', 'nl':'nl'}
+ARTICLE_UI = json.loads((ROOT / 'site/article-locales.json').read_text())
+ARTICLES = load_articles(ROOT / 'site/articles.json', LANGS, {s['key'] for s in SERVICES})
+PUBLISHED_ARTICLES = sorted((a for a in ARTICLES if a['status'] == 'published'), key=lambda a: (a['date_published'], a['id']), reverse=True)
+ARTICLES_CSS = '/articles.css?v=' + sha256((ROOT / 'articles.css').read_bytes()).hexdigest()[:12]
 LANGUAGE_LABELS = {'es':'Idiomas','en':'Languages','de':'Sprachen','no':'Språk','ru':'Языки','nl':'Talen'}
 WHATSAPP = {
 'nl': ('Goedendag, ik wil graag informatie over uw ingenieursdiensten.', 'Contact via WhatsApp'),
@@ -45,6 +51,11 @@ for lang, contact, legal, privacy in (
         PATHS[key][lang] = f'/{lang}/' + (slug+'/' if slug else '')
 for s in SERVICES:
     PATHS[s['key']] = {lang: ('/' if lang == 'es' else f'/{lang}/') + s[lang]['slug'] + '/' for lang in LANGS}
+
+
+PATHS['articles'] = {lang: ('/' if lang == 'es' else f'/{lang}/') + ARTICLE_UI[lang]['slug'] + '/' for lang in LANGS}
+for article in PUBLISHED_ARTICLES:
+    PATHS['article:' + article['id']] = {lang: PATHS['articles'][lang] + article['translations'][lang]['slug'] + '/' for lang in LANGS}
 
 
 def tr(lang, es, en):
@@ -69,6 +80,7 @@ def header(key, lang):
     nav = link('home', lang, tr(lang, 'Inicio', 'Home')) + link('expert', lang, tr(lang, 'Peritajes', 'Expert reports'))
     nav += f'<a href="{PATHS["home"][lang]}#servicios">{tr(lang, "Servicios", "Services")}</a>'
     nav += f'<a href="{PATHS["home"][lang]}#perfil">{tr(lang, "Sobre mí", "About")}</a>'
+    nav += link('articles', lang, ARTICLE_UI[lang]['label'])
     nav += link('contact', lang, tr(lang, 'Contacto', 'Contact'))
     selector = language_switch(key, lang)
     return f'''<a class="skip-link" href="#contenido">{tr(lang, 'Saltar al contenido', 'Skip to content')}</a>
@@ -122,12 +134,14 @@ def mark_reading_prose(match):
     return '<p class="reading-prose">' + match[1] + '</p>'
 
 
-def shell(key, lang, title, description, body, service=None, draft=False):
+def shell(key, lang, title, description, body, service=None, draft=False, page_label=None, page_type=None, extra_schema=None, article=None):
     url = BASE + PATHS[key][lang]
     og_locale = {'es':'es_ES','en':'en_GB','de':'de_DE','no':'nb_NO','ru':'ru_RU','nl':'nl_NL'}[lang]
     body = body.replace('↗', '<svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.8"/></svg>')
     body = re.sub(r'<p>([^<]+)</p>', mark_reading_prose, body)
     provider = {'@type':'Person', '@id':BASE+'/#professional', 'name':NAME, 'jobTitle':tr(lang,'Ingeniero Mecánico','Mechanical Engineer'), 'url':BASE+'/', 'email':CONTACT_EMAIL, 'telephone':CONTACT_PHONE}
+    provider_override = SCHEMA_OVERRIDES.get(key, {}).get(lang, {})
+    provider.update(provider_override)
     graph = [provider, {'@type':'WebPage','@id':url+'#page','url':url,'name':title,'description':description,'inLanguage':HTML_LANG[lang],'about':{'@id':BASE+'/#professional'}}]
     if service:
         graph.append({'@type':'Service','@id':url+'#service','name':service[lang]['h1'],'serviceType':service[lang]['name'],'description':description,'url':url,'provider':{'@id':BASE+'/#professional'},'areaServed': service.get('area_served', ['España','Comunidad Valenciana','Alicante'] if service['key'] in ('expert','accidents') else ['Provincia de Alicante','Marina Baixa','Costa Blanca'])})
@@ -136,18 +150,32 @@ def shell(key, lang, title, description, body, service=None, draft=False):
         graph[1]['isPartOf'] = {'@id':website_id}
         if key == 'contact':
             graph[1]['@type'] = 'ContactPage'
+        if page_type:
+            graph[1]['@type'] = page_type
         if service:
             graph[1]['mainEntity'] = {'@id':url+'#service'}
         graph.append({'@type':'WebSite','@id':website_id,'url':BASE+PATHS['home'][lang],
                       'name':NAME,'inLanguage':HTML_LANG[lang], 'publisher':{'@id':BASE+'/#professional'}})
         if key != 'home':
             graph[1]['breadcrumb'] = {'@id':url+'#breadcrumb'}
-            graph.append({'@type':'BreadcrumbList','@id':url+'#breadcrumb','itemListElement':[
-                {'@type':'ListItem','position':1,'name':tr(lang,'Inicio','Home'),'item':BASE+PATHS['home'][lang]},
-                {'@type':'ListItem','position':2,'name':service[lang]['h1'] if service else tr(lang,'Contacto','Contact'),'item':url}]})
+            items = [{'@type':'ListItem','position':1,'name':tr(lang,'Inicio','Home'),'item':BASE+PATHS['home'][lang]}]
+            if article:
+                items.append({'@type':'ListItem','position':2,'name':ARTICLE_UI[lang]['h1'],'item':BASE+PATHS['articles'][lang]})
+            items.append({'@type':'ListItem','position':len(items)+1,'name':service[lang]['h1'] if service else (page_label or tr(lang,'Contacto','Contact')),'item':url})
+            graph.append({'@type':'BreadcrumbList','@id':url+'#breadcrumb','itemListElement':items})
+    if extra_schema:
+        graph[1]['mainEntity'] = {'@id':extra_schema[0]['@id']}
+        graph.extend(extra_schema)
+    schema_json = json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False,separators=(',',':') if provider_override else (', ', ': ')).replace('<', '\\u003c')
+    article_styles = f'\n<link rel="stylesheet" href="{ARTICLES_CSS}">' if key == 'articles' or article else ''
+
     alternates = ''.join(f'<link rel="alternate" hreflang="{HTML_LANG[l]}" href="{BASE+PATHS[key][l]}">\n' for l in LANGS)
     alternates += f'<link rel="alternate" hreflang="x-default" href="{BASE+PATHS[key]["es"]}">'
     og_alternates = ''.join(f'<meta property="og:locale:alternate" content="{locale}">\n' for code,locale in {'es':'es_ES','en':'en_GB','de':'de_DE','no':'nb_NO','ru':'ru_RU','nl':'nl_NL'}.items() if code != lang)
+    if article:
+        og_alternates += f'<meta property="article:published_time" content="{article["date_published"]}">\n'
+        if article.get('date_modified'):
+            og_alternates += f'<meta property="article:modified_time" content="{article["date_modified"]}">\n'
     return f'''<!doctype html>
 <html lang="{HTML_LANG[lang]}">
 <head>
@@ -159,7 +187,7 @@ def shell(key, lang, title, description, body, service=None, draft=False):
 {'<meta name="robots" content="noindex, follow">' if draft else ''}
 <link rel="canonical" href="{url}">
 {alternates}
-<meta property="og:type" content="website">
+<meta property="og:type" content="{'article' if article else 'website'}">
 <meta property="og:url" content="{url}">
 <meta property="og:title" content="{esc(title, quote=True)}">
 <meta property="og:description" content="{esc(description, quote=True)}">
@@ -167,8 +195,8 @@ def shell(key, lang, title, description, body, service=None, draft=False):
 {og_alternates}
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="{SELECTOR_CSS}">
-<link rel="stylesheet" href="{TYPOGRAPHY_CSS}">
-<script type="application/ld+json">{json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False)}</script>
+<link rel="stylesheet" href="{TYPOGRAPHY_CSS}">{article_styles}
+<script type="application/ld+json">{schema_json}</script>
 <script id="contact-translations" type="application/json">{json.dumps(LOCALES.get(lang, {}), ensure_ascii=False)}</script>
 <script src="/script.js" defer></script>
 <script src="{TYPOGRAPHY_SCRIPT}" defer></script>
@@ -246,14 +274,95 @@ def render_legal(key, lang):
     return shell(key,lang,name+' | '+NAME,tr(lang,'Borrador pendiente de completar y revisar por el titular del sitio.','Draft awaiting completion and review by the website owner.'),body,draft=True)
 
 
+def render_articles(lang):
+    ui = ARTICLE_UI[lang]
+    body = f'<section class="service-hero"><p class="eyebrow">{esc(ui["label"].upper())}</p><h1>{esc(ui["h1"])}</h1><p class="lead">{esc(ui["intro"])}</p></section>'
+    body += f'<section class="section articles-index"><h2>{esc(ui["publications"])}</h2>'
+    entries = []
+    if not PUBLISHED_ARTICLES:
+        body += f'<p class="article-empty">{esc(ui["empty"])}</p>'
+    else:
+        body += '<ol class="article-list">'
+        for position, article in enumerate(PUBLISHED_ARTICLES, 1):
+            content = article['translations'][lang]
+            key = 'article:' + article['id']
+            body += f'<li><article><time class="article-date" datetime="{article["date_published"]}">{esc(article_date(article["date_published"],lang,ui))}</time><h3>{link(key,lang,content["title"])}</h3><p>{esc(content["description"])}</p></article></li>'
+            entries.append({'@type':'ListItem','position':position,'name':content['title'],'url':BASE+PATHS[key][lang]})
+        body += '</ol>'
+    body += '</section>'
+    listing = {'@type':'ItemList','@id':BASE+PATHS['articles'][lang]+'#publications','numberOfItems':len(entries),'itemListElement':entries}
+    return shell('articles',lang,ui['title'],ui['description'],body,page_label=ui['h1'],page_type='CollectionPage',extra_schema=[listing])
+
+
+def render_article(article, lang):
+    ui, content = ARTICLE_UI[lang], article['translations'][lang]
+    key = 'article:' + article['id']
+    url = BASE + PATHS[key][lang]
+    body = f'<!-- generated:technical-article --><section class="service-hero"><p class="eyebrow">{esc(content["category"])}</p><h1>{esc(content["title"])}</h1><p class="lead">{esc(content["description"])}</p><p class="article-byline"><time datetime="{article["date_published"]}">{esc(article_date(article["date_published"],lang,ui))}</time> · {esc(ui["author"])}: {NAME}</p></section>'
+    body += '<article class="article-body">' + sections_html(content['sections'])
+    references = content.get('references', [])
+    if references:
+        body += f'<h2>{esc(ui["references"])}</h2><ul>'
+        body += ''.join(f'<li><a href="{esc(ref["url"],quote=True)}" rel="external">{esc(ref["title"])}</a></li>' for ref in references)
+        body += '</ul>'
+    if article.get('related_services'):
+        body += f'<h2>{esc(ui["related"])}</h2><ul class="article-related">'
+        for target in article['related_services']:
+            service = next(s for s in SERVICES if s['key'] == target)
+            body += '<li>' + link(target,lang,service[lang]['name']) + '</li>'
+        body += '</ul>'
+    body += link('articles',lang,ui['back'],'text-link') + '</article>'
+    schema = {'@type':'Article','@id':url+'#article','url':url,'headline':content['title'],
+              'description':content['description'],'datePublished':article['date_published'],
+              'articleSection':content['category'],'inLanguage':HTML_LANG[lang],
+              'author':{'@id':BASE+'/#professional'},'publisher':{'@id':BASE+'/#professional'},
+              'mainEntityOfPage':{'@id':url+'#page'}}
+    if article.get('date_modified'):
+        schema['dateModified'] = article['date_modified']
+    if references:
+        schema['citation'] = [{'@type':'CreativeWork','name':r['title'],'url':r['url']} for r in references]
+    return shell(key,lang,content['title']+' | '+NAME,content['description'],body,page_label=content['title'],extra_schema=[schema],article=article)
+
+
+def prune_article_pages(previous, current):
+    """Remove only owned generated detail pages withdrawn from the publication list."""
+    if not isinstance(previous, list) or any(not isinstance(p, str) for p in previous):
+        raise ValueError('Invalid generated article manifest')
+    pending = []
+    from article_content import SLUG
+    for path in set(previous) - set(current):
+        prefix = next((p for p in PATHS['articles'].values() if path.startswith(p)), None)
+        suffix = path[len(prefix):] if prefix else ''
+        if not prefix or not suffix.endswith('/') or not SLUG.fullmatch(suffix[:-1]):
+            raise ValueError(f'Unsafe article cleanup path: {path}')
+        file = ROOT / path.lstrip('/') / 'index.html'
+        if file.exists():
+            if '<!-- generated:technical-article -->' not in file.read_text():
+                raise ValueError(f'Refusing to remove a non-generated page: {path}')
+            pending.append(file)
+    for file in pending:
+        file.unlink()
+        try:
+            file.parent.rmdir()
+        except OSError:
+            pass  # Other files in the article directory are never deleted.
+
+
 def build():
+    article_paths = [path for key, paths in PATHS.items() if key.startswith('article:') for path in paths.values()]
+    manifest = ROOT / 'site/article-generated-paths.json'
+    previous = json.loads(manifest.read_text()) if manifest.exists() else []
+    prune_article_pages(previous, article_paths)
     for lang in LANGS:
         pages = {'home':render_home(lang),'contact':render_contact(lang), 'legal':render_legal('legal',lang),'privacy':render_legal('privacy',lang)}
         pages.update({s['key']:render_service(s,lang) for s in SERVICES})
+        pages['articles'] = render_articles(lang)
+        pages.update({'article:'+a['id']:render_article(a,lang) for a in PUBLISHED_ARTICLES})
         for key, html in pages.items():
             file = ROOT / PATHS[key][lang].lstrip('/') / 'index.html'
             file.parent.mkdir(parents=True,exist_ok=True)
             file.write_text(html)
+    manifest.write_text(json.dumps(article_paths,ensure_ascii=False,indent=2)+'\n')
     # Cloudflare serves one shared 404 document; offer every language without indexing it.
     not_found = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>404 | '+NAME+'</title><link rel="stylesheet" href="/styles.css"></head><body><main class="legal-content"><h1>404</h1><p>Página no encontrada · Page not found · Seite nicht gefunden · Siden finnes ikke · Страница не найдена · Pagina niet gevonden</p>'
     not_found = not_found.replace('</head>', f'<link rel="stylesheet" href="{SELECTOR_CSS}"></head>')

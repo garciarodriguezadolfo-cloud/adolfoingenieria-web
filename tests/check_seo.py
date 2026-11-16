@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
-from build_site import PATHS, BASE, LANGS, HTML_LANG, WHATSAPP, LANG_NAMES, FLAGS, LOCALES
+from build_site import PATHS, BASE, LANGS, HTML_LANG, WHATSAPP, LANG_NAMES, FLAGS, LOCALES, SERVICES, PUBLISHED_ARTICLES, ARTICLE_UI
 
 
 class Page(HTMLParser):
@@ -28,6 +28,8 @@ class Page(HTMLParser):
         return [a for t, a in self.tags if t == tag and all(a.get(k) == v for k,v in attrs.items())]
 
 
+SERVICE_KEYS = {s['key'] for s in SERVICES}
+expected_indexable = 48 + 6 * len(PUBLISHED_ARTICLES)
 pages = {}
 titles, descriptions = set(), set()
 indexable = set()
@@ -87,7 +89,7 @@ for key, paths in PATHS.items():
         assert graph[0]['telephone'] == '+34638651175'
         assert graph[0]['email'] == 'info@adolfoingenieria.es'
         assert not any(field in graph[0] for field in ('address','aggregateRating','priceRange'))
-        if key not in ('home','contact','legal','privacy'):
+        if key in SERVICE_KEYS:
             assert graph[2]['@type'] == 'Service'
             assert graph[2]['areaServed'] == ({'expert':['España','Comunidad Valenciana'], 'occupancy':['Costa Blanca','Marina Baixa'], 'opening':['Costa Blanca','Marina Baixa'], 'energy':['Costa Blanca','Marina Baixa']}.get(key, ['España','Comunidad Valenciana','Alicante'] if key == 'accidents' else ['Provincia de Alicante','Marina Baixa','Costa Blanca']))
         if key not in ('legal','privacy'):
@@ -99,11 +101,27 @@ for key, paths in PATHS.items():
             assert len({item['@id'] for item in graph}) == len(graph)
             if key != 'home':
                 crumb = next(item for item in graph if item['@type'] == 'BreadcrumbList')
-                assert [i['position'] for i in crumb['itemListElement']] == [1,2]
-                assert [i['item'] for i in crumb['itemListElement']] == [BASE+PATHS['home'][lang],url]
+                expected_crumbs = [BASE+PATHS['home'][lang]] + ([BASE+PATHS['articles'][lang]] if key.startswith('article:') else []) + [url]
+                assert [i['position'] for i in crumb['itemListElement']] == list(range(1,len(expected_crumbs)+1))
+                assert [i['item'] for i in crumb['itemListElement']] == expected_crumbs
                 assert graph[1]['breadcrumb']['@id'] == crumb['@id']
-            if key not in ('home','contact'):
+            if key in SERVICE_KEYS:
                 assert graph[1]['mainEntity']['@id'] == graph[2]['@id']
+            elif key == 'articles':
+                assert graph[1]['@type'] == 'CollectionPage'
+                listing = next(n for n in graph if n['@type'] == 'ItemList')
+                assert graph[1]['mainEntity']['@id'] == listing['@id']
+                assert listing['numberOfItems'] == len(PUBLISHED_ARTICLES)
+                assert not any(n['@type'] == 'Article' for n in graph)
+                if not PUBLISHED_ARTICLES:
+                    assert ARTICLE_UI[lang]['empty'] in ''.join(page.data)
+                    assert not page.find('time') and not page.find('article')
+            elif key.startswith('article:'):
+                entry = next(n for n in graph if n['@type'] == 'Article')
+                assert graph[1]['mainEntity']['@id'] == entry['@id']
+                assert entry['author']['@id'] == graph[0]['@id']
+                assert entry['mainEntityOfPage']['@id'] == graph[1]['@id']
+                assert page.find('meta',property='og:type')[0]['content'] == 'article'
             else:
                 assert graph[1]['@type'] == ('ContactPage' if key == 'contact' else 'WebPage')
         assert len(page.find('meta',property='og:locale:alternate')) == 5
@@ -143,7 +161,7 @@ ns = '{http://www.sitemaps.org/schemas/sitemap/0.9}'
 root = ET.parse(ROOT/'sitemap.xml').getroot()
 assert root.tag == ns+'urlset'
 urls = [loc.text for loc in root.findall(ns+'url/'+ns+'loc')]
-assert len(urls) == len(set(urls)) == 42 and set(urls) == indexable
+assert len(urls) == len(set(urls)) == expected_indexable and set(urls) == indexable
 for entry in root.findall(ns+'url'):
     location = entry.find(ns+'loc').text
     key = next(key for key,paths in PATHS.items() if location in {BASE+p for p in paths.values()})
@@ -168,7 +186,7 @@ headers = (ROOT/'_headers').read_text()
 assert '/sitemap.xml\n  Content-Type: application/xml; charset=utf-8' in headers
 assert '/robots.txt\n  Content-Type: text/plain; charset=utf-8' in headers
 assert 'noindex' in Page((ROOT/'404.html').read_text()).find('meta',name='robots')[0]['content']
-print(f'OK: {len(pages)} pages, unique metadata, reciprocal languages, schema, internal links/anchors, 42 sitemap URLs, robots and headers.')
+print(f'OK: {len(pages)} pages, unique metadata, reciprocal languages, schema, internal links/anchors, {expected_indexable} sitemap URLs, robots and headers.')
 
 assert set(LOCALES['nl']) == set(LOCALES['de']) == set(LOCALES['no']) == set(LOCALES['ru'])
 assert all(value.strip() for value in LOCALES['nl'].values())

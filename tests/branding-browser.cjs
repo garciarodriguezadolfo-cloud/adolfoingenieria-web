@@ -18,7 +18,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:8768',out='/tmp/adolfo-l
  assert(Math.abs(style.centre-width/2)<1);assert.equal(style.header,'rgb(0, 0, 0)');assert.equal(style.footer,'rgb(0, 0, 0)');assert.equal(style.nav,'rgb(255, 255, 255)');assert(style.codes.every(c=>c==='rgb(255, 255, 255)'));assert(style.flagWidths.every(w=>w===18));assert(style.footerWidth<=260);
 
  for(const i of await images.evaluateAll(es=>es.map(e=>({w:e.width,h:e.height,nw:e.naturalWidth,nh:e.naturalHeight})))){assert(Math.abs(i.w/i.h-i.nw/i.nh)<.08);assert(i.w<=i.nw);}
- await page.locator('.brand').focus();assert(await page.locator('.brand').evaluate(e=>e===document.activeElement));assert.equal(await page.locator('header nav a').count(),5);assert.equal(await page.locator('.footer-links a').count(),2);}
+ await page.locator('.brand').focus();assert(await page.locator('.brand').evaluate(e=>e===document.activeElement));assert.equal(await page.locator('header nav a').count(),6);assert.equal(await page.locator('.footer-links a').count(),2);}
  await page.locator('.brand').evaluate(e=>e.blur());
  for(const [selector,part] of [['header','header'],['footer','footer']])await page.locator(selector).screenshot({path:`${out}/${before?'before':'after'}-${lang}-${part}-${width}.png`});console.log(`OK ${before?'before':'after'} ${lang} ${width}`);
  }
