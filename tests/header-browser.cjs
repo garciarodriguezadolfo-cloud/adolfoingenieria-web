@@ -26,7 +26,7 @@ const languages=[['es','/'],['en','/en/'],['de','/de/'],['nb','/no/'],['ru','/ru
     const geometry=await page.evaluate(()=>{
      const header=document.querySelector('.site-header'),brand=header.querySelector('.brand'),nav=header.querySelector('nav'),selector=header.querySelector('.language-switch');
      const rect=el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom};};
-     return {header:rect(header),brand:rect(brand),nav:rect(nav),selector:rect(selector),links:[...nav.children].map(rect),flags:[...selector.children].map(rect),paddingTop:parseFloat(getComputedStyle(header).paddingTop),paddingRight:parseFloat(getComputedStyle(header).paddingRight),columnGap:parseFloat(getComputedStyle(nav).columnGap),border:getComputedStyle(nav).borderBottomWidth,borderColor:getComputedStyle(nav).borderBottomColor,menuPadding:parseFloat(getComputedStyle(nav).paddingBottom),menuSize:parseFloat(getComputedStyle(nav).fontSize)};
+     return {header:rect(header),brand:rect(brand),nav:rect(nav),selector:rect(selector),links:[...nav.children].map(rect),flags:[...selector.children].map(rect),paddingTop:parseFloat(getComputedStyle(header).paddingTop),paddingRight:parseFloat(getComputedStyle(header).paddingRight),columnGap:parseFloat(getComputedStyle(nav).columnGap),border:getComputedStyle(nav).borderBottomWidth,borderColor:getComputedStyle(nav,"::after").backgroundColor,menuPadding:parseFloat(getComputedStyle(nav).paddingBottom),menuSize:parseFloat(getComputedStyle(nav).fontSize)};
     });
     const g=geometry;
     assert(Math.abs(g.selector.right-(g.header.right-g.paddingRight))<1,'Selector must align at the upper right');

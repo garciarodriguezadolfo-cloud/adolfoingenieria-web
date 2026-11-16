@@ -199,3 +199,14 @@
 /* The requested legal separator occupies the existing gap, without moving links. */
 .branded-footer .footer-links > a:first-child{position:relative}
 .branded-footer .footer-links > a:first-child::after{content:"·";position:absolute;top:0;left:calc(100% + 10px);transform:translateX(-50%);pointer-events:none}
+
+/* Give the six labels more breathing room without changing header geometry. */
+.site-header > nav{position:relative;column-gap:28px;max-inline-size:calc(100vw - 2px);border-bottom-color:transparent}
+/* Retain the original border's layout space; center the visible rule on the menu. */
+.site-header > nav::after{content:"";position:absolute;left:50%;bottom:1px;transform:translateX(-50%);width:94%;height:1px;background:#fff;pointer-events:none}
+@media(max-width:640px){
+  .site-header > nav{column-gap:calc(var(--compact-menu-gap,clamp(2px,calc(3.571429vw - 9.428573px),14px)) + 1px);max-inline-size:calc(100vw - 2px)}
+  .site-header > nav::after{bottom:-1px}
+  /* Long Russian labels keep their original font size at the narrowest widths. */
+  html:lang(ru) .site-header > nav{letter-spacing:calc(clamp(-.04em,calc(.391429vw - 1.632573px),0px) - .09px)}
+}
