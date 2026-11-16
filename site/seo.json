@@ -64,5 +64,16 @@
       "title": "Contact en offertes | Manuel Adolfo García Rodríguez",
       "description": "Vraag naar technisch vooronderzoek, deskundigenrapporten, Spaanse energiecertificaten, segunda ocupación en bedrijfsopening in Spanje en Alicante."
     }
+  },
+  "fr": {
+    "home": {
+      "title": "Expert technique en Espagne | Manuel Adolfo García Rodríguez",
+      "description": "Ingénieur mécanicien : expertises et études préliminaires en Espagne. Certificats énergétiques, seconde occupation et ouvertures sur la Costa Blanca.",
+      "scope": "Expertises pour procédures judiciaires et rapports préliminaires dans toute l’Espagne, avec une attention particulière à la Communauté valencienne. Certificats de performance énergétique, documents de seconde occupation et assistance à l’ouverture d’établissements sur la Costa Blanca, notamment dans la Marina Baixa."
+    },
+    "contact": {
+      "title": "Contact et devis | Manuel Adolfo García Rodríguez",
+      "description": "Demandez des informations sur les rapports préliminaires, expertises, certificats énergétiques, seconde occupation et ouvertures en Espagne et sur la Costa Blanca."
+    }
   }
 }

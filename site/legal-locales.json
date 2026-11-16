@@ -166,5 +166,47 @@
         "De website laadt Google Fonts, die verbindingsgegevens kunnen ontvangen. Het feitelijke gebruik van cookies en logboeken door Cloudflare en andere aanbieders moet vóór activering worden beoordeeld. De WhatsApp-link opent een externe dienst van WhatsApp/Meta. Bij het openen gelden de gegevensverwerking en privacyvoorwaarden van die dienst. De website laadt geen WhatsApp-widget en verstuurt geen berichten automatisch."
       ]
     ]
+  },
+  "fr": {
+    "legal": [
+      [
+        "Titulaire du site",
+        "Manuel Adolfo García Rodríguez | Ingénieur mécanicien. Courriel : info@adolfoingenieria.es. À compléter et à vérifier : identification fiscale et autres informations légales applicables."
+      ],
+      [
+        "Informations professionnelles",
+        "À confirmer : données d’inscription professionnelle à publier, qualification officielle et références aux règles professionnelles applicables. Aucune qualification supplémentaire n’est publiée sans vérification."
+      ],
+      [
+        "Objet et conditions d’utilisation",
+        "Ce site décrit des prestations d’ingénierie et permet d’envoyer des demandes. Les informations générales ne remplacent pas l’étude d’un dossier et ne constituent ni un devis ni l’acceptation d’une mission. Les conditions contractuelles, les responsabilités et le droit applicable restent à examiner."
+      ],
+      [
+        "Propriété intellectuelle et liens",
+        "La titularité et les licences des contenus, ressources et marques doivent être vérifiées ; les conditions d’utilisation et les références aux tiers doivent être complétées."
+      ]
+    ],
+    "privacy": [
+      [
+        "Responsable et finalité",
+        "Manuel Adolfo García Rodríguez. Contact : info@adolfoingenieria.es. Le nom, l’adresse électronique, la prestation et la demande servent exclusivement à traiter votre sollicitation et à y répondre, sans prospection commerciale. Ne communiquez pas de données sensibles ni de données de tiers."
+      ],
+      [
+        "Base juridique et conservation",
+        "Les demandes visant à confier une prestation sont traitées comme des mesures précontractuelles demandées par la personne concernée ; les autres sollicitations sont examinées au titre de l’intérêt légitime à répondre aux communications adressées au professionnel. La case confirme la lecture de ces informations, et non une inscription à des communications commerciales. Avant d’activer l’envoi, le titulaire doit définir et examiner les durées de conservation des demandes, courriels et journaux ainsi que les obligations légales de conservation applicables."
+      ],
+      [
+        "Traitement et prestataires",
+        "Le formulaire transmet les données par HTTPS à une fonction Cloudflare Pages puis, par Resend, à info@adolfoingenieria.es. Resend reçoit le contenu et l’adresse de réponse ; le fournisseur du compte destinataire traite également le message. Cloudflare Turnstile vérifie les interactions pour prévenir le spam et peut traiter des données de connexion et d’appareil. Le code ne stocke pas les demandes dans une base de données, ne journalise pas leur contenu et n’utilise pas le stockage local du navigateur. Les prestataires peuvent conserver leurs propres journaux ; leurs contrats et conditions de confidentialité doivent être examinés."
+      ],
+      [
+        "Droits et transferts",
+        "Vous pouvez écrire à info@adolfoingenieria.es pour exercer, lorsque cela s’applique, vos droits d’accès, de rectification, d’effacement, d’opposition, de limitation et de portabilité, et introduire une réclamation auprès de l’AEPD, autorité espagnole. Le titulaire doit examiner l’identification fiscale, la procédure d’exercice des droits, les sous-traitants et leurs propres sous-traitants, les garanties des éventuels transferts internationaux et la conservation. L’envoi ne doit être activé qu’après cet examen."
+      ],
+      [
+        "Ressources externes et WhatsApp",
+        "Le site charge des polices Google Fonts, qui peuvent recevoir des données de connexion. Les cookies et journaux effectivement utilisés par Cloudflare et les autres prestataires doivent être examinés avant activation. Le lien WhatsApp ouvre un service externe WhatsApp/Meta soumis à ses conditions de confidentialité lors de l’accès. Le site ne charge aucun widget WhatsApp et n’envoie aucun message automatiquement."
+      ]
+    ]
   }
 }

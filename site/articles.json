@@ -287,6 +287,52 @@
             "title": "Health and Safety Executive (2004). HSG245. Investigating accidents and incidents."
           }
         ]
+      },
+      "fr": {
+        "slug": "quand-demander-rapport-technique-preliminaire",
+        "title": "Quand est-il utile de demander un rapport technique préliminaire ?",
+        "seo_title": "Quand demander un rapport technique préliminaire ? | Adolfo Ingeniería",
+        "description": "Quand demander un rapport technique préliminaire après un accident avec une machine ou une installation, ce qu’il peut clarifier et quand approfondir l’étude.",
+        "category": "Expertises et rapports techniques.",
+        "professional_title": "Ingénieur mécanicien | Expert technique",
+        "image_alt": "Reconstitution d’une pompe centrifuge ouverte et de sa roue présentant une érosion par cavitation.",
+        "image_caption": "Reconstitution de l’érosion par cavitation sur la roue d’une pompe centrifuge.",
+        "references_heading": "Références techniques",
+        "related_intro": "Pour envisager une étude plus approfondie, consultez la prestation suivante :",
+        "sections": [
+          {
+            "heading": "Introduction",
+            "paragraphs": [
+              "Après un accident impliquant une machine ou une installation, la cause peut rester incertaine. Le rapport technique préliminaire sert à formuler des hypothèses sur ce qui s’est produit et à déterminer comment les vérifier. Il est particulièrement utile lorsque des personnes ou des entreprises ont subi un préjudice et qu’une demande d’indemnisation peut être envisagée."
+            ]
+          },
+          {
+            "heading": "Quand le demander ?",
+            "paragraphs": [
+              "Le plus tôt possible si une réparation ou un démontage de l’équipement est prévu. Avant que son état ne change, il est conseillé de le documenter et de réunir les photographies originales, le manuel et les comptes rendus de maintenance."
+            ]
+          },
+          {
+            "heading": "Ce qu’il peut clarifier",
+            "paragraphs": [
+              "Une pièce cassée peut avoir provoqué l’accident ou avoir été endommagée au cours de celui-ci. L’examen de l’équipement, de l’installation et des données disponibles permet d’évaluer quelles hypothèses concordent avec les indices et ce qui reste à vérifier."
+            ]
+          },
+          {
+            "heading": "Quand approfondir l’étude ?",
+            "paragraphs": [
+              "Si une incertitude sur la cause est importante pour la réclamation, le rapport préliminaire aide à décider s’il convient de demander une expertise complète et quelles mesures, quels essais ou quels documents seront nécessaires."
+            ]
+          }
+        ],
+        "references": [
+          {
+            "title": "INSST (2001). NTP 592. Tratamiento documental e investigación de accidentes."
+          },
+          {
+            "title": "Health and Safety Executive (2004). HSG245. Investigating accidents and incidents."
+          }
+        ]
       }
     }
   }

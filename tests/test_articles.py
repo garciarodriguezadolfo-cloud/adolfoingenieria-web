@@ -142,7 +142,7 @@ class ArticleTests(unittest.TestCase):
             run('tools/build_site.py')
             run('tests/check_seo.py')
             paths=json.loads((target/'site/article-generated-paths.json').read_text())
-            self.assertEqual(len(paths),6)
+            self.assertEqual(len(paths),len(site.LANGS))
             for path in paths:
                 self.assertTrue((target/path.lstrip('/')/'index.html').is_file())
             record['status']='draft'

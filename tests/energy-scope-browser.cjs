@@ -18,7 +18,7 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:8767',out='/tmp/adolfo-e
  assert.equal(await hero.locator('h1').innerText(),data.h1+'.');assert.deepEqual(await hero.locator('p.lead').allTextContents(),data.lead.split('\n\n'));
  assert.equal(await scope.locator('h2').innerText(),data.sections[2][0]);assert.deepEqual(await scope.locator('div:last-child>p').allTextContents(),data.sections[2][1].split('\n\n'));
  const text=await page.locator('main').innerText();assert(!/Benidorm|Benissa|Villajoyosa|Callosa|Бенидорм|Аликанте|Alicante/.test(text));
- assert.equal(await page.locator('.language-switch a').count(),6);assert((await page.locator('.whatsapp-float').getAttribute('href')).startsWith('https://wa.me/34638651175'));
+ assert.equal(await page.locator('.language-switch a').count(),7);assert((await page.locator('.whatsapp-float').getAttribute('href')).startsWith('https://wa.me/34638651175'));
  await hero.screenshot({path:`${out}/${lang}-hero-${width}.png`});await scope.screenshot({path:`${out}/${lang}-scope-${width}.png`});console.log(`OK energy ${lang} ${width}`);
  }
  assert.deepEqual(errors,[]);

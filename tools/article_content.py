@@ -58,7 +58,7 @@ def validate_articles(records, languages, service_keys, today=None):
                 raise ValueError('image: invalid dimensions')
         translations = record.get('translations')
         if not isinstance(translations, dict) or set(translations) != set(languages):
-            raise ValueError(f'{identifier}: publication requires all six translations')
+            raise ValueError(f'{identifier}: publication requires all configured translations')
         for lang, content in translations.items():
             if not isinstance(content, dict) or set(content) - {'slug','title','description','category','sections','references','seo_title','professional_title','image_alt','image_caption','references_heading','related_intro'}:
                 raise ValueError(f'{identifier}.{lang}: unknown or invalid content fields')

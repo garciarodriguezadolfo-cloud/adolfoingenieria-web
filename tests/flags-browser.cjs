@@ -3,7 +3,7 @@ const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:8765';
-const names=['Español','English','Deutsch','Norsk bokmål','Русский','Nederlands'];
+const names=['Español','English','Deutsch','Norsk bokmål','Русский','Nederlands','Français'];
 (async()=>{
  const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
  try {
@@ -13,12 +13,12 @@ const names=['Español','English','Deutsch','Norsk bokmål','Русский','Ne
   fs.mkdirSync('/tmp/adolfo-preview',{recursive:true});
   for(const width of [1440,768,390,320]){
    await page.setViewportSize({width,height:900});
-   for(const path of ['/','/en/','/de/','/no/','/ru/','/nl/','/nl/energiecertificaten-alicante/','/nl/contact/']){
+   for(const path of ['/','/en/','/de/','/no/','/ru/','/nl/','/nl/energiecertificaten-alicante/','/nl/contact/','/fr/','/fr/contact/']){
     await page.goto(base+path);
     const links=page.locator('.language-switch a');
-    assert.equal(await links.count(),6);
+    assert.equal(await links.count(),names.length);
     assert.deepEqual(await links.evaluateAll(a=>a.map(x=>x.getAttribute('aria-label'))),names);
-    assert.deepEqual(await links.locator('.language-code').allTextContents(),['ES','EN','DE','NO','RU','NL']);
+    assert.deepEqual(await links.locator('.language-code').allTextContents(),['ES','EN','DE','NO','RU','NL','FR']);
     for(const link of await links.all()){
      const flag=await link.locator('img').boundingBox(),code=await link.locator('.language-code').boundingBox();
      assert(Math.abs(code.y-flag.y-flag.height-4)<0.1,'Code must be exactly 4px below flag');
@@ -44,9 +44,9 @@ const names=['Español','English','Deutsch','Norsk bokmål','Русский','Ne
      assert.equal(await links.nth(i).evaluate(el=>el.matches(':focus-visible')),true);
     }
     await page.keyboard.press('Enter');
-    const target=await links.nth(5).getAttribute('href');
+    const target=await links.nth(names.length-1).getAttribute('href');
     await page.waitForURL(base+target);
-    assert.equal(await page.locator('html').getAttribute('lang'),'nl');
+    assert.equal(await page.locator('html').getAttribute('lang'),'fr');
     await page.keyboard.press('Tab');
     await page.mouse.click(width-2,300); // Remove focus outline for the screenshot.
     await page.evaluate(()=>scrollTo(0,0));
@@ -62,10 +62,10 @@ const names=['Español','English','Deutsch','Norsk bokmål','Русский','Ne
    await staticPage.locator(`.language-switch a[lang="${target.lang}"]`).click();
    await staticPage.waitForURL(base+target.href);
    assert.equal(await staticPage.locator('html').getAttribute('lang'),target.lang);
-   assert.equal(await staticPage.locator('.language-code').count(),6);
+   assert.equal(await staticPage.locator('.language-code').count(),names.length);
   }
   await staticPage.goto(base+'/404.html');
-  assert.deepEqual(await staticPage.locator('.language-code').allTextContents(),['ES','EN','DE','NO','RU','NL']);
+  assert.deepEqual(await staticPage.locator('.language-code').allTextContents(),['ES','EN','DE','NO','RU','NL','FR']);
   await nojs.close();
   // Reproduce an old cached selector stylesheet and later conflicting generic rules.
   const stale=await browser.newContext();
@@ -85,6 +85,6 @@ const names=['Español','English','Deutsch','Norsk bokmål','Русский','Ne
    await stalePage.screenshot({path:`/tmp/adolfo-preview/selector-stale-css-${width}.png`});
   }
   await stale.close();
-  console.log('OK: exact 4px vertical gaps; equal dimensions; cached CSS and conflicting-rule regression; centered codes under all flags; six equivalent service pages without JS; 404; six local flags loaded at 18x12; one compact row at 1440/768/390/320px; accessible names; active indicator; Tab order, visible focus and Enter navigation.');
+  console.log('OK: exact 4px vertical gaps; equal dimensions; cached CSS and conflicting-rule regression; centered codes under all flags; seven equivalent service pages without JS; 404; seven local flags loaded at 18x12; one compact row at 1440/768/390/320px; accessible names; active indicator; Tab order, visible focus and Enter navigation.');
  } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});
