@@ -4,6 +4,7 @@ from html import escape
 import json
 import re
 from urllib.parse import urlsplit
+from pathlib import PurePosixPath
 
 SLUG = re.compile(r'[a-z0-9]+(?:-[a-z0-9]+)*\Z')
 
@@ -24,7 +25,7 @@ def validate_articles(records, languages, service_keys, today=None):
     if not isinstance(records, list):
         raise ValueError('articles: expected a list')
     ids, slugs = set(), {lang: set() for lang in languages}
-    allowed = {'id', 'status', 'date_published', 'date_modified', 'related_services', 'translations'}
+    allowed = {'id', 'status', 'date_published', 'date_modified', 'related_services', 'translations', 'image'}
     for record in records:
         if not isinstance(record, dict) or set(record) - allowed:
             raise ValueError('article: unknown fields or invalid record')
@@ -46,14 +47,29 @@ def validate_articles(records, languages, service_keys, today=None):
         related = record.get('related_services', [])
         if not isinstance(related, list) or any(not isinstance(k, str) or k not in service_keys for k in related) or len(related) != len(set(related)):
             raise ValueError(f'{identifier}: invalid related service keys')
+        image = record.get('image')
+        if image is not None:
+            if not isinstance(image, dict) or set(image) != {'src','width','height'}:
+                raise ValueError('image: provide src, width and height')
+            src = image['src']
+            if not isinstance(src, str) or not re.fullmatch(r'/assets/articles/[a-z0-9/._-]+\.(?:webp|png|jpe?g|avif)', src) or '..' in PurePosixPath(src).parts:
+                raise ValueError('image.src: use a local editorial image')
+            if any(type(image[k]) is not int or not 1 <= image[k] <= 10000 for k in ('width','height')):
+                raise ValueError('image: invalid dimensions')
         translations = record.get('translations')
         if not isinstance(translations, dict) or set(translations) != set(languages):
             raise ValueError(f'{identifier}: publication requires all six translations')
         for lang, content in translations.items():
-            if not isinstance(content, dict) or set(content) - {'slug','title','description','category','sections','references'}:
+            if not isinstance(content, dict) or set(content) - {'slug','title','description','category','sections','references','seo_title','professional_title','image_alt','image_caption','references_heading','related_intro'}:
                 raise ValueError(f'{identifier}.{lang}: unknown or invalid content fields')
             for field in ('slug','title','description','category'):
                 required_text(content.get(field), f'{identifier}.{lang}.{field}')
+            for field in ('seo_title','professional_title','image_alt','image_caption','references_heading','related_intro'):
+                if field in content:
+                    required_text(content[field], field)
+            if image:
+                for field in ('image_alt','image_caption'):
+                    required_text(content.get(field), field)
             slug = content['slug']
             if not SLUG.fullmatch(slug) or slug in slugs[lang]:
                 raise ValueError(f'{identifier}.{lang}: invalid or duplicate slug')
@@ -82,9 +98,11 @@ def validate_articles(records, languages, service_keys, today=None):
             if not isinstance(references, list):
                 raise ValueError('references: expected a list')
             for ref in references:
-                if not isinstance(ref, dict) or set(ref) != {'title','url'}:
-                    raise ValueError('reference: expected title and url')
+                if not isinstance(ref, dict) or set(ref) not in ({'title'}, {'title','url'}):
+                    raise ValueError('reference: expected title and optional url')
                 required_text(ref['title'], 'reference.title')
+                if 'url' not in ref:
+                    continue
                 required_text(ref['url'], 'reference.url')
                 target = urlsplit(ref['url'])
                 if target.scheme != 'https' or not target.hostname or target.username or target.password or any(c.isspace() for c in ref['url']):

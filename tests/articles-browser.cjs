@@ -1,4 +1,4 @@
-// Six real empty indexes, accessible navigation, equivalent languages and mobile layout.
+// Six real publication indexes, accessible navigation, equivalent languages and mobile layout.
 // The eight final acceptance checks: every language at the four requested widths.
 // Complete raster logo: responsive geometry, images and comparative screenshots.
 const {chromium}=require('playwright');
@@ -13,11 +13,12 @@ const base=process.env.TEST_BASE_URL||'http://127.0.0.1:8768',out=process.env.AR
 
 
  fs.mkdirSync(out,{recursive:true});const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ const catalog=JSON.parse(fs.readFileSync(path.join(__dirname,'../site/articles.json'))).filter(a=>a.status==='published');
  const ui=JSON.parse(fs.readFileSync(path.join(__dirname,'../site/article-locales.json')));const route=l=>(l==='es'?'/':`/${l}/`)+ui[l].slug+'/';
  for(const width of (process.env.ARTICLE_WIDTHS?.split(',').map(Number)||[320,390,768,1440]))for(const lang of ['es','en','de','no','ru','nl']){
  await page.setViewportSize({width,height:900});assert.equal((await page.goto(base+route(lang))).status(),200);await page.evaluate(()=>document.fonts.ready);await page.waitForFunction(()=>document.documentElement.dataset.typographyReady==='true');
- assert.equal(await page.locator('h1').innerText(),ui[lang].h1);assert.equal(await page.locator('.service-hero .lead').innerText(),ui[lang].intro);assert.equal(await page.locator('.article-empty').innerText(),ui[lang].empty);assert.equal(await page.locator('main article,main time').count(),0);
- const graph=JSON.parse(await page.locator('script[type="application/ld+json"]').textContent())['@graph'];assert.equal(graph[1]['@type'],'CollectionPage');assert(!graph.some(n=>n['@type']==='Article'));assert.equal(graph.find(n=>n['@type']==='ItemList').numberOfItems,0);
+ assert.equal(await page.locator('h1').innerText(),ui[lang].h1);assert.equal(await page.locator('.service-hero .lead').innerText(),ui[lang].intro);if(!catalog.length){assert.equal(await page.locator('.article-empty').innerText(),ui[lang].empty);assert.equal(await page.locator('main article,main time').count(),0);}else{assert.equal(await page.locator('.article-list article').count(),catalog.length);assert.equal(await page.locator('.article-empty').count(),0);for(const a of catalog){const c=a.translations[lang];assert.equal(await page.locator(`.article-list a[href="${route(lang)+c.slug}/"]`).innerText(),c.title);assert((await page.locator('.article-list').innerText()).includes(c.category));}}
+ const graph=JSON.parse(await page.locator('script[type="application/ld+json"]').textContent())['@graph'];assert.equal(graph[1]['@type'],'CollectionPage');assert(!graph.some(n=>n['@type']==='Article'));assert.equal(graph.find(n=>n['@type']==='ItemList').numberOfItems,catalog.length);
  const menu=page.locator('header nav a');assert.equal(await menu.count(),6);assert.equal(await menu.nth(4).innerText(),ui[lang].label);assert.equal(await menu.nth(4).getAttribute('href'),route(lang));if(lang==='es')assert.deepEqual(await menu.allTextContents(),['Inicio','Peritajes','Servicios','Sobre mí','Artículos','Contacto']);
  const boxes=await menu.evaluateAll(es=>es.map(e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,right:r.right};}));assert(boxes.every(r=>Math.abs(r.y-boxes[0].y)<.1),'Menu remains on one line');assert(boxes.every(r=>r.x>=0&&r.right<=width));assert(Math.abs((boxes[0].x+boxes.at(-1).right)/2-width/2)<1);
  const flags=await page.locator('header .language-switch a').evaluateAll(es=>es.map(e=>e.getBoundingClientRect().y));assert(flags.every(y=>y===flags[0]));assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'No horizontal overflow');

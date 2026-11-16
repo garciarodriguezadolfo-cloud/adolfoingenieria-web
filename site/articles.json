@@ -1,1 +1,293 @@
-[]
+[
+  {
+    "id": "informe-tecnico-preliminar",
+    "status": "published",
+    "date_published": "2026-11-16",
+    "related_services": [
+      "expert"
+    ],
+    "image": {
+      "src": "/assets/articles/informe-tecnico-preliminar/bomba-centrifuga-rodete.webp",
+      "width": 1600,
+      "height": 679
+    },
+    "translations": {
+      "es": {
+        "slug": "cuando-encargar-informe-tecnico-preliminar",
+        "title": "¿Cuándo conviene encargar un informe técnico preliminar?",
+        "seo_title": "¿Cuándo encargar un informe técnico preliminar? | Adolfo Ingeniería",
+        "description": "Cuándo solicitar un informe técnico preliminar tras un accidente con maquinaria o instalaciones, qué puede aclarar y cuándo ampliar el estudio.",
+        "category": "Peritajes e informes técnicos.",
+        "professional_title": "Ingeniero Mecánico | Perito Técnico",
+        "image_alt": "Recreación de una bomba centrífuga abierta y su rodete con erosión por cavitación.",
+        "image_caption": "Recreación de la erosión por cavitación en el rodete de una bomba centrífuga.",
+        "references_heading": "Referencias técnicas",
+        "related_intro": "Para valorar un estudio más amplio, consulte el servicio de",
+        "sections": [
+          {
+            "heading": "Introducción",
+            "paragraphs": [
+              "Tras un accidente con una máquina o una instalación, la causa puede no estar clara. El informe técnico preliminar sirve para plantear hipótesis sobre lo ocurrido y determinar cómo comprobarlas. Resulta especialmente útil cuando hay personas o empresas perjudicadas y puede plantearse una reclamación de indemnización."
+            ]
+          },
+          {
+            "heading": "Cuándo pedirlo",
+            "paragraphs": [
+              "Lo antes posible si está previsto reparar o desmontar el equipo. Antes de que cambie su estado, conviene documentarlo y reunir las fotografías originales, el manual y los partes de mantenimiento."
+            ]
+          },
+          {
+            "heading": "Qué puede aclarar",
+            "paragraphs": [
+              "Una pieza rota puede haber provocado el accidente o haberse dañado durante el mismo. La revisión del equipo, la instalación y los datos disponibles permite valorar qué hipótesis encajan con los indicios y qué queda por comprobar."
+            ]
+          },
+          {
+            "heading": "Cuándo ampliar el estudio",
+            "paragraphs": [
+              "Si una duda sobre la causa es relevante para la reclamación, el informe preliminar ayuda a decidir si conviene encargar un peritaje completo y qué mediciones, ensayos o documentos harán falta."
+            ]
+          }
+        ],
+        "references": [
+          {
+            "title": "INSST (2001). NTP 592. Tratamiento documental e investigación de accidentes."
+          },
+          {
+            "title": "Health and Safety Executive (2004). HSG245. Investigating accidents and incidents."
+          }
+        ]
+      },
+      "en": {
+        "slug": "when-to-commission-preliminary-technical-report",
+        "title": "When should you commission a preliminary technical report?",
+        "seo_title": "When to commission a preliminary technical report | Adolfo Ingeniería",
+        "description": "When to request a preliminary technical report after an accident involving machinery or an installation, what it can clarify and when further investigation is needed.",
+        "category": "Expert assessments and technical reports.",
+        "professional_title": "Mechanical Engineer | Technical Expert",
+        "image_alt": "Recreation of an opened centrifugal pump and its impeller showing cavitation erosion.",
+        "image_caption": "Recreation of cavitation erosion on the impeller of a centrifugal pump.",
+        "references_heading": "Technical references",
+        "related_intro": "To consider a more detailed investigation, see the service for",
+        "sections": [
+          {
+            "heading": "Introduction",
+            "paragraphs": [
+              "After an accident involving a machine or an installation, the cause may be unclear. A preliminary technical report sets out hypotheses about what happened and identifies how to test them. It is particularly useful when individuals or businesses have suffered harm and a compensation claim may be considered."
+            ]
+          },
+          {
+            "heading": "When to request one",
+            "paragraphs": [
+              "As soon as possible if the equipment is due to be repaired or dismantled. Before its condition changes, it is advisable to document it and gather the original photographs, the manual and maintenance records."
+            ]
+          },
+          {
+            "heading": "What it can clarify",
+            "paragraphs": [
+              "A broken component may have caused the accident or been damaged during it. Examining the equipment, the installation and the available data helps assess which hypotheses are consistent with the evidence and what still needs to be verified."
+            ]
+          },
+          {
+            "heading": "When to extend the investigation",
+            "paragraphs": [
+              "If uncertainty about the cause is relevant to the claim, the preliminary report helps determine whether to commission a full expert assessment and which measurements, tests or documents will be needed."
+            ]
+          }
+        ],
+        "references": [
+          {
+            "title": "INSST (2001). NTP 592. Tratamiento documental e investigación de accidentes."
+          },
+          {
+            "title": "Health and Safety Executive (2004). HSG245. Investigating accidents and incidents."
+          }
+        ]
+      },
+      "de": {
+        "slug": "wann-vorlaeufigen-technischen-bericht-beauftragen",
+        "title": "Wann ist es sinnvoll, einen vorläufigen technischen Bericht zu beauftragen?",
+        "seo_title": "Wann einen vorläufigen technischen Bericht beauftragen? | Adolfo Ingeniería",
+        "description": "Wann ein vorläufiger technischer Bericht nach einem Unfall mit Maschinen oder Anlagen sinnvoll ist, was er klären kann und wann die Untersuchung erweitert werden sollte.",
+        "category": "Technische Gutachten und Berichte.",
+        "professional_title": "Maschinenbauingenieur | Technischer Sachverständiger",
+        "image_alt": "Rekonstruktion einer geöffneten Kreiselpumpe und ihres Laufrads mit Kavitationserosion.",
+        "image_caption": "Rekonstruktion von Kavitationserosion am Laufrad einer Kreiselpumpe.",
+        "references_heading": "Technische Quellen",
+        "related_intro": "Für eine weitergehende Untersuchung informieren Sie sich über die Leistung",
+        "sections": [
+          {
+            "heading": "Einleitung",
+            "paragraphs": [
+              "Nach einem Unfall mit einer Maschine oder einer Anlage ist die Ursache möglicherweise unklar. Ein vorläufiger technischer Bericht dient dazu, Hypothesen zum Geschehen aufzustellen und festzulegen, wie sie überprüft werden können. Er ist besonders hilfreich, wenn Personen oder Unternehmen geschädigt wurden und ein Schadensersatzanspruch in Betracht kommt."
+            ]
+          },
+          {
+            "heading": "Wann sollte er beauftragt werden?",
+            "paragraphs": [
+              "So früh wie möglich, wenn eine Reparatur oder Demontage der Ausrüstung vorgesehen ist. Bevor sich ihr Zustand verändert, sollte dieser dokumentiert werden. Außerdem sollten die Originalfotos, die Betriebsanleitung und die Wartungsunterlagen zusammengestellt werden."
+            ]
+          },
+          {
+            "heading": "Was kann er klären?",
+            "paragraphs": [
+              "Ein gebrochenes Bauteil kann den Unfall verursacht haben oder erst dabei beschädigt worden sein. Die Untersuchung der Ausrüstung, der Anlage und der verfügbaren Daten ermöglicht es zu beurteilen, welche Hypothesen mit den vorliegenden Anhaltspunkten vereinbar sind und was noch überprüft werden muss."
+            ]
+          },
+          {
+            "heading": "Wann sollte die Untersuchung erweitert werden?",
+            "paragraphs": [
+              "Wenn eine Unklarheit über die Ursache für den Anspruch relevant ist, hilft der vorläufige Bericht bei der Entscheidung, ob ein vollständiges Sachverständigengutachten beauftragt werden sollte und welche Messungen, Prüfungen oder Unterlagen dafür erforderlich sind."
+            ]
+          }
+        ],
+        "references": [
+          {
+            "title": "INSST (2001). NTP 592. Tratamiento documental e investigación de accidentes."
+          },
+          {
+            "title": "Health and Safety Executive (2004). HSG245. Investigating accidents and incidents."
+          }
+        ]
+      },
+      "no": {
+        "slug": "naar-boer-man-bestille-foreloepig-teknisk-rapport",
+        "title": "Når bør man bestille en foreløpig teknisk rapport?",
+        "seo_title": "Når bør du bestille en foreløpig teknisk rapport? | Adolfo Ingeniería",
+        "description": "Når en foreløpig teknisk rapport bør bestilles etter en ulykke med maskiner eller anlegg, hva den kan avklare, og når undersøkelsen bør utvides.",
+        "category": "Sakkyndige vurderinger og tekniske rapporter.",
+        "professional_title": "Maskiningeniør | Teknisk sakkyndig",
+        "image_alt": "Illustrert gjenskaping av en åpnet sentrifugalpumpe og løpehjulet med kavitasjonserosjon.",
+        "image_caption": "Illustrert gjenskaping av kavitasjonserosjon på løpehjulet i en sentrifugalpumpe.",
+        "references_heading": "Tekniske kilder",
+        "related_intro": "For å vurdere en mer omfattende undersøkelse, se tjenesten for",
+        "sections": [
+          {
+            "heading": "Innledning",
+            "paragraphs": [
+              "Etter en ulykke med en maskin eller et anlegg kan årsaken være uklar. En foreløpig teknisk rapport brukes til å formulere hypoteser om hendelsesforløpet og avklare hvordan de kan undersøkes. Den er særlig nyttig når personer eller virksomheter har blitt påført skade, og et erstatningskrav kan bli aktuelt."
+            ]
+          },
+          {
+            "heading": "Når bør den bestilles?",
+            "paragraphs": [
+              "Så tidlig som mulig dersom utstyret skal repareres eller demonteres. Før tilstanden endres, bør den dokumenteres, og originale fotografier, bruksanvisningen og vedlikeholdsrapportene bør samles inn."
+            ]
+          },
+          {
+            "heading": "Hva kan den avklare?",
+            "paragraphs": [
+              "En ødelagt komponent kan ha forårsaket ulykken eller ha blitt skadet under den. En gjennomgang av utstyret, anlegget og tilgjengelige data gjør det mulig å vurdere hvilke hypoteser som samsvarer med de tekniske holdepunktene, og hva som fortsatt må undersøkes."
+            ]
+          },
+          {
+            "heading": "Når bør undersøkelsen utvides?",
+            "paragraphs": [
+              "Hvis usikkerhet om årsaken har betydning for erstatningskravet, bidrar den foreløpige rapporten til å avgjøre om det bør bestilles en fullstendig sakkyndig vurdering, og hvilke målinger, prøvinger eller dokumenter som vil være nødvendige."
+            ]
+          }
+        ],
+        "references": [
+          {
+            "title": "INSST (2001). NTP 592. Tratamiento documental e investigación de accidentes."
+          },
+          {
+            "title": "Health and Safety Executive (2004). HSG245. Investigating accidents and incidents."
+          }
+        ]
+      },
+      "ru": {
+        "slug": "kogda-zakazat-predvaritelnyi-tekhnicheskii-otchet",
+        "title": "Когда стоит заказать предварительный технический отчёт?",
+        "seo_title": "Когда заказать предварительный технический отчёт? | Adolfo Ingeniería",
+        "description": "Когда запрашивать предварительный технический отчёт после аварии с машиной или установкой, что он может прояснить и когда стоит расширить исследование.",
+        "category": "Техническая экспертиза и технические отчёты.",
+        "professional_title": "Инженер-механик | Технический эксперт",
+        "image_alt": "Воссоздание открытого центробежного насоса и его рабочего колеса с кавитационной эрозией.",
+        "image_caption": "Воссоздание кавитационной эрозии на рабочем колесе центробежного насоса.",
+        "references_heading": "Технические источники",
+        "related_intro": "Для рассмотрения более подробного исследования ознакомьтесь с услугой",
+        "sections": [
+          {
+            "heading": "Введение",
+            "paragraphs": [
+              "После аварии с машиной или установкой причина может оставаться неясной. Предварительный технический отчёт позволяет сформулировать гипотезы о произошедшем и определить, как их проверить. Он особенно полезен, если пострадали физические лица или компании и может возникнуть вопрос о требовании возмещения ущерба."
+            ]
+          },
+          {
+            "heading": "Когда его заказывать",
+            "paragraphs": [
+              "Как можно раньше, если планируется ремонт или демонтаж оборудования. До изменения его состояния рекомендуется зафиксировать это состояние и собрать исходные фотографии, руководство по эксплуатации и документы о техническом обслуживании."
+            ]
+          },
+          {
+            "heading": "Что он может прояснить",
+            "paragraphs": [
+              "Сломанная деталь могла стать причиной аварии или получить повреждения в ходе самой аварии. Изучение оборудования, установки и имеющихся данных позволяет оценить, какие гипотезы согласуются с выявленными признаками и что ещё предстоит проверить."
+            ]
+          },
+          {
+            "heading": "Когда расширять исследование",
+            "paragraphs": [
+              "Если неопределённость в отношении причины имеет значение для требования о возмещении ущерба, предварительный отчёт помогает решить, стоит ли заказывать полноценную техническую экспертизу и какие измерения, испытания или документы для этого понадобятся."
+            ]
+          }
+        ],
+        "references": [
+          {
+            "title": "INSST (2001). NTP 592. Tratamiento documental e investigación de accidentes."
+          },
+          {
+            "title": "Health and Safety Executive (2004). HSG245. Investigating accidents and incidents."
+          }
+        ]
+      },
+      "nl": {
+        "slug": "wanneer-voorlopig-technisch-rapport-laten-opstellen",
+        "title": "Wanneer is het zinvol een voorlopig technisch rapport te laten opstellen?",
+        "seo_title": "Wanneer een voorlopig technisch rapport laten opstellen? | Adolfo Ingeniería",
+        "description": "Wanneer een voorlopig technisch rapport na een ongeval met een machine of installatie zinvol is, wat het kan verduidelijken en wanneer nader onderzoek nodig is.",
+        "category": "Deskundigenonderzoek en technische rapporten.",
+        "professional_title": "Werktuigbouwkundig ingenieur | Technisch deskundige",
+        "image_alt": "Reconstructie van een geopende centrifugaalpomp en de waaier met cavitatie-erosie.",
+        "image_caption": "Reconstructie van cavitatie-erosie aan de waaier van een centrifugaalpomp.",
+        "references_heading": "Technische bronnen",
+        "related_intro": "Raadpleeg voor een uitgebreider onderzoek de dienst voor",
+        "sections": [
+          {
+            "heading": "Inleiding",
+            "paragraphs": [
+              "Na een ongeval met een machine of installatie kan de oorzaak onduidelijk zijn. Een voorlopig technisch rapport dient om hypothesen over het gebeurde te formuleren en te bepalen hoe deze kunnen worden getoetst. Het is vooral nuttig wanneer personen of bedrijven schade hebben geleden en een schadevergoedingsclaim aan de orde kan komen."
+            ]
+          },
+          {
+            "heading": "Wanneer aanvragen?",
+            "paragraphs": [
+              "Zo snel mogelijk als het materieel zal worden gerepareerd of gedemonteerd. Voordat de toestand verandert, is het verstandig deze vast te leggen en de oorspronkelijke foto’s, de handleiding en de onderhoudsverslagen te verzamelen."
+            ]
+          },
+          {
+            "heading": "Wat kan het verduidelijken?",
+            "paragraphs": [
+              "Een gebroken onderdeel kan het ongeval hebben veroorzaakt of tijdens het ongeval zijn beschadigd. Onderzoek van het materieel, de installatie en de beschikbare gegevens maakt het mogelijk te beoordelen welke hypothesen bij de aanwijzingen passen en wat nog moet worden geverifieerd."
+            ]
+          },
+          {
+            "heading": "Wanneer het onderzoek uitbreiden?",
+            "paragraphs": [
+              "Als onzekerheid over de oorzaak van belang is voor de schadeclaim, helpt het voorlopige rapport te bepalen of een volledig deskundigenonderzoek zinvol is en welke metingen, beproevingen of documenten daarvoor nodig zijn."
+            ]
+          }
+        ],
+        "references": [
+          {
+            "title": "INSST (2001). NTP 592. Tratamiento documental e investigación de accidentes."
+          },
+          {
+            "title": "Health and Safety Executive (2004). HSG245. Investigating accidents and incidents."
+          }
+        ]
+      }
+    }
+  }
+]

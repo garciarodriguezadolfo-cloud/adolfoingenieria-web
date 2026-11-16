@@ -20,3 +20,13 @@
 .article-body a,.article-list a{overflow-wrap:anywhere}
 .article-related{display:flex;flex-wrap:wrap;gap:12px 24px;list-style:none;padding:0}
 @media(max-width:520px){.article-list h3{font-size:20px}.article-body{padding-block:44px}}
+/* Real publications: preserve the document image, with no crop or layout shift. */
+.article-reading-surface{background:#f7f8fa}
+.article-figure{margin:0 0 44px}
+.article-figure img{display:block;width:100%;height:auto;border-radius:2px}
+.article-figure figcaption{margin-top:12px;color:var(--muted);font-size:12px;line-height:1.7;max-width:75ch}
+.article-professional{font-weight:500}
+.article-body>h2{border-bottom:1px solid #e5dfd4;padding-bottom:10px}
+.article-body>h2:first-of-type{margin-top:0}
+.article-card-category{font-size:12px!important;letter-spacing:.015em;margin:6px 0!important}
+@media(max-width:520px){.article-figure{margin-bottom:32px}.article-figure figcaption{font-size:11px}.article-body .article-related{display:block}}

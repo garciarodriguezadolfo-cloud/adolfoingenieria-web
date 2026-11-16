@@ -153,6 +153,26 @@ class ArticleTests(unittest.TestCase):
             for path in paths:
                 self.assertFalse((target/path.lstrip('/')/'index.html').exists())
 
+    def test_optional_real_image_and_plain_bibliography(self):
+        record=fixture()
+        record['image']={'src':'/assets/articles/example.webp','width':1600,'height':679}
+        for content in record['translations'].values():
+            content.update(image_alt='Descriptive alternative',image_caption='Recreation, not accident evidence.',
+                           professional_title='Mechanical Engineer | Technical Expert',seo_title='Custom SEO title')
+            content['references']=[{'title':'Original bibliography without a URL.'}]
+        self.validate([record])
+        html,_=self.render_fixture(record)
+        self.assertIn('<title>Custom SEO title</title>',html)
+        self.assertIn('fetchpriority="high"',html)
+        self.assertIn('Recreation, not accident evidence.',html)
+        schema=next(n for n in self.schema(html) if n['@type']=='Article')
+        self.assertEqual(schema['image']['width'],1600)
+        self.assertEqual(schema['author']['name'],site.NAME)
+        self.assertNotIn('url',schema['citation'][0])
+        for mutation in [dict(src='/assets/articles/../invalid.webp'),dict(width=0),dict(height=True)]:
+            modified=json.loads(json.dumps(record));modified['image'].update(mutation)
+            with self.assertRaises(ValueError):self.validate([modified])
+
     def test_localized_dates(self):
         self.assertEqual(article_date('2026-11-16','es',site.ARTICLE_UI['es']),'16 de noviembre de 2026')
         self.assertEqual(article_date('2026-11-16','no',site.ARTICLE_UI['no']),'16. november 2026')
