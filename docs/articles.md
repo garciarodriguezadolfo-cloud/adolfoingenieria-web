@@ -1,6 +1,6 @@
 # Incorporar artículos reales
 
-La sección tiene seis índices: `/articulos/`, `/en/articles/`, `/de/fachartikel/`, `/no/artikler/`, `/ru/stati/` y `/nl/artikelen/`. Inicialmente `site/articles.json` contiene `[]`; se muestra el aviso de próximas publicaciones. No se crean páginas individuales ni datos `Article` sin publicaciones reales.
+La sección tiene seis índices: `/articulos/`, `/en/articles/`, `/de/fachartikel/`, `/no/artikler/`, `/ru/stati/` y `/nl/artikelen/`. El catálogo incluye ahora la primera publicación real en seis idiomas; con un catálogo vacío se muestra el aviso de próximas publicaciones. No se crean páginas individuales ni datos `Article` sin publicaciones reales.
 
 ## Fuentes y plantillas
 
@@ -35,11 +35,17 @@ Cada traducción contiene:
 | Campo | Contenido |
 | --- | --- |
 | `slug` | Ruta final estable en minúsculas ASCII y guiones, dentro del índice del idioma. No cambiar una URL ya publicada sin estudiar sus enlaces. |
-| `title` | Título real del artículo, usado en H1, título SEO y Schema.org. |
+| `title` | Título real del artículo, usado en H1 y Schema.org. |
+| `seo_title` | Opcional: título SEO independiente del H1; si falta se utiliza el título y el nombre profesional. |
+| `professional_title` | Opcional: denominación profesional verificada, localizada, visible y en los metadatos de autor. |
+| `image_alt`, `image_caption` | Obligatorios cuando existe imagen: alternativa descriptiva y pie localizado fiel a la fuente. |
+| `references_heading`, `related_intro` | Opcionales: encabezado bibliográfico y contexto del enlace al servicio. |
 | `description` | Resumen real; se usa en la tarjeta, introducción y metadescripción. |
 | `category` | Categoría editorial traducida, sin crear páginas de categoría vacías. |
 | `sections` | Lista de secciones con `heading`, `level` (2 o 3), `paragraphs` (lista de párrafos) y opcionalmente `items` (lista). Debe empezar por H2; solo se permiten H2/H3 y contenido no vacío. |
-| `references` | Opcional: lista de objetos con `title` y `url` HTTPS. Usar fuentes técnicas/normativas reales y revisar su vigencia y aplicación al caso. |
+| `references` | Opcional: lista de objetos con `title` y, solo si está verificada, `url` HTTPS opcional. Usar fuentes técnicas/normativas reales y revisar su vigencia y aplicación al caso. |
+
+El registro puede incluir `image` con `src` bajo `/assets/articles/`, `width` y `height` reales. La plantilla muestra el archivo completo sin recortarlo y genera los metadatos de imagen.
 
 El autor se incorpora automáticamente como **Manuel Adolfo García Rodríguez**; no se admiten autores, experiencia, acreditaciones o resultados inventados. Se preserva la terminología de los procedimientos españoles al traducir. Las referencias pueden localizarse por idioma. El contenido se introduce como texto, sin etiquetas HTML.
 
@@ -50,7 +56,7 @@ El autor se incorpora automáticamente como **Manuel Adolfo García Rodríguez**
 3. Ejecutar `python3 tools/build_site.py`, `python3 tests/check_seo.py` y `python3 tests/test_articles.py`.
 4. Revisar móvil/escritorio y los enlaces de la página real antes de fusionar o desplegar por el procedimiento habitual del propietario.
 
-Cada artículo publicado genera seis URL bajo los índices, con fecha localizada, categoría, autor, H2/H3, referencias y servicios relacionados, además de `Article`, `datePublished`, `inLanguage`, breadcrumb y `dateModified` solo cuando se proporciona. El índice ordena por fecha descendente y muestra título, fecha y descripción. Las relaciones hreflang y canonical se generan automáticamente para las seis traducciones.
+Cada artículo publicado genera seis URL bajo los índices, con fecha localizada, categoría, autor, H2/H3, referencias y servicios relacionados, además de `Article`, `datePublished`, `inLanguage`, breadcrumb y `dateModified` solo cuando se proporciona. El índice ordena por fecha descendente y muestra título, fecha, categoría y descripción. Las relaciones hreflang y canonical se generan automáticamente para las seis traducciones.
 
 Si se retira una publicación, el generador elimina solo las salidas que consten en su manifiesto y tengan la marca de propiedad `generated:technical-article`. No borra archivos manuales ni otros recursos; rechaza rutas fuera de los índices. No genera páginas vacías que aparenten seguir publicadas ni crea redirecciones. Evaluar el tratamiento SEO de una retirada real antes de desplegarla.
 

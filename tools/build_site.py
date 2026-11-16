@@ -140,6 +140,8 @@ def shell(key, lang, title, description, body, service=None, draft=False, page_l
     body = body.replace('↗', '<svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.8"/></svg>')
     body = re.sub(r'<p>([^<]+)</p>', mark_reading_prose, body)
     provider = {'@type':'Person', '@id':BASE+'/#professional', 'name':NAME, 'jobTitle':tr(lang,'Ingeniero Mecánico','Mechanical Engineer'), 'url':BASE+'/', 'email':CONTACT_EMAIL, 'telephone':CONTACT_PHONE}
+    if article and article['translations'][lang].get('professional_title'):
+        provider['jobTitle'] = article['translations'][lang]['professional_title']
     provider_override = SCHEMA_OVERRIDES.get(key, {}).get(lang, {})
     provider.update(provider_override)
     graph = [provider, {'@type':'WebPage','@id':url+'#page','url':url,'name':title,'description':description,'inLanguage':HTML_LANG[lang],'about':{'@id':BASE+'/#professional'}}]
@@ -176,6 +178,12 @@ def shell(key, lang, title, description, body, service=None, draft=False, page_l
         og_alternates += f'<meta property="article:published_time" content="{article["date_published"]}">\n'
         if article.get('date_modified'):
             og_alternates += f'<meta property="article:modified_time" content="{article["date_modified"]}">\n'
+    article_metadata = ''
+    if article:
+        article_metadata = f'<meta name="author" content="{NAME}">\n'
+        image = article.get('image')
+        if image:
+            article_metadata += f'<meta property="og:image" content="{BASE+image["src"]}">\n<meta property="og:image:width" content="{image["width"]}">\n<meta property="og:image:height" content="{image["height"]}">\n<meta property="og:image:alt" content="{esc(article["translations"][lang]["image_alt"],quote=True)}">\n'
     return f'''<!doctype html>
 <html lang="{HTML_LANG[lang]}">
 <head>
@@ -192,7 +200,7 @@ def shell(key, lang, title, description, body, service=None, draft=False, page_l
 <meta property="og:title" content="{esc(title, quote=True)}">
 <meta property="og:description" content="{esc(description, quote=True)}">
 <meta property="og:locale" content="{og_locale}">
-{og_alternates}
+{og_alternates}{article_metadata}
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="{SELECTOR_CSS}">
 <link rel="stylesheet" href="{TYPOGRAPHY_CSS}">{article_styles}
@@ -286,7 +294,7 @@ def render_articles(lang):
         for position, article in enumerate(PUBLISHED_ARTICLES, 1):
             content = article['translations'][lang]
             key = 'article:' + article['id']
-            body += f'<li><article><time class="article-date" datetime="{article["date_published"]}">{esc(article_date(article["date_published"],lang,ui))}</time><h3>{link(key,lang,content["title"])}</h3><p>{esc(content["description"])}</p></article></li>'
+            body += f'<li><article><time class="article-date" datetime="{article["date_published"]}">{esc(article_date(article["date_published"],lang,ui))}</time><p class="article-card-category">{esc(content["category"])}</p><h3>{link(key,lang,content["title"])}</h3><p>{esc(content["description"])}</p></article></li>'
             entries.append({'@type':'ListItem','position':position,'name':content['title'],'url':BASE+PATHS[key][lang]})
         body += '</ol>'
     body += '</section>'
@@ -299,29 +307,40 @@ def render_article(article, lang):
     key = 'article:' + article['id']
     url = BASE + PATHS[key][lang]
     body = f'<!-- generated:technical-article --><section class="service-hero"><p class="eyebrow">{esc(content["category"])}</p><h1>{esc(content["title"])}</h1><p class="lead">{esc(content["description"])}</p><p class="article-byline"><time datetime="{article["date_published"]}">{esc(article_date(article["date_published"],lang,ui))}</time> · {esc(ui["author"])}: {NAME}</p></section>'
-    body += '<article class="article-body">' + sections_html(content['sections'])
+    professional = content.get('professional_title')
+    if professional:
+        body = body.replace('</p></section>', f'<br><span class="article-professional">{esc(professional)}</span></p></section>')
+    body += '<div class="article-reading-surface"><article class="article-body">'
+    if article.get('image'):
+        image = article['image']
+        body += f'<figure class="article-figure"><img src="{image["src"]}" width="{image["width"]}" height="{image["height"]}" alt="{esc(content["image_alt"],quote=True)}" fetchpriority="high" decoding="async"><figcaption>{esc(content["image_caption"])}</figcaption></figure>'
+    body += sections_html(content['sections'])
     references = content.get('references', [])
     if references:
-        body += f'<h2>{esc(ui["references"])}</h2><ul>'
-        body += ''.join(f'<li><a href="{esc(ref["url"],quote=True)}" rel="external">{esc(ref["title"])}</a></li>' for ref in references)
+        body += f'<h2>{esc(content.get("references_heading",ui["references"]))}</h2><ul>'
+        body += ''.join('<li>' + (f'<a href="{esc(ref["url"],quote=True)}" rel="external">{esc(ref["title"])}</a>' if ref.get('url') else esc(ref['title'])) + '</li>' for ref in references)
         body += '</ul>'
     if article.get('related_services'):
         body += f'<h2>{esc(ui["related"])}</h2><ul class="article-related">'
         for target in article['related_services']:
             service = next(s for s in SERVICES if s['key'] == target)
-            body += '<li>' + link(target,lang,service[lang]['name']) + '</li>'
+            body += '<li>' + (esc(content['related_intro']) + ' ' if content.get('related_intro') else '') + link(target,lang,service[lang]['name']) + '</li>'
         body += '</ul>'
-    body += link('articles',lang,ui['back'],'text-link') + '</article>'
+    body += link('articles',lang,ui['back'],'text-link') + '</article></div>'
     schema = {'@type':'Article','@id':url+'#article','url':url,'headline':content['title'],
               'description':content['description'],'datePublished':article['date_published'],
               'articleSection':content['category'],'inLanguage':HTML_LANG[lang],
               'author':{'@id':BASE+'/#professional'},'publisher':{'@id':BASE+'/#professional'},
               'mainEntityOfPage':{'@id':url+'#page'}}
+    if professional:
+        schema['author'].update({'@type':'Person','name':NAME,'jobTitle':professional})
+    if article.get('image'):
+        schema['image'] = {'@type':'ImageObject','url':BASE+article['image']['src'],'width':article['image']['width'],'height':article['image']['height'],'caption':content['image_caption']}
     if article.get('date_modified'):
         schema['dateModified'] = article['date_modified']
     if references:
-        schema['citation'] = [{'@type':'CreativeWork','name':r['title'],'url':r['url']} for r in references]
-    return shell(key,lang,content['title']+' | '+NAME,content['description'],body,page_label=content['title'],extra_schema=[schema],article=article)
+        schema['citation'] = [{'@type':'CreativeWork','name':r['title'],**({'url':r['url']} if r.get('url') else {})} for r in references]
+    return shell(key,lang,content.get('seo_title',content['title']+' | '+NAME),content['description'],body,page_label=content['title'],extra_schema=[schema],article=article)
 
 
 def prune_article_pages(previous, current):
