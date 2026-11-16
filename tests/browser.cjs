@@ -25,7 +25,7 @@ const messages = {es:'no está disponible',en:'unavailable',de:'nicht verfügbar
     assert.equal(await page.locator('h1').count(),1);
     assert.equal(await page.locator('link[rel=canonical]').getAttribute('href'),'https://adolfoingenieria.es'+path);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`Horizontal overflow: ${path} at ${width}`);
-    assert.equal(await page.locator('.language-switch a').count(),6);
+    assert.equal(await page.locator('.language-switch a').count(),7);
     const alternatives=await page.locator('.language-switch a').evaluateAll(links=>links.map(a=>({href:a.getAttribute('href'),lang:a.lang})));
     for(const target of alternatives){
       await page.locator(`.language-switch a[lang="${target.lang}"]`).click();
@@ -67,6 +67,6 @@ const messages = {es:'no está disponible',en:'unavailable',de:'nicht verfügbar
   await page.setViewportSize({width:390,height:844});await page.goto(base+'/certificados-energeticos-alicante/');
   await page.screenshot({path:'/tmp/adolfo-preview/energy-mobile.png',fullPage:true});
   assert.deepEqual(errors,[]);
-  console.log('OK: 54 routes at desktop/390px/320px; all six equivalent languages with/without JS; WhatsApp; canonical; honest unconfigured form state; no JS errors.');
+  console.log('OK: configured routes at desktop/390px/320px; all seven equivalent languages with/without JS; WhatsApp; canonical; honest unconfigured form state; no JS errors.');
  } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});

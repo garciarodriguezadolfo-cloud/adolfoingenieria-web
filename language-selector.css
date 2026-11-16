@@ -210,3 +210,7 @@
   /* Long Russian labels keep their original font size at the narrowest widths. */
   html:lang(ru) .site-header > nav{letter-spacing:calc(clamp(-.04em,calc(.391429vw - 1.632573px),0px) - .09px)}
 }
+/* French labels use the existing compact-menu approach; other locales are unchanged. */
+@media(max-width:640px){html:lang(fr) .site-header > nav{--compact-menu-size:clamp(11.6px,calc(3.428571vw + .628573px),14px)}}
+/* The shared 404 keeps its original 24x16 flags; only their link boxes may shrink. */
+.legal-content > .language-switch.language-switch > a{flex:0 1 40px;min-inline-size:24px}

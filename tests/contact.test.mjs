@@ -91,9 +91,9 @@ test('upstream rejection, missing receipt and network errors never return accept
   const r=await call();assert.equal(r.status,502);assert.deepEqual(await r.json(),{error:'delivery'});
 });
 
-test('all six page languages pass validation and preserve the fixed recipient', async t=>{
+test('all seven page languages pass validation and preserve the fixed recipient', async t=>{
   const calls=upstream(t);
-  for(const language of ['es','en','de','nb','ru','nl']){
+  for(const language of ['es','en','de','nb','ru','nl','fr']){
     assert.equal((await call(makeRequest({...body,language}))).status,200,language);
     const payload=JSON.parse(calls.at(-1).options.body);
     assert.deepEqual(payload.to,['info@adolfoingenieria.es']);

@@ -21,17 +21,18 @@ CONTACT_PHONE_DISPLAY = CONFIG['contact_phone_display']
 SERVICES = json.loads((ROOT / 'site/services.json').read_text())
 SEO = json.loads((ROOT / 'site/seo.json').read_text())
 SCHEMA_OVERRIDES = json.loads((ROOT / 'site/schema-overrides.json').read_text())
-LANGS = ('es', 'en', 'de', 'no', 'ru', 'nl')
+LANGS = ('es', 'en', 'de', 'no', 'ru', 'nl', 'fr')
 HTML_LANG = {lang: ('nb' if lang == 'no' else lang) for lang in LANGS}
-LOCALES = {lang: json.loads((ROOT / f'site/locales/{lang}.json').read_text()) for lang in ('de', 'no', 'ru', 'nl')}
-LANG_NAMES = {'es':'Español', 'en':'English', 'de':'Deutsch', 'no':'Norsk bokmål', 'ru':'Русский', 'nl':'Nederlands'}
-FLAGS = {'es':'es', 'en':'gb', 'de':'de', 'no':'no', 'ru':'ru', 'nl':'nl'}
+LOCALES = {lang: json.loads((ROOT / f'site/locales/{lang}.json').read_text()) for lang in ('de', 'no', 'ru', 'nl', 'fr')}
+LANG_NAMES = {'es':'Español', 'en':'English', 'de':'Deutsch', 'no':'Norsk bokmål', 'ru':'Русский', 'nl':'Nederlands', 'fr':'Français'}
+FLAGS = {'es':'es', 'en':'gb', 'de':'de', 'no':'no', 'ru':'ru', 'nl':'nl', 'fr':'fr'}
 ARTICLE_UI = json.loads((ROOT / 'site/article-locales.json').read_text())
 ARTICLES = load_articles(ROOT / 'site/articles.json', LANGS, {s['key'] for s in SERVICES})
 PUBLISHED_ARTICLES = sorted((a for a in ARTICLES if a['status'] == 'published'), key=lambda a: (a['date_published'], a['id']), reverse=True)
 ARTICLES_CSS = '/articles.css?v=' + sha256((ROOT / 'articles.css').read_bytes()).hexdigest()[:12]
-LANGUAGE_LABELS = {'es':'Idiomas','en':'Languages','de':'Sprachen','no':'Språk','ru':'Языки','nl':'Talen'}
+LANGUAGE_LABELS = {'es':'Idiomas','en':'Languages','de':'Sprachen','no':'Språk','ru':'Языки','nl':'Talen', 'fr':'Langues'}
 WHATSAPP = {
+'fr': ('Bonjour, je souhaiterais obtenir des informations sur vos prestations d’ingénierie.', 'Contacter sur WhatsApp'),
 'nl': ('Goedendag, ik wil graag informatie over uw ingenieursdiensten.', 'Contact via WhatsApp'),
 'es': ('Hola, me gustaría consultar sobre sus servicios de ingeniería.', 'Consultar por WhatsApp'),
 'en': ('Hello, I would like to enquire about your engineering services.', 'Contact via WhatsApp'),
@@ -46,7 +47,8 @@ for lang, contact, legal, privacy in (
     ('de', 'kontakt', 'impressum', 'datenschutz'),
     ('no', 'kontakt', 'juridisk-informasjon', 'personvern'),
     ('ru', 'kontakty', 'pravovaya-informatsiya', 'konfidentsialnost'),
-    ('nl', 'contact', 'juridische-informatie', 'privacybeleid')):
+    ('nl', 'contact', 'juridische-informatie', 'privacybeleid'),
+    ('fr', 'contact', 'mentions-legales', 'confidentialite')):
     for key, slug in [('home',''), ('contact',contact), ('legal',legal), ('privacy',privacy)]:
         PATHS[key][lang] = f'/{lang}/' + (slug+'/' if slug else '')
 for s in SERVICES:
@@ -88,7 +90,7 @@ def header(key, lang):
 
 
 def footer(lang):
-    registration = {'es':'Colegiado n.º', 'en':'Member no.', 'de':'Mitglied Nr.', 'no':'Medlemsnr.', 'ru':'Рег. №', 'nl':'Lidnr.'}[lang]
+    registration = {'es':'Colegiado n.º', 'en':'Member no.', 'de':'Mitglied Nr.', 'no':'Medlemsnr.', 'ru':'Рег. №', 'nl':'Lidnr.', 'fr':'N°'}[lang]
     return f'''<footer class="branded-footer"><img class="footer-logo" src="/assets/branding/complete-logo-transparent.png" width="1280" height="765" loading="lazy" decoding="async" alt="{NAME} — {tr(lang, 'Ingeniero Mecánico | Perito Técnico', 'Mechanical Engineer | Technical Expert')}"><div class="footer-details"><span>© <span id="year"></span> {NAME}</span><span class="footer-professional">{tr(lang, 'Ingeniero Mecánico', 'Mechanical Engineer')} | {registration} 4.702 COITIA</span><div class="footer-links">{link('legal',lang,tr(lang,'Aviso legal (borrador)','Legal notice (draft)'))}{link('privacy',lang,tr(lang,'Privacidad (borrador)','Privacy (draft)'))}</div></div></footer>'''
 
 
@@ -136,7 +138,7 @@ def mark_reading_prose(match):
 
 def shell(key, lang, title, description, body, service=None, draft=False, page_label=None, page_type=None, extra_schema=None, article=None):
     url = BASE + PATHS[key][lang]
-    og_locale = {'es':'es_ES','en':'en_GB','de':'de_DE','no':'nb_NO','ru':'ru_RU','nl':'nl_NL'}[lang]
+    og_locale = {'es':'es_ES','en':'en_GB','de':'de_DE','no':'nb_NO','ru':'ru_RU','nl':'nl_NL','fr':'fr_FR'}[lang]
     body = body.replace('↗', '<svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.8"/></svg>')
     body = re.sub(r'<p>([^<]+)</p>', mark_reading_prose, body)
     provider = {'@type':'Person', '@id':BASE+'/#professional', 'name':NAME, 'jobTitle':tr(lang,'Ingeniero Mecánico','Mechanical Engineer'), 'url':BASE+'/', 'email':CONTACT_EMAIL, 'telephone':CONTACT_PHONE}
@@ -173,7 +175,7 @@ def shell(key, lang, title, description, body, service=None, draft=False, page_l
 
     alternates = ''.join(f'<link rel="alternate" hreflang="{HTML_LANG[l]}" href="{BASE+PATHS[key][l]}">\n' for l in LANGS)
     alternates += f'<link rel="alternate" hreflang="x-default" href="{BASE+PATHS[key]["es"]}">'
-    og_alternates = ''.join(f'<meta property="og:locale:alternate" content="{locale}">\n' for code,locale in {'es':'es_ES','en':'en_GB','de':'de_DE','no':'nb_NO','ru':'ru_RU','nl':'nl_NL'}.items() if code != lang)
+    og_alternates = ''.join(f'<meta property="og:locale:alternate" content="{locale}">\n' for code,locale in {'es':'es_ES','en':'en_GB','de':'de_DE','no':'nb_NO','ru':'ru_RU','nl':'nl_NL','fr':'fr_FR'}.items() if code != lang)
     if article:
         og_alternates += f'<meta property="article:published_time" content="{article["date_published"]}">\n'
         if article.get('date_modified'):
@@ -383,7 +385,7 @@ def build():
             file.write_text(html)
     manifest.write_text(json.dumps(article_paths,ensure_ascii=False,indent=2)+'\n')
     # Cloudflare serves one shared 404 document; offer every language without indexing it.
-    not_found = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>404 | '+NAME+'</title><link rel="stylesheet" href="/styles.css"></head><body><main class="legal-content"><h1>404</h1><p>Página no encontrada · Page not found · Seite nicht gefunden · Siden finnes ikke · Страница не найдена · Pagina niet gevonden</p>'
+    not_found = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>404 | '+NAME+'</title><link rel="stylesheet" href="/styles.css"></head><body><main class="legal-content"><h1>404</h1><p>Página no encontrada · Page not found · Seite nicht gefunden · Siden finnes ikke · Страница не найдена · Pagina niet gevonden · Page introuvable</p>'
     not_found = not_found.replace('</head>', f'<link rel="stylesheet" href="{SELECTOR_CSS}"></head>')
     not_found += language_switch('home', 'es')
     not_found += '</main>'+whatsapp('es')+'</body></html>'

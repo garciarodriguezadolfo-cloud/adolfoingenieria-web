@@ -160,7 +160,33 @@
     "area_served": [
       "España",
       "Comunidad Valenciana"
-    ]
+    ],
+    "fr": {
+      "slug": "expertises-techniques",
+      "title": "Expertises techniques et rapports préliminaires en Espagne",
+      "description": "Rapports préliminaires et expertises pour procédures judiciaires, avocats, entreprises et particuliers. Toute l’Espagne, notamment la Communauté valencienne.",
+      "name": "Expertises techniques",
+      "h1": "Expertises pour procédures judiciaires et rapports préliminaires",
+      "lead": "Assistance technique d’expertise aux avocats, cabinets juridiques, entreprises et particuliers dans toute l’Espagne, avec une attention particulière à la Communauté valencienne. Le périmètre est défini après étude du sujet et de la documentation.",
+      "sections": [
+        [
+          "Rapport technique préliminaire : causes et faisabilité",
+          "Un rapport technique préliminaire permet d’ordonner les faits, d’examiner les indices de défaillances mécaniques ou techniques et d’étudier la faisabilité technique des questions soulevées. Cette première analyse d’expertise précise ce que les données disponibles permettent d’étayer, les incertitudes et les vérifications complémentaires nécessaires. Elle peut constituer la première phase d’une mission suivie d’une expertise complète, mais cette suite n’est pas automatique : elle nécessite une nouvelle évaluation et un périmètre expressément convenu."
+        ],
+        [
+          "Rapport d’expertise technique et présentation devant les juridictions",
+          "Manuel Adolfo García Rodríguez, ingénieur mécanicien, rédige des rapports pour des procédures judiciaires et des avis d’expertise dans le périmètre accepté. Un rapport technique destiné au tribunal expose les sources, la méthode, l’analyse et les conclusions en distinguant les faits vérifiés des hypothèses. La présentation et la confirmation des conclusions devant les juridictions sont envisagées lorsqu’elles sont pertinentes et convenues. L’assistance technique à l’avocat ne remplace pas le conseil juridique et n’implique pas une désignation de l’expert par le tribunal."
+        ],
+        [
+          "Expertises pour procédures judiciaires dans toute l’Espagne",
+          "Je réalise des rapports d’expertise technique et des avis destinés aux procédures judiciaires sur l’ensemble du territoire espagnol, avec une attention particulière à la Communauté valencienne.\n\nChaque mission est étudiée individuellement afin de définir son périmètre, les opérations techniques nécessaires et la faisabilité de l’investigation, en assurant une analyse objective, indépendante et techniquement étayée."
+        ],
+        [
+          "Documents pour évaluer la mission",
+          "Préparez une chronologie, les photographies originales, contrats, factures et rapports antérieurs, ainsi que les questions techniques à résoudre. Précisez l’état de la procédure et les délais connus, sans transmettre de données sensibles par le formulaire initial. Le besoin d’inspections, de mesures ou d’autres vérifications est défini avant de convenir du périmètre. L’investigation et la reconstitution d’accidents font l’objet d’une page de prestation dédiée."
+        ]
+      ]
+    }
   },
   {
     "key": "accidents",
@@ -319,6 +345,32 @@
         ]
       ],
       "h1": "Onderzoek en reconstructie van ongevallen"
+    },
+    "fr": {
+      "slug": "investigation-reconstitution-accidents",
+      "title": "Investigation d’accidents et défaillances mécaniques | Expert technique",
+      "description": "Investigation d’accidents et analyse des défaillances mécaniques en Espagne, dans la Communauté valencienne et à Alicante. Étude préliminaire selon le dossier.",
+      "name": "Investigation et reconstitution d’accidents",
+      "h1": "Investigation et reconstitution d’accidents",
+      "lead": "Analyse des causes, des défaillances mécaniques et des indices pour comprendre un accident et examiner les questions techniques d’une réclamation. Intervention dans toute l’Espagne, avec une attention particulière à la Communauté valencienne et à Alicante.",
+      "sections": [
+        [
+          "Analyse des causes et des défaillances mécaniques",
+          "La chronologie de l’accident, les dommages et les défaillances mécaniques ou techniques compatibles avec les éléments disponibles sont examinés. Une étude préliminaire des causes peut aider l’avocat, l’entreprise ou le particulier à préciser les questions et la faisabilité technique de l’investigation. Si une expertise complète est ensuite envisagée, le périmètre et les moyens font l’objet d’une nouvelle évaluation : le rapport préliminaire n’oblige pas à poursuivre et ne préjuge pas du résultat."
+        ],
+        [
+          "Reconstitution d’accidents à partir des éléments disponibles",
+          "La reconstitution technique s’appuie sur les photographies, plans, mesures, documents et, le cas échéant, inspections. Les hypothèses sont confrontées aux données disponibles. Le manque d’éléments ou les incertitudes sont expressément indiqués : aucune conclusion particulière n’est garantie."
+        ],
+        [
+          "Un rapport au raisonnement explicite",
+          "Le rapport présente l’objet de l’étude, les sources, la méthode, l’analyse et les conclusions. Il peut s’intégrer à un avis d’expertise et prévoir une présentation devant les juridictions si cela est convenu dans la mission. La faisabilité est examinée au cas par cas dans le domaine du génie mécanique."
+        ],
+        [
+          "Préserver les informations dès le départ",
+          "Pour consulter un expert en investigation d’accidents, réunissez la date, le lieu, une description chronologique, les photographies originales, les rapports existants et les données des éléments concernés. Ne prenez pas de risques pour recueillir des preuves et ne modifiez pas les éléments sans en documenter l’état. Indiquez les délais judiciaires ou de réclamation s’ils sont connus."
+        ]
+      ]
     }
   },
   {
@@ -482,7 +534,34 @@
     "area_served": [
       "Costa Blanca",
       "Marina Baixa"
-    ]
+    ],
+    "fr": {
+      "slug": "certificats-energetiques-costa-blanca",
+      "title": "Certificats de performance énergétique | Costa Blanca et Marina Baixa",
+      "description": "Certificats de performance énergétique (CEE) sur la Costa Blanca, notamment dans la Marina Baixa : visite technique, évaluation, rédaction et enregistrement.",
+      "name": "Certificats de performance énergétique",
+      "h1": "Certificats de performance énergétique sur la Costa Blanca",
+      "lead": "Réalisation et enregistrement de certificats de performance énergétique espagnols (CEE) pour les logements et autres biens situés sur la Costa Blanca, avec une attention particulière aux communes de la Marina Baixa.\n\nConseil technique pour la certification énergétique des biens destinés à la vente ou à la location, conformément à la réglementation en vigueur.",
+      "sections": [
+        [
+          "Contenu de l’évaluation énergétique",
+          "Le travail commence par les informations sur le bien et une visite permettant de relever ses caractéristiques : enveloppe du bâtiment, ouvertures et installations pertinentes. Le technicien chargé de la certification évalue la performance énergétique selon la procédure applicable et prépare le certificat, sa classe énergétique et les recommandations d’amélioration."
+        ],
+        [
+          "Documents et démarches",
+          "Pour évaluer la mission, l’emplacement, l’usage, la surface approximative et les documents disponibles, tels que plans ou certificats antérieurs, sont demandés. Le devis doit préciser la visite, l’établissement du CEE et, le cas échéant, les démarches d’enregistrement et les taxes. Aucune classe énergétique ni aucun délai ne sont promis sans examen du bien."
+        ],
+        [
+          "Certificats énergétiques sur la Costa Blanca",
+          "Je réalise des certificats de performance énergétique sur toute la Costa Blanca, avec une attention particulière aux communes de la Marina Baixa.\n\nLa prestation comprend la visite technique, l’évaluation énergétique du bien, l’établissement du certificat et son enregistrement auprès de l’organisme compétent."
+        ],
+        [
+          "Quand se renseigner ?",
+          "Si vous envisagez une vente ou une location, il est utile de vérifier à l’avance si un certificat est nécessaire, sa validité et les éventuelles exceptions applicables. La certification énergétique ne remplace pas les documents relatifs à l’occupation du bien. Vous pouvez également consulter la prestation de seconde occupation."
+        ]
+      ],
+      "coverage": "Costa Blanca · Marina Baixa"
+    }
   },
   {
     "key": "occupancy",
@@ -651,7 +730,34 @@
     "area_served": [
       "Costa Blanca",
       "Marina Baixa"
-    ]
+    ],
+    "fr": {
+      "slug": "certificats-seconde-occupation-costa-blanca",
+      "title": "Certificats de seconde occupation | Costa Blanca et Marina Baixa",
+      "description": "Certificats espagnols de seconde occupation pour les logements sur la Costa Blanca, notamment dans la Marina Baixa. Examen technique et exigences municipales.",
+      "name": "Certificats de seconde occupation",
+      "h1": "Certificats de seconde occupation sur la Costa Blanca",
+      "coverage": "Costa Blanca · Marina Baixa",
+      "lead": "Préparation des démarches relatives aux certificats de seconde occupation (segunda ocupación) pour les logements situés sur la Costa Blanca, avec une attention particulière aux communes de la Marina Baixa.\n\nLes exigences techniques et les documents demandés par la mairie compétente sont examinés, avec un accompagnement au cours de la procédure.",
+      "sections": [
+        [
+          "Examiner la situation du logement",
+          "Avant de préparer un certificat de seconde occupation, les antécédents disponibles, l’usage du logement et les documents demandés par la mairie sont étudiés. La visite permet d’effectuer les vérifications techniques pertinentes ; les problèmes constatés sont signalés afin d’évaluer les suites à donner."
+        ],
+        [
+          "Certificat d’habitabilité et exigences municipales",
+          "Si vous demandez un certificat d’habitabilité, il faut d’abord identifier le document et la procédure exigés par la mairie pour ce logement. Cette expression ne rend pas équivalentes toutes les démarches de seconde occupation. Selon la commune, une déclaration sur l’honneur d’occupation selon la procédure espagnole (declaración responsable) et des documents techniques spécifiques peuvent être requis. Le certificat technique ne remplace pas une décision administrative lorsqu’elle est nécessaire et ne régularise pas, à lui seul, des travaux ou des usages non conformes."
+        ],
+        [
+          "Documents à préparer",
+          "Indiquez l’adresse, la référence cadastrale si vous en disposez, les plans et les documents d’occupation antérieurs, ainsi que les informations sur les travaux réalisés. Le devis précise l’examen, la visite et les documents techniques ; le dépôt du dossier, les taxes et les éventuels travaux supplémentaires doivent être expressément convenus."
+        ],
+        [
+          "Seconde occupation sur la Costa Blanca et dans la Marina Baixa",
+          "Les missions de seconde occupation sont étudiées pour les logements de la Costa Blanca, notamment dans la Marina Baixa. La procédure et les documents sont vérifiés pour chaque commune. Si un certificat énergétique est également nécessaire, les deux prestations sont évaluées séparément."
+        ]
+      ]
+    }
   },
   {
     "key": "opening",
@@ -820,6 +926,33 @@
     "area_served": [
       "Costa Blanca",
       "Marina Baixa"
-    ]
+    ],
+    "fr": {
+      "slug": "ouvertures-changements-titulaire-costa-blanca",
+      "title": "Ouvertures et changements de titulaire | Costa Blanca et Marina Baixa",
+      "description": "Assistance technique pour les ouvertures et changements de titulaire d’activités sur la Costa Blanca, notamment dans la Marina Baixa. Exigences municipales.",
+      "name": "Ouvertures et changements de titulaire",
+      "h1": "Ouvertures et changements de titulaire sur la Costa Blanca",
+      "coverage": "Costa Blanca · Marina Baixa",
+      "lead": "Assistance technique pour l’ouverture d’établissements commerciaux et les changements de titulaire d’activités sur la Costa Blanca, avec une attention particulière aux communes de la Marina Baixa.\n\nLes exigences et les démarches sont étudiées en fonction de l’activité, des caractéristiques de l’établissement et de la réglementation municipale applicable.",
+      "sections": [
+        [
+          "Avant d’ouvrir ou de reprendre un local",
+          "Il est utile d’examiner la situation administrative et les conditions techniques du local avant d’engager un investissement. L’usage prévu, les antécédents et les exigences applicables sont étudiés afin d’identifier les documents nécessaires et les points à vérifier."
+        ],
+        [
+          "Autorisation d’ouverture, declaración responsable et dossier technique",
+          "L’ingénieur intervenant dans une autorisation d’ouverture doit d’abord examiner l’activité et les conditions du local. Selon le cas, l’administration compétente peut exiger une autorisation d’ouverture, une declaración responsable d’activité selon la procédure espagnole ou une autre démarche, accompagnée d’un projet technique d’ouverture, d’un mémoire ou d’un certificat. Les documents et la faisabilité sont définis dans le champ professionnel applicable ; toutes les activités ne relèvent pas de la même procédure et l’autorisation n’est pas garantie."
+        ],
+        [
+          "Changement de titulaire d’une activité",
+          "Un changement de titulaire ne doit pas être confondu avec une autorisation de modifier l’activité ou le local. Les antécédents et l’existence de changements affectant les conditions autorisées sont examinés. Les démarches, taxes et documents à fournir sont précisés selon les exigences de la mairie."
+        ],
+        [
+          "Informations pour demander un devis",
+          "Précisez la commune, l’adresse, l’activité prévue, la surface approximative, l’état du local et si vous disposez d’une autorisation ou de documents antérieurs. L’intervention couvre la Costa Blanca, notamment la Marina Baixa ; les délais dépendent du périmètre technique et des démarches administratives, sans garantie d’autorisation."
+        ]
+      ]
+    }
   }
 ]

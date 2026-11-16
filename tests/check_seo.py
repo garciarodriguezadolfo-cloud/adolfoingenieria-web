@@ -29,7 +29,7 @@ class Page(HTMLParser):
 
 
 SERVICE_KEYS = {s['key'] for s in SERVICES}
-expected_indexable = 48 + 6 * len(PUBLISHED_ARTICLES)
+expected_indexable = len(LANGS) * (8 + len(PUBLISHED_ARTICLES))
 pages = {}
 titles, descriptions = set(), set()
 indexable = set()
@@ -124,7 +124,7 @@ for key, paths in PATHS.items():
                 assert page.find('meta',property='og:type')[0]['content'] == 'article'
             else:
                 assert graph[1]['@type'] == ('ContactPage' if key == 'contact' else 'WebPage')
-        assert len(page.find('meta',property='og:locale:alternate')) == 5
+        assert len(page.find('meta',property='og:locale:alternate')) == len(LANGS)-1
         if key == 'expert':
             assert page.find('section',id='preliminary-assessment')
         if key in ('home','contact'):
@@ -168,7 +168,7 @@ for entry in root.findall(ns+'url'):
     expected = {HTML_LANG[lang]:BASE+path for lang,path in PATHS[key].items()}
     expected['x-default'] = BASE+PATHS[key]['es']
     alternates = entry.findall('{http://www.w3.org/1999/xhtml}link')
-    assert len(alternates) == 7
+    assert len(alternates) == len(LANGS)+1
     assert all(item.get('rel') == 'alternate' for item in alternates)
     assert {item.get('hreflang'):item.get('href') for item in alternates} == expected
 # Detect orphan indexable HTML outside the generator's route table as well.
@@ -188,6 +188,6 @@ assert '/robots.txt\n  Content-Type: text/plain; charset=utf-8' in headers
 assert 'noindex' in Page((ROOT/'404.html').read_text()).find('meta',name='robots')[0]['content']
 print(f'OK: {len(pages)} pages, unique metadata, reciprocal languages, schema, internal links/anchors, {expected_indexable} sitemap URLs, robots and headers.')
 
-assert set(LOCALES['nl']) == set(LOCALES['de']) == set(LOCALES['no']) == set(LOCALES['ru'])
-assert all(value.strip() for value in LOCALES['nl'].values())
-print('OK: local SVG flags, native accessible language names, uniform dimensions and complete Dutch shared translation keys.')
+assert all(set(locale) == set(LOCALES['nl']) for locale in LOCALES.values())
+assert all(value.strip() for locale in LOCALES.values() for value in locale.values())
+print('OK: local SVG flags, native accessible language names, uniform dimensions and complete shared translation keys in every locale.')

@@ -22,7 +22,7 @@ const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:8877';
     window.contactTurnstileReady();
   `}));
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  for(const path of ['/contacto/','/en/contact/','/de/kontakt/','/no/kontakt/','/ru/kontakty/','/nl/contact/','/','/en/','/de/','/no/','/ru/','/nl/']){
+  for(const path of ['/contacto/','/en/contact/','/de/kontakt/','/no/kontakt/','/ru/kontakty/','/nl/contact/','/fr/contact/','/','/en/','/de/','/no/','/ru/','/nl/','/fr/']){
    for(scenario of ['accepted','delivery','verification','unavailable','network']){
     await page.goto(base+path);
     const email=page.getByRole('link',{name:'info@adolfoingenieria.es',exact:true});
@@ -39,7 +39,7 @@ const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:8877';
     await page.waitForFunction(()=>!document.getElementById('contact-form').hasAttribute('aria-busy'));
     const status=await page.locator('#contact-status').innerText();
     const lang=await page.locator('html').getAttribute('lang');
-    const accepted={es:'aceptada por el servicio de correo',en:'accepted by the email service',de:'vom E-Mail-Dienst angenommen',nb:'godtatt av e-posttjenesten',ru:'Почтовый сервис принял',nl:'door de e-maildienst geaccepteerd'}[lang];
+    const accepted={es:'aceptada por el servicio de correo',en:'accepted by the email service',de:'vom E-Mail-Dienst angenommen',nb:'godtatt av e-posttjenesten',ru:'Почтовый сервис принял',nl:'door de e-maildienst geaccepteerd',fr:'acceptée par le service de messagerie'}[lang];
     if(scenario==='accepted'){
       assert(status.includes(accepted));
       assert.equal(await page.locator('[name=mensaje]').inputValue(),'');
@@ -67,6 +67,6 @@ const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:8877';
   await page.evaluate(()=>window.testOptions['expired-callback']());
   assert(await page.locator('button[type=submit]').isDisabled());
   assert.deepEqual(errors,[]);
-  console.log('OK: six-language professional mailto and UI fixtures: provider acceptance, errors, unavailable service, network failure, required fields, captcha expiry, mobile layout and no persistent storage. No real emails sent.');
+  console.log('OK: seven-language professional mailto and UI fixtures: provider acceptance, errors, unavailable service, network failure, required fields, captcha expiry, mobile layout and no persistent storage. No real emails sent.');
  } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});
